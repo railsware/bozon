@@ -1,0 +1,36 @@
+{
+  "name": "<%= name %>",
+  "version": "0.1.0",
+  "description": "",
+  "repository": "",
+  "license": "MIT",
+  "scripts": {
+  },
+  "devDependencies": {
+    "bozon": "/Users/ac/calendly/bozon"
+  },
+  "dependencies": {
+    "electron-prebuilt": "0.37.7"
+  },
+  "packaging": {
+    "version": "0.37.7",
+    "archive": true,
+    "overwrite": true,
+    "destination": "./releases",
+    "platforms": [
+      "linux-x64",
+      "darwin-x64"
+    ],
+    "platformResources": {
+      "darwin": {
+        "icon": ".icns"
+      },
+      "win32": {
+        "icon": ".ico"
+      },
+      "linux": {
+        "icon": ".png"
+      }
+    }
+  }
+}

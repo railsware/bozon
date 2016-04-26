@@ -1,0 +1,1 @@
+require('bozon/tasks/all')

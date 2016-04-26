@@ -1,0 +1,45 @@
+{
+  "name": "bozon",
+  "version": "0.1.0",
+  "description": "Framework for building Electron applications",
+  "main": "lib/cli/index.js",
+  "scripts": {
+    "test": "."
+  },
+  "keywords": [
+    "electron",
+    "desktop",
+    "application",
+    "framework",
+    "bozon"
+  ],
+  "author": "Alex Chaplinsky",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "coffee-script": "^1.10.0",
+    "commander": "^2.9.0",
+    "ejs": "^2.4.1",
+    "electron-packager": "^7.0.1",
+    "electron-prebuilt": "^0.37.5",
+    "gulp": "^3.9.1",
+    "gulp-coffee": "^2.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-sass": "^2.3.1",
+    "gulp-useref": "^3.0.8",
+    "gulp-wiredep": "0.0.0",
+    "merge-config": "^2.0.0",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "run-sequence": "^1.1.5",
+    "shelljs": "^0.7.0",
+    "underscore.string": "^3.3.4",
+    "yargs": "^4.6.0"
+  },
+  "preferGlobal": "true",
+  "bin": {
+    "bozon": "lib/cli/index.js"
+  },
+  "devDependencies": {}
+}
