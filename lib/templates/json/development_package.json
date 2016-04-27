@@ -19,17 +19,18 @@
     "destination": "./releases",
     "platforms": [
       "linux-x64",
-      "darwin-x64"
+      "darwin-x64",
+      "win32"
     ],
     "platformResources": {
       "darwin": {
-        "icon": ".icns"
+        "icon": "builds/production/darwin/electron.icns"
       },
       "win32": {
-        "icon": ".ico"
+        "icon": "builds/production/win32/electron.ico"
       },
       "linux": {
-        "icon": ".png"
+        "icon": "builds/production/linux/electron.png"
       }
     }
   }
