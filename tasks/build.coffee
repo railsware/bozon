@@ -2,8 +2,7 @@ gulp = require('gulp')
 sass = require('gulp-sass')
 coffee = require('gulp-coffee')
 concat = require('gulp-concat')
-wiredep = require('gulp-wiredep')
-useref = require('gulp-useref')
+webpack = require('gulp-webpack')
 shell = require('shelljs')
 jsonEditor = require('gulp-json-editor')
 runSequence = require('run-sequence')
@@ -21,8 +20,7 @@ destination = (suffix = '') ->
   gulp.dest utils.destination(argv.env, argv.platform, suffix)
 
 gulp.task 'html', ->
-  source('*.html')
-    .pipe destination()
+  source('*.html').pipe destination()
 
 gulp.task 'sass', ->
   source('stylesheets/*.sass')
@@ -34,15 +32,16 @@ gulp.task 'sass', ->
     .pipe destination('stylesheets')
 
 gulp.task 'coffee', ->
-  source('javascripts/browser/**/*.coffee')
-    .pipe(coffee(bare: true).on('error', console.log))
-    .pipe(concat('application.js'))
-    .pipe destination('javascripts')
+  source('javascripts/browser/application.coffee')
+    .pipe webpack
+      target: 'electron'
+      output:
+        filename: 'application.js'
+    .pipe destination('javascripts/browser')
 
   source('javascripts/main/**/*.coffee')
     .pipe(coffee(bare: true).on('error', console.log))
-    .pipe(concat('index.js'))
-    .pipe destination()
+    .pipe destination('javascripts/main')
 
 gulp.task 'extras', ->
   source('package.json')
