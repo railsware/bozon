@@ -4,7 +4,7 @@ childProcess = require('child_process')
 gulp.task 'clear:builds', ->
   childProcess.spawn('rm', ['-rf', './builds'])
 
-gulp.task 'clear:releases', ->
-  childProcess.spawn('rm', ['-rf', './releases'])
+gulp.task 'clear:packages', ->
+  childProcess.spawn('rm', ['-rf', './packages'])
 
-gulp.task 'clear', ['clear:builds', 'clear:releases']
+gulp.task 'clear', ['clear:builds', 'clear:packages']
