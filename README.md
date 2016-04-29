@@ -1,6 +1,14 @@
 # bozon
 > Bootstrap, Build, Run and Package [Electron](http://electron.atom.io/) application with ease. CoffeeScript and Sass included.
 
+## What is Bozon?
+Bozon is a single tool for handling different tasks being performed by multiple packages, which is used for building desktop applications with Electron. Simplify building, compiling, running, testing, and packaging your application.
+
+* **Electron** - build cross platform desktop apps with web technologies
+* **Gulp** - task runner that helps making all important processes with a single command
+* **Webpack** - building and packaging source code for renderer process done with webpack
+* **spectron** - Easily test your Electron apps using ChromeDriver and WebdriverIO
+* **electron-packager** - package and distribute your Electron app
 
 ## Installation
 
