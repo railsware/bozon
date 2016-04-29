@@ -13,7 +13,7 @@
     "framework",
     "bozon"
   ],
-  "author": "Alex Chaplinsky",
+  "author": "Railsware, Alex Chaplinsky",
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.3",
