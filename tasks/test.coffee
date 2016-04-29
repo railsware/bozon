@@ -1,7 +1,8 @@
 gulp = require('gulp')
+mocha = require('gulp-mocha')
 childProcess = require('child_process')
 
 gulp.task 'mocha', ->
-  childProcess.spawn 'mocha', ['spec'], {stdio: 'inherit'}
+  gulp.src('./spec/*', read: false).pipe(mocha())
 
 gulp.task 'test', ['package:test', 'mocha']

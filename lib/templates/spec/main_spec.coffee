@@ -1,12 +1,15 @@
+helper = require('./helper')
+
 Application = require('spectron').Application
 assert = require('assert')
+
 
 describe 'application launch', ->
   this.timeout(10000)
 
   beforeEach ->
     this.app = new Application
-      path: './tmp/Testapp-darwin-x64/Testapp.app/Contents/MacOS/Testapp'
+      path: helper.appPath()
     this.app.start()
 
   afterEach ->
