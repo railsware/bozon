@@ -1,25 +1,41 @@
 path = require('path')
 gulp = require('gulp')
-shell = require('shelljs')
+childProcess = require('child_process')
 argv = require('yargs').argv
 utils = require('./utils/utils')
 
 env = argv.env || 'production'
 
-buildPath = (os) ->
-  utils.destination env, os
+testOptions = ->
+  [
+    './builds/test',
+    utils.settings().name,
+    "--platform=#{process.platform}",
+    "--arch=#{process.arch}",
+    "--icon=#{utils.settings().packaging.platformResources?[process.platform]?.icon}",
+    "--out=.tmp",
+    "--overwrite"
+  ]
 
-cmdPackage = (params, platform) ->
-  os = platform.split('-')[0]
-  arch = platform.split('-')[1]
-  command = "./node_modules/.bin/electron-packager #{buildPath(os)} #{utils.settings().name} --platform=#{os}  --arch=#{arch} --out=#{params.destination} --icon=#{params.platformResources[os].icon}"
-  command += ' --overwrite' if params.overwrite
-  command += ' --asar' if params.archive
-  command
+productionOptions = (os, arch) ->
+  args = [
+    utils.destination(env, os),
+    utils.settings().name,
+    "--platform=#{os}",
+    "--arch=#{arch}",
+    "--out=#{utils.release(env, os)}",
+    "--icon=#{params.platformResources[os].icon}"
+  ]
+  args.push '--overwrite' if params.overwrite
+  args.push '--asar' if params.archive
+  args
 
-gulp.task 'packager:run', ->
+gulp.task 'package', ->
   for platform in utils.settings().packaging.platforms
-    shell.exec cmdPackage(utils.settings().packaging, platform), (error, stdout, stderr) ->
-      console.log(stdout)
+    os = platform.split('-')[0]
+    arch = platform.split('-')[1]
+    childProcess.spawnSync 'gulp', ['compile', "--env=#{env}", "--platform=#{os}"], stdio: 'inherit'
+    childProcess.spawnSync './node_modules/.bin/electron-packager', productionOptions(os, arch), stdio: 'inherit'
 
-gulp.task 'package', ['build:production', 'packager:run']
+gulp.task 'package:test', ['build:test'], ->
+  childProcess.spawnSync './node_modules/.bin/electron-packager', testOptions(), stdio: 'inherit'

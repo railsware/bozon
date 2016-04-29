@@ -16,7 +16,6 @@
     "version": "0.37.7",
     "archive": true,
     "overwrite": true,
-    "destination": "./releases",
     "platforms": [
       "linux-x64",
       "darwin-x64",

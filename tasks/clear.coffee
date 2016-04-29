@@ -1,10 +1,10 @@
 gulp = require('gulp')
-shell = require('shelljs')
+childProcess = require('child_process')
 
 gulp.task 'clear:builds', ->
-  shell.exec('rm -rf ./builds')
+  childProcess.spawn('rm', ['-rf', './builds'])
 
 gulp.task 'clear:releases', ->
-  shell.exec('rm -rf ./releases')
+  childProcess.spawn('rm', ['-rf', './releases'])
 
 gulp.task 'clear', ['clear:builds', 'clear:releases']

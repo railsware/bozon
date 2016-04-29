@@ -10,5 +10,8 @@ module.exports.destination = (env, platform, suffix = '') ->
 module.exports.source = (suffix) ->
   path.join 'app', suffix
 
+module.exports.release = (env, platform) ->
+  if env is 'test' then '.tmp' else './packages'
+
 module.exports.settings = ->
   require(path.join(process.cwd(), 'package.json'))

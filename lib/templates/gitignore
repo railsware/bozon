@@ -1,4 +1,5 @@
+.tmp
 node_modules
 builds
-releases
+packages
 bower_components

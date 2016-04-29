@@ -3,7 +3,7 @@ sass = require('gulp-sass')
 coffee = require('gulp-coffee')
 concat = require('gulp-concat')
 webpack = require('gulp-webpack')
-shell = require('shelljs')
+childProcess = require('child_process')
 jsonEditor = require('gulp-json-editor')
 runSequence = require('run-sequence')
 argv = require('yargs').argv
@@ -55,15 +55,8 @@ gulp.task 'compile', ->
   settings = new Settings(argv.env, argv.platform)
   runSequence 'coffee', 'sass', 'html', 'images', 'extras'
 
-gulp.task 'build:development', (cb) ->
-  settings = new Settings('development')
-  shell.exec "gulp compile --env=development --platform=#{settings.platform()}"
+gulp.task 'build:development', ->
+  childProcess.spawnSync 'gulp', ['compile', '--env=development', "--platform=#{process.platform}"], stdio: 'inherit'
 
-gulp.task 'build:test', (cb) ->
-  settings = new Settings('test')
-  shell.exec "gulp compile --env=test --platform=#{settings.platform()}"
-
-gulp.task 'build:production', (cb) ->
-  settings = new Settings('production')
-  for platform in utils.settings().packaging.platforms
-    shell.exec "gulp compile --env=production --platform=#{platform.split('-')[0]}"
+gulp.task 'build:test', ->
+  childProcess.spawnSync 'gulp', ['compile', '--env=test', "--platform=#{process.platform}"], stdio: 'inherit'

@@ -1,8 +1,7 @@
 gulp = require('gulp')
-shell = require('shelljs')
+childProcess = require('child_process')
 
-gulp.task 'electron', (cb) ->
-  shell.exec './node_modules/.bin/electron ./builds/development'
-  cb()
+gulp.task 'electron', ->
+  childProcess.spawn './node_modules/.bin/electron', ['./builds/development'], stdio: 'inherit'
 
 gulp.task 'start', ['build:development', 'electron']
