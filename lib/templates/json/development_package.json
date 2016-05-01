@@ -10,17 +10,13 @@
     "bozon": "^0.1.0"
   },
   "dependencies": {
-    "electron-prebuilt": "0.37.7"
+    "electron-prebuilt": "<%= electronVersion %>"
   },
   "packaging": {
-    "version": "0.37.7",
+    "version": "<%= electronVersion %>",
     "archive": true,
     "overwrite": true,
-    "platforms": [
-      "linux-x64",
-      "darwin-x64",
-      "win32"
-    ],
+    "platforms": <%- platformsStr%>,
     "platformResources": {
       "darwin": {
         "icon": "builds/production/darwin/electron.icns"
