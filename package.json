@@ -41,5 +41,7 @@
   "bin": {
     "bozon": "lib/cli/index.js"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
 }
