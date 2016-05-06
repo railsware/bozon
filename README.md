@@ -35,7 +35,7 @@ This will produce the following file structure:
   |  |--package.json
   |--config/
   |--spec/
-  |--gulpfile.coffee
+  |--gulpfile.js
   |--package.json
 ```
 
