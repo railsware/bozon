@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Framework for building Electron applications",
   "main": "lib/cli/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "commander": "^2.9.0",
     "ejs": "^2.4.1",
     "electron-packager": "^7.0.1",
-    "electron-prebuilt": "0.37.5",
+    "electron-prebuilt": "0.37.8",
     "gulp": "^3.9.1",
     "gulp-coffee": "^2.3.2",
     "gulp-concat": "^2.6.0",
