@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var coffee = require('gulp-coffee');
-var concat = require('gulp-concat');
 var webpack = require('webpack-stream');
 var childProcess = require('child_process');
 var jsonEditor = require('gulp-json-editor');
