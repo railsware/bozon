@@ -35,10 +35,10 @@
     "os": "^0.1.1",
     "path": "^0.12.7",
     "run-sequence": "^1.1.5",
-    "spectron": "^2.37.0",
+    "spectron": "^3.0.0",
     "underscore.string": "^3.3.4",
     "webpack-stream": "^3.2.0",
-    "yargs": "^4.6.0"
+    "yargs": "^4.7.0"
   },
   "preferGlobal": "true",
   "bin": {
