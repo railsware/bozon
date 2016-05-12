@@ -7,7 +7,7 @@
   "scripts": {
   },
   "devDependencies": {
-    "bozon": "^0.1.0"
+    "bozon": "^<%= bozonVersion %>"
   },
   "dependencies": {
     "electron-prebuilt": "<%= electronVersion %>"
@@ -16,7 +16,7 @@
     "version": "<%= electronVersion %>",
     "archive": true,
     "overwrite": true,
-    "platforms": <%- platformsStr%>,
+    "platforms": <%- platformsStr %>,
     "platformResources": {
       "darwin": {
         "icon": "builds/production/darwin/electron.icns"
