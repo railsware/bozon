@@ -1,4 +1,3 @@
-var os = require('os');
 var path = require('path');
 var Config = require('merge-config');
 var argv = require('yargs').argv;
@@ -18,7 +17,7 @@ var Settings = (function() {
   };
 
   Settings.prototype.platform = function() {
-    return this.curerntPlatform || os.platform();
+    return this.curerntPlatform || process.platform;
   };
 
   Settings.prototype.get = function(key) {

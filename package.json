@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "0.3.1",
+  "version": "0.3.4",
   "description": "Framework for building Electron applications",
   "repository": {
     "type": "git",
@@ -24,8 +24,8 @@
     "commander": "^2.9.0",
     "del": "^2.2.0",
     "ejs": "^2.4.1",
-    "electron-packager": "^7.0.1",
-    "electron-prebuilt": "1.0.1",
+    "electron-packager": "^7.0.2",
+    "electron-prebuilt": "1.1.1",
     "gulp": "^3.9.1",
     "gulp-coffee": "^2.3.2",
     "gulp-json-editor": "^2.2.1",
@@ -33,13 +33,11 @@
     "gulp-sass": "^2.3.1",
     "inquirer": "^1.0.2",
     "merge-config": "^2.0.0",
-    "os": "^0.1.1",
-    "path": "^0.12.7",
     "run-sequence": "^1.1.5",
-    "spectron": "^3.0.0",
+    "spectron": "^3.1.0",
     "underscore.string": "^3.3.4",
     "webpack-stream": "^3.2.0",
-    "yargs": "^4.7.0"
+    "yargs": "^4.7.1"
   },
   "preferGlobal": "true",
   "bin": {
