@@ -7,7 +7,7 @@ gulp.task('clear:builds', function(done) {
   });
 });
 
-gulp.task('clear:packages', function() {
+gulp.task('clear:packages', function(done) {
   del(['./packages/**']).then(function() {
     done()
   });
