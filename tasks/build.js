@@ -71,12 +71,14 @@ gulp.task('compile', function() {
 
 gulp.task('build:development', function() {
   childProcess.spawnSync('gulp', ['compile', '--env=development', "--platform=" + process.platform], {
+    shell: true,
     stdio: 'inherit'
   });
 });
 
 gulp.task('build:test', function() {
   childProcess.spawnSync('gulp', ['compile', '--env=test', "--platform=" + process.platform], {
+    shell: true,
     stdio: 'inherit'
   });
 });
