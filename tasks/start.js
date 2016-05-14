@@ -1,8 +1,10 @@
 var gulp = require('gulp');
+var path = require('path')
 var childProcess = require('child_process');
 
 gulp.task('electron', function() {
-  childProcess.spawn('./node_modules/.bin/electron', ['./builds/development'], {
+  childProcess.spawn(path.join('.', 'node_modules', '.bin', 'electron'), ['./builds/development'], {
+    shell: true,
     stdio: 'inherit'
   });
 });

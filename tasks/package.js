@@ -29,13 +29,20 @@ gulp.task('package', function() {
     platform = ref[i];
     os = platform.split('-')[0];
     arch = platform.split('-')[1];
-    childProcess.spawnSync('gulp', ['compile', "--env=" + env, "--platform=" + os], { stdio: 'inherit' });
-    childProcess.spawnSync('./node_modules/.bin/electron-packager', productionOptions(os, arch), { stdio: 'inherit' });
+    childProcess.spawnSync('gulp', ['compile', "--env=" + env, "--platform=" + os], {
+      shell: true,
+      stdio: 'inherit'
+    });
+    childProcess.spawnSync(path.join('.', 'node_modules', '.bin', 'electron-packager'), productionOptions(os, arch), {
+      shell: true,
+      stdio: 'inherit'
+    });
   }
 });
 
 gulp.task('package:test', ['build:test'], function() {
-  childProcess.spawnSync('./node_modules/.bin/electron-packager', testOptions(), {
+  childProcess.spawnSync(path.join('.', 'node_modules', '.bin', 'electron-packager'), testOptions(), {
+    shell: true,
     stdio: 'inherit'
   });
 });
