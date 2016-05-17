@@ -28,7 +28,7 @@ This will produce the following file structure:
   |--app/
   |  |--images/
   |  |--javascripts/
-  |  |  |--browser/
+  |  |  |--renderer/
   |  |  |--main/
   |  |--stylesheets/
   |  |--index.html

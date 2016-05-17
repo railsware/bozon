@@ -42,12 +42,12 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
   source('javascripts/main/**/*.js').pipe(destination('javascripts/main'));
 
-  source('javascripts/browser/application.*').pipe(webpack({
+  source('javascripts/renderer/application.*').pipe(webpack({
     target: 'electron',
     output: {
       filename: 'application.js'
     }
-  })).pipe(destination('javascripts/browser'));
+  })).pipe(destination('javascripts/renderer'));
 
   source('javascripts/main/**/*.coffee').pipe(coffee({
     bare: true
