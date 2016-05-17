@@ -39,7 +39,7 @@
     "spectron": "^3.0.0",
     "underscore.string": "^3.3.4",
     "webpack-stream": "^3.2.0",
-    "yargs": "^4.7.0"
+    "yargs": "^4.7.1"
   },
   "preferGlobal": "true",
   "bin": {
