@@ -33,7 +33,6 @@
     "gulp-sass": "^2.3.1",
     "inquirer": "^1.0.2",
     "merge-config": "^2.0.0",
-    "os": "^0.1.1",
     "path": "^0.12.7",
     "run-sequence": "^1.1.5",
     "spectron": "^3.0.0",
