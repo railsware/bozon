@@ -1,5 +1,5 @@
 var bozon = require('../lib/bozon');
-var path = require('path')
+var path = require('path');
 var childProcess = require('child_process');
 
 bozon.task('electron', function() {
