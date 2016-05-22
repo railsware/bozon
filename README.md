@@ -1,4 +1,4 @@
-# bozon
+# bozon ![img](https://circleci.com/gh/railsware/bozon.svg?style=shield&circle-token=73a7ce20fc55a51d77657e11c3f5c9d4bf5fdcd9)
 > Bootstrap, Build, Run and Package [Electron](http://electron.atom.io/) application with ease
 
 ## What is Bozon?
