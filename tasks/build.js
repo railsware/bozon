@@ -5,7 +5,6 @@ var webpack = require('webpack-stream');
 var childProcess = require('child_process');
 var jsonEditor = require('gulp-json-editor');
 var runSequence = require('run-sequence');
-var argv = require('yargs').argv;
 var utils = require('./utils/utils');
 var Settings = require('./utils/settings');
 
@@ -19,10 +18,13 @@ var source = function(suffix) {
 };
 
 var destination = function(suffix) {
+  var env = utils.argument('env');
+  var platform = utils.argument('platform');
+
   if (suffix == null) {
     suffix = '';
   }
-  return gulp.dest(utils.destination(argv.env, argv.platform, suffix));
+  return gulp.dest(utils.destination(suffix));
 };
 
 gulp.task('html', function() {
@@ -65,7 +67,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('compile', function() {
-  settings = new Settings(argv.env, argv.platform);
+  settings = new Settings();
   runSequence('scripts', 'styles', 'html', 'images', 'config');
 });
 

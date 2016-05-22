@@ -1,9 +1,8 @@
 var path = require('path');
 var gulp = require('gulp');
 var childProcess = require('child_process');
-var argv = require('yargs').argv;
 var utils = require('./utils/utils');
-var env = argv.env || 'production';
+var env = utils.argument('env') || 'production';
 
 var testOptions = function() {
   var ref, ref1;
@@ -12,7 +11,7 @@ var testOptions = function() {
 
 var productionOptions = function(os, arch) {
   var args;
-  args = [utils.destination(env, os), utils.settings().name, "--platform=" + os, "--arch=" + arch, "--out=" + (utils.release(env, os)), "--icon=" + utils.settings().packaging.platformResources[os].icon];
+  args = [utils.buildSourse(env, os), utils.settings().name, "--platform=" + os, "--arch=" + arch, "--out=" + (utils.release(env, os)), "--icon=" + utils.settings().packaging.platformResources[os].icon];
   if (utils.settings().packaging.overwrite) {
     args.push('--overwrite');
   }
