@@ -1,9 +1,10 @@
 var path = require('path');
+var _ = require('lodash');
 
 module.exports.argument = function(name) {
-  arg = process.argv.find(function (argum) {
-    regexp = new RegExp('--' + name + '=');
-    return argum.match(regexp);
+  var regexp = new RegExp('--' + name + '=');
+  arg = _.find(process.argv, function (item) {
+    return item.match(regexp);
   });
   if (arg) {
     return arg.split('=')[1];
