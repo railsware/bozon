@@ -19,13 +19,13 @@
     "platforms": <%- platformsStr %>,
     "platformResources": {
       "darwin": {
-        "icon": "builds/production/darwin/electron.icns"
+        "icon": "builds/production/darwin/images/electron.icns"
       },
       "win32": {
-        "icon": "builds/production/win32/electron.ico"
+        "icon": "builds/production/win32/images/electron.ico"
       },
       "linux": {
-        "icon": "builds/production/linux/electron.png"
+        "icon": "builds/production/linux/images/electron.png"
       }
     }
   }
