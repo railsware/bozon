@@ -35,11 +35,11 @@ var testOptions = function() {
 
 var productionOptions = function(os, arch) {
   var args = [
-    utils.buildSourse(env, os),
+    utils.buildSource(env, os),
     settings.name,
     "--platform=" + os,
     "--arch=" + arch,
-    "--out=" + utils.release(env, os),
+    "--out=" + utils.release(env),
     "--icon=" + iconPath(os)
   ];
   if (settings.packaging.overwrite) {
@@ -62,5 +62,5 @@ gulp.task('package', function() {
 });
 
 gulp.task('package:test', ['build:test'], function() {
-  cspawnSync(packager(), testOptions())
+  spawnSync(packager(), testOptions())
 });

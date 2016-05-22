@@ -8,7 +8,7 @@
   },
   "main": "lib/cli/index.js",
   "scripts": {
-    "test": "."
+    "test": "mocha test/**/*.* --compilers coffee:coffee-script/register"
   },
   "keywords": [
     "electron",
@@ -43,6 +43,8 @@
     "bozon": "lib/cli/index.js"
   },
   "devDependencies": {
-    "mocha": "^2.4.5"
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.4"
   }
 }

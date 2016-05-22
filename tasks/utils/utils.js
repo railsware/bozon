@@ -1,9 +1,9 @@
 var path = require('path');
 
 module.exports.argument = function(name) {
-  arg = process.argv.find(function (arg) {
+  arg = process.argv.find(function (argum) {
     regexp = new RegExp('--' + name + '=');
-    return arg.match(regexp);
+    return argum.match(regexp);
   });
   if (arg) {
     return arg.split('=')[1];
@@ -13,8 +13,12 @@ module.exports.argument = function(name) {
 };
 
 module.exports.destination = function(suffix) {
-  var env = this.argument('env');
-  var platform = this.argument('platform');
+  if (suffix == null) {
+    suffix = '';
+  }
+
+  var env = this.argument('env') || 'development';
+  var platform = this.argument('platform') || '';
 
   if (env === 'test' || env === 'development') {
     return path.join('builds', env, suffix);
@@ -24,12 +28,13 @@ module.exports.destination = function(suffix) {
 };
 
 module.exports.source = function(suffix) {
+  if (suffix == null) {
+    suffix = '';
+  }
   return path.join('app', suffix);
 };
 
-module.exports.release = function(env, platform) {
-  var env = this.argument('env');
-
+module.exports.release = function(env) {
   if (env === 'test') {
     return '.tmp';
   } else {
@@ -37,7 +42,7 @@ module.exports.release = function(env, platform) {
   }
 };
 
-module.exports.buildSourse = function(env, platform) {
+module.exports.buildSource = function(env, platform) {
   if (env === 'test' || env === 'development') {
     return path.join('builds', env);
   } else {

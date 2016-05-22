@@ -11,19 +11,12 @@ var Settings = require('./utils/settings');
 settings = {};
 
 var source = function(suffix) {
-  if (suffix == null) {
-    suffix = '';
-  }
   return gulp.src(utils.source(suffix));
 };
 
 var destination = function(suffix) {
   var env = utils.argument('env');
   var platform = utils.argument('platform');
-
-  if (suffix == null) {
-    suffix = '';
-  }
   return gulp.dest(utils.destination(suffix));
 };
 
