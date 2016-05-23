@@ -5,16 +5,20 @@ var utils = require('./utils');
 var Settings = (function() {
   function Settings() {
     this.config = new Config();
-    this.config.file(path.join('config', 'settings.json'));
-    this.config.file(path.join('config', 'environments', this.env() + ".json"));
-    this.config.file(path.join('config', 'platforms', this.platform() + ".json"));
+    this.config.file(path.join(configPath(), 'settings.json'));
+    this.config.file(path.join(configPath(), 'environments', env() + ".json"));
+    this.config.file(path.join(configPath(), 'platforms', platform() + ".json"));
   }
 
-  Settings.prototype.env = function() {
+  function configPath () {
+    return path.join(process.cwd(), 'config');
+  }
+
+  function env () {
     return utils.argument('env') || 'development';
   };
 
-  Settings.prototype.platform = function() {
+   function platform () {
     return utils.argument('platform') || process.platform;
   };
 
