@@ -33,7 +33,7 @@ describe 'Generator', ->
     before ->
       childProcess.spawnSync('mkdir', [tmpDir])
       process.chdir('.tmp')
-      generator = new Generator('test-app', {})
+      generator = new Generator('test_app', {})
       stub = sinon.stub(generator, 'installPackages')
       generator.setup()
 
