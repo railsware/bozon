@@ -38,7 +38,7 @@ bozon.task('images', function () {
 
 bozon.task('compile', function (callback) {
   settings = new bozon.Settings();
-  runSequence('scripts:main', 'scripts:renderer', 'styles', 'html', 'images', 'config', callback);
+  runSequence.apply(this, ['scripts:main', 'scripts:renderer', 'styles', 'html', 'images'].concat(bozon.hooks, 'config', callback));
 });
 
 bozon.task('build:development', function () {
