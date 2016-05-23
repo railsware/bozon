@@ -12,7 +12,7 @@ describe 'settings', ->
     beforeEach ->
       cwd = process.cwd()
       stub = sinon.stub(process, 'cwd')
-      stub.returns(path.join(cwd, 'test', 'samples'))
+      stub.returns(path.join(cwd, 'test', 'assets'))
 
     afterEach ->
       stub.restore()
