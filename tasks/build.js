@@ -1,6 +1,4 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var coffee = require('gulp-coffee');
 var webpack = require('webpack-stream');
 var childProcess = require('child_process');
 var jsonEditor = require('gulp-json-editor');
@@ -26,12 +24,6 @@ gulp.task('html', function() {
 
 gulp.task('styles', function() {
   source('stylesheets/**/*.css').pipe(destination('stylesheets'));
-
-  source('stylesheets/**/*.sass').pipe(sass.sync({
-    outputStyle: 'expanded',
-    precision: 10,
-    includePaths: ['.']
-  }).on('error', sass.logError)).pipe(destination('stylesheets'));
 });
 
 gulp.task('scripts', function() {
@@ -43,10 +35,6 @@ gulp.task('scripts', function() {
       filename: 'application.js'
     }
   })).pipe(destination('javascripts/renderer'));
-
-  source('javascripts/main/**/*.coffee').pipe(coffee({
-    bare: true
-  }).on('error', console.log)).pipe(destination('javascripts/main'));
 });
 
 gulp.task('config', function() {
