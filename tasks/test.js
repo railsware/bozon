@@ -1,11 +1,12 @@
 var gulp = require('gulp');
+var bozon = require('../lib/bozon');
 var mocha = require('gulp-mocha');
 var childProcess = require('child_process');
 
-gulp.task('mocha', function() {
+bozon.task('mocha', function() {
   gulp.src('./spec/*', {
     read: false
   }).pipe(mocha());
 });
 
-gulp.task('test', ['package:test', 'mocha']);
+bozon.task('test', ['package:test', 'mocha']);

@@ -1,10 +1,10 @@
+var bozon = require('../lib/bozon');
 var path = require('path');
-var gulp = require('gulp');
 var childProcess = require('child_process');
-var utils = require('./utils/utils');
-var env = utils.argument('env') || 'production';
 
-var settings = utils.settings();
+var env = bozon.utils.argument('env') || 'production';
+
+var settings = bozon.utils.settings();
 
 var spawnSync = function(command, options) {
   childProcess.spawnSync(command, options, {
@@ -35,11 +35,11 @@ var testOptions = function() {
 
 var productionOptions = function(os, arch) {
   var args = [
-    utils.buildSource(env, os),
+    bozon.utils.buildSource(env, os),
     settings.name,
     "--platform=" + os,
     "--arch=" + arch,
-    "--out=" + utils.release(env),
+    "--out=" + bozon.utils.release(env),
     "--icon=" + iconPath(os)
   ];
   if (settings.packaging.overwrite) {
@@ -51,7 +51,7 @@ var productionOptions = function(os, arch) {
   return args;
 };
 
-gulp.task('package', function() {
+bozon.task('package', function() {
   var platforms = settings.packaging.platforms;
   for (i = 0; i < platforms.length; i++) {
     var os = platforms[i].split('-')[0];
@@ -61,6 +61,6 @@ gulp.task('package', function() {
   }
 });
 
-gulp.task('package:test', ['build:test'], function() {
+bozon.task('package:test', ['build:test'], function() {
   spawnSync(packager(), testOptions())
 });

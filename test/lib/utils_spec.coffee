@@ -1,5 +1,5 @@
 expect = require('chai').expect
-utils = require('./../../tasks/utils/utils')
+utils = require('./../../lib/utils')
 
 describe '#argument', ->
   describe 'passed --env and --platform arguments', ->

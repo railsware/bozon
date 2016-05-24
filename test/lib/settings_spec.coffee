@@ -1,7 +1,7 @@
 path = require('path')
 expect = require('chai').expect
 sinon = require('sinon')
-Settings = require('./../../tasks/utils/settings')
+Settings = require('./../../lib/settings')
 
 describe 'settings', ->
   describe '#get', ->
