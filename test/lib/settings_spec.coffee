@@ -1,30 +1,25 @@
 path = require('path')
 expect = require('chai').expect
 sinon = require('sinon')
+helper = require('../helper')
 Settings = require('./../../lib/settings')
 
 describe 'settings', ->
   describe '#get', ->
-    argv = {}
-    stub = {}
+    mock = helper.mock process, 'argv'
     settings = {}
 
     beforeEach ->
-      cwd = process.cwd()
-      stub = sinon.stub(process, 'cwd')
-      stub.returns(path.join(cwd, 'test', 'assets'))
+      process.chdir('./test/assets')
 
     afterEach ->
-      stub.restore()
+      process.chdir('../..')
+      mock.restore()
 
     context 'development env on darwin system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=development', '--platform=darwin']
+        mock.returns ['--env=development', '--platform=darwin']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return dev config for darwin system', ->
         expect(settings.get()).to.eql({
@@ -37,12 +32,8 @@ describe 'settings', ->
 
     context 'test env on darwin system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=test', '--platform=darwin']
+        mock.returns ['--env=test', '--platform=darwin']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return test config for darwin system', ->
         expect(settings.get()).to.eql({
@@ -55,12 +46,8 @@ describe 'settings', ->
 
     context 'production env on darwin system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=production', '--platform=darwin']
+        mock.returns ['--env=production', '--platform=darwin']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return test config for darwin system', ->
         expect(settings.get()).to.eql({
@@ -73,12 +60,8 @@ describe 'settings', ->
 
     context 'development env on linux system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=development', '--platform=linux']
+        mock.returns ['--env=development', '--platform=linux']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return dev config for linux system', ->
         expect(settings.get()).to.eql({
@@ -91,12 +74,8 @@ describe 'settings', ->
 
     context 'test env on linux system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=test', '--platform=linux']
+        mock.returns ['--env=test', '--platform=linux']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return test config for linux system', ->
         expect(settings.get()).to.eql({
@@ -109,12 +88,8 @@ describe 'settings', ->
 
     context 'production env on linux system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=production', '--platform=linux']
+        mock.returns ['--env=production', '--platform=linux']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return test config for linux system', ->
         expect(settings.get()).to.eql({
@@ -127,12 +102,8 @@ describe 'settings', ->
 
     context 'development env on windows system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=development', '--platform=windows']
+        mock.returns ['--env=development', '--platform=windows']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return dev config for windows system', ->
         expect(settings.get()).to.eql({
@@ -145,12 +116,8 @@ describe 'settings', ->
 
     context 'test env on windows system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=test', '--platform=windows']
+        mock.returns ['--env=test', '--platform=windows']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return test config for windows system', ->
         expect(settings.get()).to.eql({
@@ -163,12 +130,8 @@ describe 'settings', ->
 
     context 'production env on windows system', ->
       beforeEach ->
-        argv = process.argv
-        process.argv = ['--env=production', '--platform=windows']
+        mock.returns ['--env=production', '--platform=windows']
         settings = new Settings()
-
-      afterEach ->
-        process.argv = argv
 
       it 'should return test config for windows system', ->
         expect(settings.get()).to.eql({

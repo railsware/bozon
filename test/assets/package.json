@@ -1,0 +1,16 @@
+{
+  "name": "TestApp",
+  "env": "test",
+  "packaging": {
+    "overwrite": true,
+    "archive": true,
+    "platformResources": {
+      "darwin": {
+        "icon": "darwin_icon.png"
+      },
+      "linux": {
+        "icon": "linux_icon.png"
+      }
+    }
+  }
+}

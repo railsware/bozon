@@ -1,7 +1,20 @@
 path = require('path')
 fs = require('fs')
 
+class Mock
+  constructor: (@object, @property) ->
+    @[@property] = @object[@property]
+
+  returns: (value) =>
+    @object[@property] = value
+
+  restore: =>
+    @object[@property] = @[@property]
+
 module.exports =
+  mock: (object, property) ->
+    new Mock(object, property)
+
   fileExists: (file) ->
     filePath = path.join(process.cwd(), 'test_app', file)
     try

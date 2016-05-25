@@ -1,5 +1,4 @@
 var webpack = require('webpack-stream');
-var childProcess = require('child_process');
 var jsonEditor = require('gulp-json-editor');
 var runSequence = require('run-sequence');
 var bozon = require('../lib/bozon');
@@ -43,15 +42,9 @@ bozon.task('compile', function () {
 });
 
 bozon.task('build:development', function () {
-  childProcess.spawnSync('gulp', ['compile', '--env=development', '--platform=' + process.platform], {
-    shell: true,
-    stdio: 'inherit'
-  });
+  bozon.spawnSync('gulp', ['compile', '--env=development', '--platform=' + process.platform])
 });
 
 bozon.task('build:test', function () {
-  childProcess.spawnSync('gulp', ['compile', '--env=test', '--platform=' + process.platform], {
-    shell: true,
-    stdio: 'inherit'
-  });
+  bozon.spawnSync('gulp', ['compile', '--env=test', '--platform=' + process.platform])
 });
