@@ -162,27 +162,20 @@ describe 'bozon', ->
         expect(bozon.packagingEnv()).to.eql('production')
 
   describe '#testPackagingOptions', ->
-    mock1 = helper.mock(process, 'platform')
-    mock2 = helper.mock(process, 'arch')
-
     beforeEach ->
       process.chdir('./test/assets')
-      mock1.returns 'darwin'
-      mock2.returns 'x64'
 
     afterEach ->
       process.chdir('./../..')
-      mock1.restore()
-      mock2.restore()
 
     it 'should return correct packaging options', ->
       expect(bozon.testPackagingOptions()).to.eql([
         './builds/test',
         'TestApp',
-        "--platform=darwin",
-        "--arch=x64",
+        "--platform=#{process.platform}",
+        "--arch=#{process.arch}",
         "--out=.tmp",
-        "--icon=darwin_icon.png",
+        "--icon=#{process.platform}_icon.png",
         '--overwrite'
       ])
 
