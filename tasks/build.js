@@ -14,7 +14,7 @@ bozon.task('styles', function () {
 });
 
 bozon.task('scripts:main', function () {
-  bozon.src('javascripts/main/**/*.js').pipe(bozon.dest('javascripts/main'));
+  bozon.src('javascripts/main/**/*.*').pipe(bozon.dest('javascripts/main'));
 });
 
 bozon.task('scripts:renderer', function () {
