@@ -19,7 +19,7 @@ describe 'Generator', ->
       date = new Date()
       expect(generator.defaults).to.eql({
         bozonVersion: "0.3.5",
-        electronVersion: "1.1.1",
+        electronVersion: "1.1.3",
         name: 'TestApp',
         platforms: ['linux-x64', 'darwin-x64', 'win32-ia32'],
         platformsStr: "[\"linux-x64\", \"darwin-x64\", \"win32-ia32\"]",
@@ -72,8 +72,8 @@ describe 'Generator', ->
     it 'package.json should contain actual information', ->
       expect($.fileContains('package.json', '"name": "TestApp"')).to.be.true
       expect($.fileContains('package.json', '"version": "0.1.0"')).to.be.true
-      expect($.fileContains('package.json', '"electron-prebuilt": "1.1.1"')).to.be.true
-      expect($.fileContains('package.json', '"version": "1.1.1"')).to.be.true
+      expect($.fileContains('package.json', '"electron-prebuilt": "1.1.3"')).to.be.true
+      expect($.fileContains('package.json', '"version": "1.1.3"')).to.be.true
       expect($.fileContains('package.json', '"platforms": ["linux-x64", "darwin-x64", "win32-ia32"]')).to.be.true
 
     it 'app package.json should contain actual information', ->
