@@ -4,7 +4,7 @@ var mocha = require('gulp-mocha');
 var childProcess = require('child_process');
 
 bozon.task('mocha', function() {
-  gulp.src('./spec/*', {
+  return gulp.src('./spec/*', {
     read: false
   }).pipe(mocha());
 });
