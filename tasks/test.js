@@ -1,4 +1,3 @@
-var gulp = require('gulp');
 var bozon = require('../lib/bozon');
 var childProcess = require('child_process');
 

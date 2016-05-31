@@ -5,7 +5,7 @@ bozon.task('package', function() {
   for (i = 0; i < platforms.length; i++) {
     var os = platforms[i].split('-')[0];
     var arch = platforms[i].split('-')[1];
-    bozon.spawnSync('gulp', ['compile', "--env=" + bozon.packagingEnv(), "--platform=" + os])
+    bozon.runGulp(['compile', "--env=" + bozon.packagingEnv(), "--platform=" + os])
     bozon.spawnSync(bozon.packagerPath(), bozon.productionPackagingOptions(os, arch))
   }
 });

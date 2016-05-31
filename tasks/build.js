@@ -50,9 +50,9 @@ bozon.task('compile', function (callback) {
 });
 
 bozon.task('build:development', function () {
-  bozon.spawnSync('gulp', ['compile', '--env=development', '--platform=' + process.platform])
+  bozon.runGulp(['compile', '--env=development', '--platform=' + process.platform])
 });
 
 bozon.task('build:test', function () {
-  bozon.spawnSync('gulp', ['compile', '--env=test', '--platform=' + process.platform])
+  bozon.runGulp(['compile', '--env=test', '--platform=' + process.platform])
 });
