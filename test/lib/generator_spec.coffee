@@ -64,7 +64,7 @@ describe 'Generator', ->
       expect($.fileExists('config/platforms/linux.json')).to.be.true
       expect($.fileExists('config/platforms/win32.json')).to.be.true
       expect($.fileExists('spec/helper.js')).to.be.true
-      expect($.fileExists('spec/main_spec.js')).to.be.true
+      expect($.fileExists('spec/features/main_spec.js')).to.be.true
 
     it 'should call install packages', ->
       expect(generator.installPackages).to.be.calledOnce

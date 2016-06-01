@@ -1,5 +1,4 @@
 require('./clear')
 require('./build')
-require('./test')
 require('./start')
 require('./package')
