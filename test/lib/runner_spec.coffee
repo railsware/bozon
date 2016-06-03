@@ -10,7 +10,7 @@ describe 'Runner', =>
       @generateSpy = sinon.spy()
       @GeneratorStub = sinon.stub()
       @GeneratorStub::generate = @generateSpy
-      runner = proxyquire '../../lib/cli/runner',
+      runner = proxyquire '../../lib/runner',
         './generator': =>
           generate: @generateSpy
       runner.new()
@@ -22,8 +22,8 @@ describe 'Runner', =>
     beforeEach =>
       @runGulpSpy = sinon.spy()
       @spawnSyncSpy = sinon.spy()
-      runner = proxyquire '../../lib/cli/runner',
-      '../bozon':
+      runner = proxyquire '../../lib/runner',
+      './bozon':
         runGulp: @runGulpSpy
         spawnSync: @spawnSyncSpy
       runner.start()
@@ -39,8 +39,8 @@ describe 'Runner', =>
         @runGulpSpy = sinon.spy()
         @runMochaSpy = sinon.spy()
         @spawnSyncSpy = sinon.spy()
-        @runner = proxyquire '../../lib/cli/runner',
-        '../bozon':
+        @runner = proxyquire '../../lib/runner',
+        './bozon':
           runGulp: @runGulpSpy
           runMocha: @runMochaSpy
           spawnSync: @spawnSyncSpy
@@ -77,8 +77,8 @@ describe 'Runner', =>
         @runGulpSpy = sinon.spy()
         @runMochaSpy = sinon.spy()
         @spawnSyncSpy = sinon.spy()
-        @runner = proxyquire '../../lib/cli/runner',
-        '../bozon':
+        @runner = proxyquire '../../lib/runner',
+        './bozon':
           runGulp: @runGulpSpy
           runMocha: @runMochaSpy
           spawnSync: @spawnSyncSpy
@@ -115,8 +115,8 @@ describe 'Runner', =>
         @runGulpSpy = sinon.spy()
         @runMochaSpy = sinon.spy()
         @spawnSyncSpy = sinon.spy()
-        @runner = proxyquire '../../lib/cli/runner',
-        '../bozon':
+        @runner = proxyquire '../../lib/runner',
+        './bozon':
           runGulp: @runGulpSpy
           runMocha: @runMochaSpy
           spawnSync: @spawnSyncSpy
@@ -138,7 +138,7 @@ describe 'Runner', =>
   describe 'clear', =>
     beforeEach =>
       @delSpy = sinon.spy()
-      runner = proxyquire '../../lib/cli/runner',
+      runner = proxyquire '../../lib/runner',
       'del': @delSpy
       runner.clear()
 
@@ -153,8 +153,8 @@ describe 'Runner', =>
       process.chdir('./test/assets')
       @runGulpSpy = sinon.spy()
       @spawnSyncSpy = sinon.spy()
-      runner = proxyquire '../../lib/cli/runner',
-      '../bozon':
+      runner = proxyquire '../../lib/runner',
+      './bozon':
         runGulp: @runGulpSpy
         spawnSync: @spawnSyncSpy
       runner.package()

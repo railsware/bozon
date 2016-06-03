@@ -38,7 +38,7 @@
   },
   "preferGlobal": "true",
   "bin": {
-    "bozon": "lib/cli/index.js"
+    "bozon": "lib/cli.js"
   },
   "devDependencies": {
     "chai": "^3.5.0",
