@@ -44,6 +44,7 @@
     "chai": "^3.5.0",
     "coffee-script": "^1.10.0",
     "mocha": "^2.4.5",
+    "proxyquire": "^1.7.9",
     "sinon": "^1.17.4"
   }
 }

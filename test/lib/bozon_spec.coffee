@@ -144,6 +144,10 @@ describe 'bozon', ->
     it 'should return path to packager executable', ->
       expect(bozon.packagerPath()).to.equal(process.cwd() + '/node_modules/.bin/electron-packager')
 
+  describe '#specPath', ->
+    it 'should return specs path', ->
+      expect(bozon.specPath()).to.equal(process.cwd() + '/spec')
+
   describe '#packagingEnv', ->
     mock = helper.mock(process, 'argv')
 
