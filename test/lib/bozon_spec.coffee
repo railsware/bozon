@@ -18,6 +18,7 @@ describe 'bozon', ->
         "packaging": {
           "archive": true,
           "overwrite": true,
+          "platforms": ["darwin-x64", "linux-x64"]
           "platformResources": {
             "darwin": {
               "icon": "darwin_icon.png"
