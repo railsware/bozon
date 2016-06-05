@@ -21,9 +21,9 @@ $ bozon start
 $ bozon package
 ```
 
-Builds the app for OS X, Linux, and Windows, using [electron-packager](https://github.com/electron-userland/electron-packager).
+Builds the app for OS X, Linux, and Windows, using [electron-builder](https://github.com/electron-userland/electron-builder).
 
 
 ## License
 
-The MIT License (MIT) © <%= year %>
+The MIT License (MIT) © <%= author%> <%= year %>

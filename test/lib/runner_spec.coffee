@@ -20,120 +20,86 @@ describe 'Runner', =>
 
   describe 'start', =>
     beforeEach =>
-      @runGulpSpy = sinon.spy()
-      @spawnSyncSpy = sinon.spy()
+      @compileSpy = sinon.spy()
+      @runElectronSpy = sinon.spy()
       runner = proxyquire '../../lib/runner',
       './bozon':
-        runGulp: @runGulpSpy
-        spawnSync: @spawnSyncSpy
+        compile: @compileSpy
+        runElectron: @runElectronSpy
       runner.start()
 
-    it 'should call runGulp with task start', =>
-      expect(@runGulpSpy.calledOnce).to.be.true
-      expect(@runGulpSpy.getCall(0).args).to.eql([['compile', '--env=development', '--platform=' + process.platform]])
+    it 'should compile app and run electron app', =>
+      expect(@compileSpy.withArgs(helper.platform(), 'development').calledOnce).to.be.true
+      expect(@runElectronSpy.calledOnce).to.be.true
 
   describe 'test', =>
     describe 'no arguments', =>
       beforeEach =>
-        process.chdir('./test/assets')
-        @runGulpSpy = sinon.spy()
+        @compileSpy = sinon.spy()
+        @packageSpy = sinon.stub().returns Promise.resolve(true)
         @runMochaSpy = sinon.spy()
-        @spawnSyncSpy = sinon.spy()
         @runner = proxyquire '../../lib/runner',
         './bozon':
-          runGulp: @runGulpSpy
+          compile: @compileSpy
+          package: @packageSpy
           runMocha: @runMochaSpy
-          spawnSync: @spawnSyncSpy
         @runner.test()
 
-      afterEach =>
-        process.chdir('./../..')
-
       it 'should compile application', =>
-        expect(@runGulpSpy.calledOnce).to.be.true
-        expect(@runGulpSpy.getCall(0).args).to.eql([['compile', '--env=test', "--platform=#{process.platform}"]])
+        expect(@compileSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
       it 'should package application', =>
-        expect(@spawnSyncSpy.calledOnce).to.be.true
-        expect(@spawnSyncSpy.getCall(0).args).to.eql([
-          "#{process.cwd()}/node_modules/.bin/electron-packager",
-          [ "./builds/test",
-            'TestApp',
-            "--platform=#{process.platform}",
-            "--arch=#{process.arch}",
-            '--out=.tmp',
-            "--icon=#{process.platform}_icon.png",
-            '--overwrite'
-          ]
-        ])
+        expect(@packageSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
       it 'should call mocha --recursive on spec dir', =>
-        expect(@runMochaSpy.calledOnce).to.be.true
-        expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', path.join(process.cwd(), 'spec')]])
+        @packageSpy().then (a) =>
+          expect(@runMochaSpy.calledOnce).to.be.true
+          expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', path.join(process.cwd(), 'spec')]])
 
     describe 'feature test spec', =>
       beforeEach =>
-        process.chdir('./test/assets')
-        @runGulpSpy = sinon.spy()
+        @compileSpy = sinon.spy()
+        @packageSpy = sinon.stub().returns Promise.resolve(true)
         @runMochaSpy = sinon.spy()
-        @spawnSyncSpy = sinon.spy()
         @runner = proxyquire '../../lib/runner',
         './bozon':
-          runGulp: @runGulpSpy
+          compile: @compileSpy
+          package: @packageSpy
           runMocha: @runMochaSpy
-          spawnSync: @spawnSyncSpy
         @runner.test('spec/features/some_feature_spec.js')
 
-      afterEach =>
-        process.chdir('./../..')
-
       it 'should compile application', =>
-        expect(@runGulpSpy.calledOnce).to.be.true
-        expect(@runGulpSpy.getCall(0).args).to.eql([['compile', '--env=test', "--platform=#{process.platform}"]])
+        expect(@compileSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
       it 'should package application', =>
-        expect(@spawnSyncSpy.calledOnce).to.be.true
-        expect(@spawnSyncSpy.getCall(0).args).to.eql([
-          "#{process.cwd()}/node_modules/.bin/electron-packager",
-          [ "./builds/test",
-            'TestApp',
-            "--platform=#{process.platform}",
-            "--arch=#{process.arch}",
-            '--out=.tmp',
-            "--icon=#{process.platform}_icon.png",
-            '--overwrite'
-          ]
-        ])
+        expect(@packageSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
-      it 'should call mocha --recursive on exact spec or dir', =>
-        expect(@runMochaSpy.calledOnce).to.be.true
-        expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', 'spec/features/some_feature_spec.js']])
+      it 'should call mocha --recursive on spec dir', =>
+        @packageSpy().then (a) =>
+          expect(@runMochaSpy.calledOnce).to.be.true
+          expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', 'spec/features/some_feature_spec.js']])
 
     describe 'unit test spec', =>
       beforeEach =>
-        process.chdir('./test/assets')
-        @runGulpSpy = sinon.spy()
+        @compileSpy = sinon.spy()
+        @packageSpy = sinon.stub().returns Promise.resolve(true)
         @runMochaSpy = sinon.spy()
-        @spawnSyncSpy = sinon.spy()
         @runner = proxyquire '../../lib/runner',
         './bozon':
-          runGulp: @runGulpSpy
+          compile: @compileSpy
+          package: @packageSpy
           runMocha: @runMochaSpy
-          spawnSync: @spawnSyncSpy
         @runner.test('spec/units/some_spec.js')
-
-      afterEach =>
-        process.chdir('./../..')
 
       it 'should call mocha --recursive on exact spec or dir', =>
         expect(@runMochaSpy.calledOnce).to.be.true
         expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', 'spec/units/some_spec.js']])
 
       it 'should not compile app', =>
-        expect(@runGulpSpy.calledOnce).to.be.false
+        expect(@compileSpy.calledOnce).to.be.false
 
       it 'should not package package', =>
-        expect(@spawnSyncSpy.calledOnce).to.be.false
+        expect(@packageSpy.calledOnce).to.be.false
 
   describe 'clear', =>
     beforeEach =>
@@ -149,20 +115,44 @@ describe 'Runner', =>
       expect(@delSpy.getCall(2).args).to.eql([[process.cwd() + '/.tmp/**']])
 
   describe 'package', =>
-    beforeEach =>
-      process.chdir('./test/assets')
-      @runGulpSpy = sinon.spy()
-      @spawnSyncSpy = sinon.spy()
-      runner = proxyquire '../../lib/runner',
-      './bozon':
-        runGulp: @runGulpSpy
-        spawnSync: @spawnSyncSpy
-      runner.package()
+    describe 'windows platform', =>
+      beforeEach =>
+        @runGulpSpy = sinon.spy()
+        @packageSpy = sinon.spy()
+        runner = proxyquire '../../lib/runner',
+        './bozon':
+          compile: @compileSpy
+          package: @packageSpy
+        runner.package('windows')
 
-    afterEach =>
-      process.chdir('./../..')
+      it 'should compile and package application', =>
+        expect(@compileSpy.withArgs('windows', 'production').calledOnce).to.be.true
+        expect(@packageSpy.withArgs('windows', 'production').calledOnce).to.be.true
 
-    it 'should call bozon runGulp with task package', =>
-      expect(@runGulpSpy.calledTwice).to.be.true
-      expect(@runGulpSpy.getCall(0).args).to.eql([['compile', '--env=production', '--platform=darwin']])
-      expect(@runGulpSpy.getCall(1).args).to.eql([['compile', '--env=production', '--platform=linux']])
+    describe 'linux platform', =>
+      beforeEach =>
+        @runGulpSpy = sinon.spy()
+        @packageSpy = sinon.spy()
+        runner = proxyquire '../../lib/runner',
+        './bozon':
+          compile: @compileSpy
+          package: @packageSpy
+        runner.package('linux')
+
+      it 'should compile and package application', =>
+        expect(@compileSpy.withArgs('linux', 'production').calledOnce).to.be.true
+        expect(@packageSpy.withArgs('linux', 'production').calledOnce).to.be.true
+
+    describe 'mac os platform', =>
+      beforeEach =>
+        @runGulpSpy = sinon.spy()
+        @packageSpy = sinon.spy()
+        runner = proxyquire '../../lib/runner',
+        './bozon':
+          compile: @compileSpy
+          package: @packageSpy
+        runner.package('osx')
+
+      it 'should compile and package application', =>
+        expect(@compileSpy.withArgs('osx', 'production').calledOnce).to.be.true
+        expect(@packageSpy.withArgs('osx', 'production').calledOnce).to.be.true

@@ -1,6 +1,12 @@
 path = require('path')
 fs = require('fs')
 
+beforeEach ->
+  process.chdir('./test/assets')
+
+afterEach ->
+  process.chdir('./../..')
+
 class Mock
   constructor: (@object, @property) ->
     @[@property] = @object[@property]
@@ -14,6 +20,12 @@ class Mock
 module.exports =
   mock: (object, property) ->
     new Mock(object, property)
+
+  platform: ->
+    if process.platform is 'darwin'
+      'osx'
+    else
+      process.platform
 
   fileExists: (file) ->
     filePath = path.join(process.cwd(), 'test_app', file)

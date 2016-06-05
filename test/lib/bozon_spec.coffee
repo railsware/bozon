@@ -1,37 +1,175 @@
+bozon = {}
+sinon = require('sinon')
 expect = require('chai').expect
-bozon = require('./../../lib/bozon')
+proxyquire = require('proxyquire')
 helper = require('../helper')
 
-describe 'bozon', ->
+describe '#bozon', =>
+  beforeEach =>
+    bozon = require('./../../lib/bozon')
 
-  describe '#settings', ->
-    beforeEach ->
-      process.chdir('./test/assets')
+  describe '#task', ->
+    beforeEach =>
+      @gulpSpy = sinon.spy()
+      bozon = proxyquire './../../lib/bozon',
+        gulp:
+          task: @gulpSpy
+      bozon.task('compile')
 
-    afterEach ->
-      process.chdir('./../..')
+    it 'should set gulp task', =>
+      expect(@gulpSpy.calledOnce).to.be.true
+      expect(@gulpSpy.getCall(0).args[0]).to.eq('compile')
 
-    it 'should read package.json', ->
-      expect(bozon.settings()).to.eql({
-        "env": "test",
-        "name": "TestApp",
-        "packaging": {
-          "archive": true,
-          "overwrite": true,
-          "platforms": ["darwin-x64", "linux-x64"]
-          "platformResources": {
-            "darwin": {
-              "icon": "darwin_icon.png"
-            },
-            "linux": {
-              "icon": "linux_icon.png"
-            }
-          }
-        }
-      })
+  describe '#src', ->
+    beforeEach =>
+      @gulpSpy = sinon.spy()
+      bozon = proxyquire './../../lib/bozon',
+        gulp:
+          src: @gulpSpy
+      bozon.src('javascripts')
+
+    it 'should set gulp src', =>
+      expect(@gulpSpy.calledOnce).to.be.true
+      expect(@gulpSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/app/javascripts")
+
+  describe '#dest', ->
+    beforeEach =>
+      @gulpSpy = sinon.spy()
+      bozon = proxyquire './../../lib/bozon',
+        gulp:
+          dest: @gulpSpy
+      bozon.dest('javascripts')
+
+    it 'should set gulp dest', =>
+      expect(@gulpSpy.calledOnce).to.be.true
+      expect(@gulpSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/builds/development/javascripts")
+
+  describe '#runGulp', =>
+    beforeEach =>
+      @childProcessSpy = sinon.spy()
+      bozon = proxyquire './../../lib/bozon',
+        'child_process':
+          spawnSync: @childProcessSpy
+      bozon.runGulp(['compile', '--env=development'])
+
+    it 'should run gulp with arguments', =>
+      expect(@childProcessSpy.calledOnce).to.be.true
+      expect(@childProcessSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/node_modules/.bin/gulp")
+      expect(@childProcessSpy.getCall(0).args[1]).to.eql(['compile', '--env=development'])
+
+  describe '#runMocha', =>
+    beforeEach =>
+      @childProcessSpy = sinon.spy()
+      bozon = proxyquire './../../lib/bozon',
+        'child_process':
+          spawnSync: @childProcessSpy
+      bozon.runMocha(['--recursive', 'spec/unit/some_spec.js'])
+
+    it 'should run mocha with arguments', =>
+      expect(@childProcessSpy.calledOnce).to.be.true
+      expect(@childProcessSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/node_modules/.bin/mocha")
+      expect(@childProcessSpy.getCall(0).args[1]).to.eql(['--recursive', 'spec/unit/some_spec.js'])
+
+  describe '#runElectron', =>
+    beforeEach =>
+      @childProcessSpy = sinon.spy()
+      bozon = proxyquire './../../lib/bozon',
+        'child_process':
+          spawnSync: @childProcessSpy
+      bozon.runElectron()
+
+    it 'should run electron for build directory', =>
+      expect(@childProcessSpy.calledOnce).to.be.true
+      expect(@childProcessSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/node_modules/.bin/electron")
+      expect(@childProcessSpy.getCall(0).args[1]).to.eql(["#{process.cwd()}/builds/development"])
+
+  describe '#compile', =>
+    describe 'compile for oxs with development env', =>
+      beforeEach =>
+        @childProcessSpy = sinon.spy()
+        bozon = proxyquire './../../lib/bozon',
+          'child_process':
+            spawnSync: @childProcessSpy
+        bozon.compile('osx', 'development')
+
+      it 'should run gulp compile command', =>
+        expect(@childProcessSpy.calledOnce).to.be.true
+        expect(@childProcessSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/node_modules/.bin/gulp")
+        expect(@childProcessSpy.getCall(0).args[1]).to.eql(['compile', '--env=development', '--platform=osx'])
+
+    describe 'compile for linux with test env', =>
+      beforeEach =>
+        @childProcessSpy = sinon.spy()
+        bozon = proxyquire './../../lib/bozon',
+          'child_process':
+            spawnSync: @childProcessSpy
+        bozon.compile('linux', 'test')
+
+      it 'should run gulp compile command', =>
+        expect(@childProcessSpy.calledOnce).to.be.true
+        expect(@childProcessSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/node_modules/.bin/gulp")
+        expect(@childProcessSpy.getCall(0).args[1]).to.eql(['compile', '--env=test', '--platform=linux'])
+
+    describe 'compile for linux with test env', =>
+      beforeEach =>
+        @childProcessSpy = sinon.spy()
+        bozon = proxyquire './../../lib/bozon',
+          'child_process':
+            spawnSync: @childProcessSpy
+        bozon.compile('windows', 'production')
+
+      it 'should run gulp compile command', =>
+        expect(@childProcessSpy.calledOnce).to.be.true
+        expect(@childProcessSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/node_modules/.bin/gulp")
+        expect(@childProcessSpy.getCall(0).args[1]).to.eql(['compile', '--env=production', '--platform=windows'])
+
+  describe '#package', =>
+    describe 'production on windows', =>
+      beforeEach =>
+        @childProcessSpy = sinon.spy()
+        @packagerSpy = sinon.spy()
+        bozon = proxyquire './../../lib/bozon',
+          './packager': =>
+            build: @packagerSpy
+          'child_process':
+            spawnSync: @childProcessSpy
+        bozon.package('windows', 'production')
+
+      it 'should call packager build method', =>
+        expect(@packagerSpy.calledOnce).to.be.true
+        expect(@packagerSpy.getCall(0).args).to.eql(['windows', 'production'])
+
+    describe 'development on osx', =>
+      beforeEach =>
+        @childProcessSpy = sinon.spy()
+        @packagerSpy = sinon.spy()
+        bozon = proxyquire './../../lib/bozon',
+          './packager': =>
+            build: @packagerSpy
+          'child_process':
+            spawnSync: @childProcessSpy
+        bozon.package('osx', 'development')
+
+      it 'should call packager build method', =>
+        expect(@packagerSpy.calledOnce).to.be.true
+        expect(@packagerSpy.getCall(0).args).to.eql(['osx', 'development'])
+
+    describe 'test on linux', =>
+      beforeEach =>
+        @childProcessSpy = sinon.spy()
+        @packagerSpy = sinon.spy()
+        bozon = proxyquire './../../lib/bozon',
+          './packager': =>
+            build: @packagerSpy
+          'child_process':
+            spawnSync: @childProcessSpy
+        bozon.package('linux', 'test')
+
+      it 'should call packager build method', =>
+        expect(@packagerSpy.calledOnce).to.be.true
+        expect(@packagerSpy.getCall(0).args).to.eql(['linux', 'test'])
 
   describe '#sourcePath', ->
-
     it 'should return source path with suffix', ->
       expect(bozon.sourcePath('stylesheets/app.css')).to.equal(process.cwd() + '/app/stylesheets/app.css')
 
@@ -69,20 +207,20 @@ describe 'bozon', ->
         mock.returns ['node', './', '--env=production', '--platform=darwin']
 
       it 'should return destination path with suffix', ->
-        expect(bozon.destinationPath('javascripts')).to.equal(process.cwd() + '/builds/production/darwin/javascripts')
+        expect(bozon.destinationPath('javascripts')).to.equal(process.cwd() + '/builds/production/javascripts')
 
       it 'should return destination path without suffix', ->
-        expect(bozon.destinationPath()).to.equal(process.cwd() + '/builds/production/darwin')
+        expect(bozon.destinationPath()).to.equal(process.cwd() + '/builds/production')
 
     describe 'production environment and linux platform', ->
       beforeEach ->
         mock.returns ['node', './', '--env=production', '--platform=linux']
 
       it 'should return destination path with suffix', ->
-        expect(bozon.destinationPath('javascripts')).to.equal(process.cwd() + '/builds/production/linux/javascripts')
+        expect(bozon.destinationPath('javascripts')).to.equal(process.cwd() + '/builds/production/javascripts')
 
       it 'should return destination path without suffix', ->
-        expect(bozon.destinationPath()).to.equal(process.cwd() + '/builds/production/linux')
+        expect(bozon.destinationPath()).to.equal(process.cwd() + '/builds/production')
 
     describe 'no end and platform specified', ->
       beforeEach ->
@@ -94,111 +232,6 @@ describe 'bozon', ->
       it 'should return destination path without suffix', ->
         expect(bozon.destinationPath()).to.equal(process.cwd() + '/builds/development')
 
-  describe '#releasePath', ->
-    mock = helper.mock(process, 'argv')
-
-    afterEach ->
-      mock.restore()
-
-    describe 'development env', ->
-      beforeEach ->
-        mock.returns ['node', './', '--env=development']
-
-      it 'should return release path for develoment env', ->
-        expect(bozon.releasePath('development')).to.equal(process.cwd() + '/packages')
-
-    describe 'production env', ->
-      beforeEach ->
-        mock.returns ['node', './', '--env=production']
-
-      it 'should return release path for production env', ->
-        expect(bozon.releasePath()).to.equal(process.cwd() + '/packages')
-
-    describe 'test env', ->
-      beforeEach ->
-        mock.returns ['node', './', '--env=test']
-
-      it 'should return release path for test env', ->
-        expect(bozon.releasePath('test')).to.equal(process.cwd() + '/.tmp')
-
-  describe '#buildPath', ->
-    mock = helper.mock(process, 'argv')
-
-    afterEach ->
-      mock.restore()
-
-    describe 'production env', ->
-      beforeEach ->
-        mock.returns ['node', './', '--env=production']
-
-      it 'should return build path', ->
-        expect(bozon.buildPath('darwin')).to.equal(process.cwd() + '/builds/production/darwin')
-
-    describe 'staging env', ->
-      beforeEach ->
-        mock.returns ['node', './', '--env=staging']
-
-      it 'should return staging build path', ->
-        expect(bozon.buildPath('linux')).to.equal(process.cwd() + '/builds/staging/linux')
-
-  describe '#packagerPath', ->
-    it 'should return path to packager executable', ->
-      expect(bozon.packagerPath()).to.equal(process.cwd() + '/node_modules/.bin/electron-packager')
-
-  describe '#specPath', ->
-    it 'should return specs path', ->
-      expect(bozon.specPath()).to.equal(process.cwd() + '/spec')
-
-  describe '#packagingEnv', ->
-    mock = helper.mock(process, 'argv')
-
-    describe 'Specified environment', ->
-      beforeEach ->
-        mock.returns ['node', './', '--env=test']
-
-      afterEach ->
-        mock.restore()
-
-      it 'should return passed env', ->
-        expect(bozon.packagingEnv()).to.eql('test')
-
-    describe 'Unspecified environment', ->
-      it 'should return default env', ->
-        expect(bozon.packagingEnv()).to.eql('production')
-
-  describe '#testPackagingOptions', ->
-    beforeEach ->
-      process.chdir('./test/assets')
-
-    afterEach ->
-      process.chdir('./../..')
-
-    it 'should return correct packaging options', ->
-      expect(bozon.testPackagingOptions()).to.eql([
-        './builds/test',
-        'TestApp',
-        "--platform=#{process.platform}",
-        "--arch=#{process.arch}",
-        "--out=.tmp",
-        "--icon=#{process.platform}_icon.png",
-        '--overwrite'
-      ])
-
-  describe '#productionPackagingOptions', ->
-    beforeEach ->
-      process.chdir('./test/assets')
-
-    afterEach ->
-      process.chdir('./../..')
-
-    it 'should return correct packaging options', ->
-      expect(bozon.productionPackagingOptions('linux', 'x64')).to.eql([
-        "#{process.cwd()}/builds/production/linux",
-        'TestApp',
-        "--platform=linux",
-        "--arch=x64",
-        "--out=#{process.cwd()}/packages",
-        "--icon=linux_icon.png",
-        '--overwrite',
-        '--asar'
-      ])
+  describe '#specPath', =>
+    it 'should return specs path', =>
+      expect(bozon.specPath()).to.eq("#{process.cwd()}/spec")

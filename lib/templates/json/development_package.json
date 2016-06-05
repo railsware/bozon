@@ -1,10 +1,10 @@
 {
   "name": "<%= name %>",
   "version": "0.1.0",
-  "description": "",
+  "description": "Desktop application build with Electron",
   "repository": "",
-  "license": "MIT",
   "scripts": {
+    "postinstall": "install-app-deps"
   },
   "devDependencies": {
     "bozon": "^<%= bozonVersion %>"
@@ -12,21 +12,15 @@
   "dependencies": {
     "electron-prebuilt": "<%= electronVersion %>"
   },
-  "packaging": {
-    "version": "<%= electronVersion %>",
-    "archive": true,
-    "overwrite": true,
-    "platforms": <%- platformsStr %>,
-    "platformResources": {
-      "darwin": {
-        "icon": "builds/production/darwin/images/electron.icns"
-      },
-      "win32": {
-        "icon": "builds/production/win32/images/electron.ico"
-      },
-      "linux": {
-        "icon": "builds/production/linux/images/electron.png"
-      }
+  "build": {
+    "app-bundle-id": "your.id",
+    "app-category-type": "your.app.category.type",
+    "win": {
+      "iconUrl": "https://github.com/railsware/bozon/blob/master/lib/templates/images/electron.ico?raw=true"
+    },
+    "osx": {
+      "icon": "resources/icon.icns",
+      "target": "dmg"
     }
   }
 }
