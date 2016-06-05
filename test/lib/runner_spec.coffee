@@ -5,12 +5,6 @@ sinon = require('sinon')
 proxyquire = require('proxyquire')
 
 describe 'Runner', =>
-  beforeEach =>
-    process.chdir('./test/assets')
-
-  afterEach =>
-    process.chdir('../..')
-
   describe 'new', =>
     beforeEach =>
       @generateSpy = sinon.spy()

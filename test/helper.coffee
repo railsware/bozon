@@ -1,6 +1,12 @@
 path = require('path')
 fs = require('fs')
 
+beforeEach ->
+  process.chdir('./test/assets')
+
+afterEach ->
+  process.chdir('./../..')
+
 class Mock
   constructor: (@object, @property) ->
     @[@property] = @object[@property]

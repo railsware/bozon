@@ -6,11 +6,7 @@ helper = require('../helper')
 
 describe '#bozon', =>
   beforeEach =>
-    process.chdir('./test/assets')
     bozon = require('./../../lib/bozon')
-
-  afterEach =>
-    process.chdir('./../..')
 
   describe '#task', ->
     beforeEach =>

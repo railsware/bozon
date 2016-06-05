@@ -28,16 +28,13 @@ describe 'Generator', ->
     tmpDir = path.join(process.cwd(), '.tmp')
     stub = {}
 
-    before ->
-      childProcess.spawnSync('mkdir', [tmpDir])
-      process.chdir('.tmp')
+    beforeEach =>
       generator = new Generator('test_app', {})
       stub = sinon.stub(generator, 'installPackages')
       generator.setup()
 
-    after ->
-      process.chdir('..')
-      childProcess.spawnSync('rm', ['-rf', tmpDir])
+    afterEach =>
+      childProcess.spawnSync('rm', ['-rf', 'test_app'])
       stub.restore()
 
     it 'should create application structure', ->
