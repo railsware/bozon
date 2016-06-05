@@ -15,6 +15,12 @@ module.exports =
   mock: (object, property) ->
     new Mock(object, property)
 
+  platform: ->
+    if process.platform is 'darwin'
+      'osx'
+    else
+      process.platform
+
   fileExists: (file) ->
     filePath = path.join(process.cwd(), 'test_app', file)
     try

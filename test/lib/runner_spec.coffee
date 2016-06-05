@@ -35,7 +35,7 @@ describe 'Runner', =>
       runner.start()
 
     it 'should compile app and run electron app', =>
-      expect(@compileSpy.withArgs('osx', 'development').calledOnce).to.be.true
+      expect(@compileSpy.withArgs(helper.platform(), 'development').calledOnce).to.be.true
       expect(@runElectronSpy.calledOnce).to.be.true
 
   describe 'test', =>
@@ -52,10 +52,10 @@ describe 'Runner', =>
         @runner.test()
 
       it 'should compile application', =>
-        expect(@compileSpy.withArgs('osx', 'test').calledOnce).to.be.true
+        expect(@compileSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
       it 'should package application', =>
-        expect(@packageSpy.withArgs('osx', 'test').calledOnce).to.be.true
+        expect(@packageSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
       it 'should call mocha --recursive on spec dir', =>
         @packageSpy().then (a) =>
@@ -75,10 +75,10 @@ describe 'Runner', =>
         @runner.test('spec/features/some_feature_spec.js')
 
       it 'should compile application', =>
-        expect(@compileSpy.withArgs('osx', 'test').calledOnce).to.be.true
+        expect(@compileSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
       it 'should package application', =>
-        expect(@packageSpy.withArgs('osx', 'test').calledOnce).to.be.true
+        expect(@packageSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
 
       it 'should call mocha --recursive on spec dir', =>
         @packageSpy().then (a) =>
