@@ -21,6 +21,7 @@ describe 'Generator', ->
         bozonVersion: "0.3.8",
         electronVersion: "1.2.1",
         name: 'TestApp',
+        author: null,
         year: date.getFullYear()
       })
 
