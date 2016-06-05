@@ -1,6 +1,11 @@
 {
   "name": "<%= name %>",
   "version": "0.1.0",
-  "description": "",
-  "main": "javascripts/main/index.js"
+  "description": "<%= name %> application built with Electron",
+  "author": "",
+  "license": "MIT",
+  "main": "javascripts/main/index.js",
+  "dependencies": {
+
+  }
 }
