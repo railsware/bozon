@@ -6,10 +6,8 @@
   "license": "MIT",
   "scripts": {
   },
-  "devDependencies": {
-    "bozon": "^<%= bozonVersion %>"
-  },
   "dependencies": {
+    "bozon": "^<%= bozonVersion %>",
     "electron-prebuilt": "<%= electronVersion %>"
   },
   "packaging": {
