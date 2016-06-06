@@ -75,11 +75,11 @@ bozon test
 ```
 
 ## Packaging application
-Packaging Electron application is done by [electron-packager](https://www.npmjs.com/package/electron-packager) using settings in defined in `package.json` under `packaging` section.
-Application source code is being compiled to `./builds/production/[platform]` directory, and packaged versions for different platforms go to `./packages` directory.
+Packaging Electron application is done by [electron-builder](https://www.npmjs.com/package/electron-builder) using settings in defined in `package.json` under `build` section.
+Application source code is being compiled to `./builds/production/` directory, and packaged versions for different platforms go to `./packages` directory.
 
 ```bash
-bozon package
+bozon package [osx|windows|linux]
 ```
 
 ## License
