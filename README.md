@@ -11,7 +11,7 @@ Bozon is a single tool for handling different tasks being performed by multiple 
 * **Gulp** - task runner that helps making all important processes with a single command
 * **Webpack** - building and packaging source code for renderer process done with webpack
 * **spectron** - Easily test your Electron apps using ChromeDriver and WebdriverIO
-* **electron-packager** - package and distribute your Electron app
+* **electron-builder** - package and distribute your Electron app
 
 ![img](https://api.monosnap.com/rpc/file/download?id=OrfGcc5KS0miV3RWGB92Wgl7HKOjFO)
 
