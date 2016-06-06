@@ -9,11 +9,7 @@ describe 'settings', ->
     mock = helper.mock process, 'argv'
     settings = {}
 
-    beforeEach ->
-      process.chdir('./test/assets')
-
     afterEach ->
-      process.chdir('../..')
       mock.restore()
 
     context 'development env on darwin system', ->
