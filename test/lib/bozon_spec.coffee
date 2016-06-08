@@ -129,7 +129,7 @@ describe '#bozon', =>
         @childProcessSpy = sinon.spy()
         @packagerSpy = sinon.spy()
         bozon = proxyquire './../../lib/bozon',
-          './packager': =>
+          './packaging/packager': =>
             build: @packagerSpy
           'child_process':
             spawnSync: @childProcessSpy
@@ -144,7 +144,7 @@ describe '#bozon', =>
         @childProcessSpy = sinon.spy()
         @packagerSpy = sinon.spy()
         bozon = proxyquire './../../lib/bozon',
-          './packager': =>
+          './packaging/packager': =>
             build: @packagerSpy
           'child_process':
             spawnSync: @childProcessSpy
@@ -159,7 +159,7 @@ describe '#bozon', =>
         @childProcessSpy = sinon.spy()
         @packagerSpy = sinon.spy()
         bozon = proxyquire './../../lib/bozon',
-          './packager': =>
+          './packaging/packager': =>
             build: @packagerSpy
           'child_process':
             spawnSync: @childProcessSpy

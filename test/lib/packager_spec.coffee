@@ -8,7 +8,7 @@ describe 'Packager', =>
     describe 'test environment', =>
       beforeEach =>
         @buildSpy = sinon.spy()
-        Packager = proxyquire '../../lib/packager',
+        Packager = proxyquire '../../lib/packaging/packager',
           'electron-builder':
             build: @buildSpy
         packager = new Packager()
@@ -31,7 +31,7 @@ describe 'Packager', =>
     describe 'development environment', =>
       beforeEach =>
         @buildSpy = sinon.spy()
-        Packager = proxyquire '../../lib/packager',
+        Packager = proxyquire '../../lib/packaging/packager',
           'electron-builder':
             build: @buildSpy
         packager = new Packager()
@@ -54,7 +54,7 @@ describe 'Packager', =>
     describe 'development environment', =>
       beforeEach =>
         @buildSpy = sinon.spy()
-        Packager = proxyquire '../../lib/packager',
+        Packager = proxyquire '../../lib/packaging/packager',
           'electron-builder':
             build: @buildSpy
         packager = new Packager()
