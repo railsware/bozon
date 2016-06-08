@@ -35,71 +35,18 @@ describe 'Runner', =>
   describe 'test', =>
     describe 'no arguments', =>
       beforeEach =>
-        @compileSpy = sinon.spy()
-        @packageSpy = sinon.stub().returns Promise.resolve(true)
-        @runMochaSpy = sinon.spy()
+        @runSpy = sinon.spy()
+        @specRunnerSpy = sinon.spy()
+        @specRunnerSpy.prototype.run = @runSpy
         @runner = proxyquire '../../lib/runner',
-        './bozon':
-          compile: @compileSpy
-          package: @packageSpy
-          runMocha: @runMochaSpy
-        @runner.test()
+        './testing/spec_runner': @specRunnerSpy
+        @runner.test('spec/units/')
 
-      it 'should compile application', =>
-        expect(@compileSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
+      it 'should create instance of SpecRunner', =>
+        expect(@specRunnerSpy.withArgs('spec/units/').calledOnce).to.be.true
 
-      it 'should package application', =>
-        expect(@packageSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
-
-      it 'should call mocha --recursive on spec dir', =>
-        @packageSpy().then (a) =>
-          expect(@runMochaSpy.calledOnce).to.be.true
-          expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', path.join(process.cwd(), 'spec')]])
-
-    describe 'feature test spec', =>
-      beforeEach =>
-        @compileSpy = sinon.spy()
-        @packageSpy = sinon.stub().returns Promise.resolve(true)
-        @runMochaSpy = sinon.spy()
-        @runner = proxyquire '../../lib/runner',
-        './bozon':
-          compile: @compileSpy
-          package: @packageSpy
-          runMocha: @runMochaSpy
-        @runner.test('spec/features/some_feature_spec.js')
-
-      it 'should compile application', =>
-        expect(@compileSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
-
-      it 'should package application', =>
-        expect(@packageSpy.withArgs(helper.platform(), 'test').calledOnce).to.be.true
-
-      it 'should call mocha --recursive on spec dir', =>
-        @packageSpy().then (a) =>
-          expect(@runMochaSpy.calledOnce).to.be.true
-          expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', 'spec/features/some_feature_spec.js']])
-
-    describe 'unit test spec', =>
-      beforeEach =>
-        @compileSpy = sinon.spy()
-        @packageSpy = sinon.stub().returns Promise.resolve(true)
-        @runMochaSpy = sinon.spy()
-        @runner = proxyquire '../../lib/runner',
-        './bozon':
-          compile: @compileSpy
-          package: @packageSpy
-          runMocha: @runMochaSpy
-        @runner.test('spec/units/some_spec.js')
-
-      it 'should call mocha --recursive on exact spec or dir', =>
-        expect(@runMochaSpy.calledOnce).to.be.true
-        expect(@runMochaSpy.getCall(0).args).to.eql([['--recursive', 'spec/units/some_spec.js']])
-
-      it 'should not compile app', =>
-        expect(@compileSpy.calledOnce).to.be.false
-
-      it 'should not package package', =>
-        expect(@packageSpy.calledOnce).to.be.false
+      it 'should call run function on spec runner', =>
+        expect(@runSpy.calledOnce).to.be.true
 
   describe 'clear', =>
     beforeEach =>
