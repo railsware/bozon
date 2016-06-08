@@ -5,7 +5,7 @@ path = require('path')
 expect = require('chai').expect
 sinon = require('sinon')
 
-Generator = require('./../../lib/generator')
+Generator = require('./../../lib/scaffolding/generator')
 
 describe 'Generator', ->
   generator = {}

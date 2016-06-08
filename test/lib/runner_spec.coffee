@@ -11,7 +11,7 @@ describe 'Runner', =>
       @GeneratorStub = sinon.stub()
       @GeneratorStub::generate = @generateSpy
       runner = proxyquire '../../lib/runner',
-        './generator': =>
+        './scaffolding/generator': =>
           generate: @generateSpy
       runner.new()
 
