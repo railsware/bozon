@@ -6,36 +6,37 @@ proxyquire = require('proxyquire')
 describe 'Packager', =>
   describe '#build', ->
     describe 'test environment', =>
-      beforeEach =>
-        @buildSpy = sinon.spy()
+      beforeEach (done) =>
+        @packagerSpy = sinon.spy()
         Packager = proxyquire '../../lib/packaging/packager',
-          'electron-builder':
-            build: @buildSpy
+          'electron-packager-tf': @packagerSpy
         packager = new Packager()
         packager.build('osx', 'test')
+        done()
 
       it 'should call builder build function', =>
-        expect(@buildSpy.calledOnce).to.be.true
+        expect(@packagerSpy.calledOnce).to.be.true
 
       it 'should pass correct args', =>
-        args = @buildSpy.getCall(0).args[0]
-        expect(args).to.have.property('devMetadata').and.eql({
-          "directories": {
-            "app": "builds/test"
-            "buildResources": "resources"
-            "output": ".tmp"
-          }
+        args = @packagerSpy.getCall(0).args[0]
+        expect(args).to.eql({
+          "name": "TestApp",
+          "version": "1.2.1",
+          "platform": process.platform,
+          "arch": process.arch,
+          "dir": "builds/test",
+          "out": ".tmp"
         })
-        expect(args['targets'].entries().next().value[0].name).to.eql('osx')
 
     describe 'development environment', =>
-      beforeEach =>
+      beforeEach (done) =>
         @buildSpy = sinon.spy()
         Packager = proxyquire '../../lib/packaging/packager',
           'electron-builder':
             build: @buildSpy
         packager = new Packager()
         packager.build('linux', 'development')
+        done()
 
       it 'should call builder build function', =>
         expect(@buildSpy.calledOnce).to.be.true
@@ -51,7 +52,7 @@ describe 'Packager', =>
         })
         expect(args['targets'].entries().next().value[0].name).to.eql('linux')
 
-    describe 'development environment', =>
+    describe 'production environment', =>
       beforeEach =>
         @buildSpy = sinon.spy()
         Packager = proxyquire '../../lib/packaging/packager',

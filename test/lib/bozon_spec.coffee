@@ -231,7 +231,3 @@ describe '#bozon', =>
 
       it 'should return destination path without suffix', ->
         expect(bozon.destinationPath()).to.equal(process.cwd() + '/builds/development')
-
-  describe '#specPath', =>
-    it 'should return specs path', =>
-      expect(bozon.specPath()).to.eq("#{process.cwd()}/spec")
