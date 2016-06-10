@@ -25,6 +25,7 @@
     "del": "^2.2.0",
     "ejs": "^2.4.2",
     "electron-builder": "4.2.6",
+    "electron-packager-tf": "7.3.0",
     "electron-prebuilt": "1.2.1",
     "gulp": "^3.9.1",
     "gulp-json-editor": "^2.2.1",
