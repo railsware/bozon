@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "bozon": "^<%= bozonVersion %>",
-    "electron-prebuilt": "<%= electronVersion %>"
+    "electron-prebuilt": "<%= electronVersion %>",
+    "mocha": "^2.5.3",
+    "spectron": "^3.2.2"
   },
   "build": {
     "app-bundle-id": "your.id",
