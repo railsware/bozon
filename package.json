@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/railsware/bozon.git"
   },
-  "main": "lib/cli/index.js",
+  "main": "lib",
   "scripts": {
     "test": "mocha test/**/*.* --compilers coffee:coffee-script/register"
   },
@@ -36,7 +36,7 @@
   },
   "preferGlobal": "true",
   "bin": {
-    "bozon": "lib/cli.js"
+    "bozon": "bin/bozon"
   },
   "devDependencies": {
     "chai": "^3.5.0",
