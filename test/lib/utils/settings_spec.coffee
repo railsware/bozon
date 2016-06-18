@@ -1,10 +1,7 @@
-path = require('path')
-expect = require('chai').expect
-sinon = require('sinon')
-helper = require('../helper')
-Settings = require('./../../lib/settings')
+helper = require('../../helper')
 
-describe 'settings', ->
+describe 'Settings', ->
+  Settings = require('./../../../lib/utils/settings')
   describe '#get', ->
     mock = helper.mock process, 'argv'
     settings = {}
@@ -137,3 +134,45 @@ describe 'settings', ->
           "env": "production",
           "devtools": "none"
         })
+
+  describe '#argument', =>
+    mock = helper.mock(process, 'argv')
+    settings = {}
+
+    describe 'passed --env development and --platform darwin arguments', =>
+      beforeEach =>
+        mock.returns ['node', './', '--env=development', '--platform=darwin']
+        settings = new Settings()
+
+      afterEach =>
+        mock.restore()
+
+      it 'should return parsed env argument', =>
+        expect(settings.argument('env')).to.equal('development')
+
+      it 'should return parsed platform argument', =>
+        expect(settings.argument('platform')).to.equal('darwin')
+
+    describe 'passed --env production and --platform linux arguments', =>
+      beforeEach =>
+        mock.returns ['node', './', '--env=production', '--platform=linux']
+        settings = new Settings()
+
+      afterEach =>
+        mock.restore()
+
+      it 'should return parsed env argument', =>
+        expect(settings.argument('env')).to.equal('production')
+
+      it 'should return parsed platform argument', =>
+        expect(settings.argument('platform')).to.equal('linux')
+
+    describe 'no arguments passed', =>
+      beforeEach =>
+        settings = new Settings()
+
+      it 'should return null for env argument', =>
+        expect(settings.argument('env')).to.equal(null)
+
+      it 'should return null for platform argument', =>
+        expect(settings.argument('platform')).to.equal(null)
