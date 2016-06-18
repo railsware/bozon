@@ -15,8 +15,14 @@ describe 'Generator', ->
     it 'should set defaults for template variables', ->
       date = new Date()
       expect(generator.defaults).to.eql({
-        bozonVersion: "0.4.1",
-        electronVersion: "1.2.1",
+        bozonVersion: '0.4.1',
+        electronBuilderVersion: '5.4.4',
+        electronPackagerVersion: '7.4.0',
+        electronPrebuiltVersion: '1.2.2',
+        gulpVersion: '^3.9.1',
+        mochaVersion: '^2.5.3',
+        spectronVersion: '^3.2.3'
+        webpackStreamVersion: '^3.2.0'
         name: 'TestApp',
         author: null,
         year: date.getFullYear()
@@ -67,7 +73,7 @@ describe 'Generator', ->
     it 'package.json should contain actual information', ->
       expect($.fileContains('package.json', '"name": "TestApp"')).to.be.true
       expect($.fileContains('package.json', '"version": "0.1.0"')).to.be.true
-      expect($.fileContains('package.json', '"electron-prebuilt": "1.2.1"')).to.be.true
+      expect($.fileContains('package.json', '"electron-prebuilt": "1.2.2"')).to.be.true
 
     it 'app package.json should contain actual information', ->
       expect($.fileContains('app/package.json', '"name": "TestApp"')).to.be.true

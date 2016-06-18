@@ -7,13 +7,13 @@
     "postinstall": "install-app-deps"
   },
   "dependencies": {
-    "electron-builder": "5.3.0",
-    "electron-packager-tf": "7.3.2",
-    "electron-prebuilt": "<%= electronVersion %>",
-    "gulp": "^3.9.1",
-    "mocha": "^2.5.3",
-    "spectron": "^3.2.2",
-    "webpack-stream": "^3.2.0"
+    "electron-builder": "<%= electronBuilderVersion %>",
+    "electron-packager-tf": "<%= electronPackagerVersion %>",
+    "electron-prebuilt": "<%= electronPrebuiltVersion %>",
+    "gulp": "<%= gulpVersion %>",
+    "mocha": "<%= mochaVersion %>",
+    "spectron": "<%= spectronVersion %>",
+    "webpack-stream": "<%= webpackStreamVersion %>"
   },
   "build": {
     "app-bundle-id": "your.id",
