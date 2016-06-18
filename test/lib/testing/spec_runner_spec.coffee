@@ -5,14 +5,15 @@ reload = require('require-reload')
 describe 'SpecRunner', ->
   SpecRunner = {}
   buildSpy = sinon.stub().returns(Promise.resolve(true))
+  packagerSpy = sinon.stub().returns
+    build: buildSpy
   mochaSpy = sinon.spy()
 
   describe 'CoffeeScript specs', ->
     utilsSpy = sinon.stub().returns(['js', 'coffee'])
 
     beforeEach =>
-      mockRequire '../../../lib/packaging/packager', ->
-        build: buildSpy
+      mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -25,6 +26,8 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should package test app and run mocha', (done) ->
+        expect(packagerSpy.calledOnce).to.eq(true)
+        expect(packagerSpy.getCall(0).args).to.eql(['osx', 'test'])
         expect(buildSpy.calledOnce).to.eq(true)
         setTimeout ->
           expect(mochaSpy.calledOnce).to.eq(true)
@@ -38,6 +41,7 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should run mocha specs without packaging test app', (done) ->
+        expect(packagerSpy.calledOnce).to.eq(true)
         expect(buildSpy.calledOnce).to.eq(true)
         setTimeout ->
           expect(mochaSpy.calledTwice).to.eq(true)
@@ -51,6 +55,8 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should package test app and run mocha specs', (done) ->
+        expect(packagerSpy.calledTwice).to.eq(true)
+        expect(packagerSpy.getCall(1).args).to.eql(['osx', 'test'])
         expect(buildSpy.calledTwice).to.eq(true)
         setTimeout ->
           expect(mochaSpy.calledThrice).to.eq(true)
@@ -60,8 +66,7 @@ describe 'SpecRunner', ->
 
   describe 'JavaScript specs', ->
     beforeEach =>
-      mockRequire '../../../lib/packaging/packager', ->
-        build: buildSpy
+      mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -74,6 +79,8 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should package test app and run mocha', (done) ->
+        expect(packagerSpy.calledThrice).to.eq(true)
+        expect(packagerSpy.getCall(2).args).to.eql(['osx', 'test'])
         expect(buildSpy.calledThrice).to.eq(true)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(4)
@@ -88,6 +95,7 @@ describe 'SpecRunner', ->
 
       it 'should run mocha specs without packaging test app', (done) ->
         expect(buildSpy.calledThrice).to.eq(true)
+        expect(packagerSpy.calledThrice).to.eq(true)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(5)
           expect(mochaSpy.getCall(4).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/units/some_unit_spec.js')]])
@@ -100,6 +108,8 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should package test app and run mocha specs', (done) ->
+        expect(packagerSpy.callCount).to.eq(4)
+        expect(packagerSpy.getCall(3).args).to.eql(['osx', 'test'])
         expect(buildSpy.callCount).to.eq(4)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(6)
@@ -109,8 +119,7 @@ describe 'SpecRunner', ->
 
   describe 'Typescript specs', ->
     beforeEach =>
-      mockRequire '../../../lib/packaging/packager', ->
-        build: buildSpy
+      mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -123,6 +132,8 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should package test app and run mocha', (done) ->
+        expect(packagerSpy.callCount).to.eq(5)
+        expect(packagerSpy.getCall(4).args).to.eql(['osx', 'test'])
         expect(buildSpy.callCount).to.eq(5)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(7)
@@ -149,6 +160,8 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should package test app and run mocha specs', (done) ->
+        expect(packagerSpy.callCount).to.eq(6)
+        expect(packagerSpy.getCall(5).args).to.eql(['osx', 'test'])
         expect(buildSpy.callCount).to.eq(6)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(9)
@@ -158,8 +171,7 @@ describe 'SpecRunner', ->
 
   describe 'Mixed type specs files', ->
     beforeEach =>
-      mockRequire '../../../lib/packaging/packager', ->
-        build: buildSpy
+      mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -172,6 +184,8 @@ describe 'SpecRunner', ->
         runner.run()
 
       it 'should package test app and run mocha', (done) ->
+        expect(packagerSpy.callCount).to.eq(7)
+        expect(packagerSpy.getCall(6).args).to.eql(['osx', 'test'])
         expect(buildSpy.callCount).to.eq(7)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(10)
