@@ -1,13 +1,10 @@
-$ = require('../helper')
-
-childProcess = require('child_process')
+$ = require('../../helper')
 path = require('path')
-expect = require('chai').expect
-sinon = require('sinon')
-
-Generator = require('./../../lib/scaffolding/generator')
 
 describe 'Generator', ->
+  childProcess = require('child_process')
+
+  Generator = require('./../../../lib/scaffolding/generator')
   generator = {}
 
   describe '#constructor', ->
@@ -27,16 +24,19 @@ describe 'Generator', ->
 
   describe '#setup', ->
     tmpDir = path.join(process.cwd(), '.tmp')
-    stub = {}
+    installStub = {}
+    linkStub = {}
 
     beforeEach =>
       generator = new Generator('test_app', {})
-      stub = sinon.stub(generator, 'installPackages')
+      installStub = sinon.stub(generator, 'installPackages')
+      linkStub = sinon.stub(generator, 'linkBozon')
       generator.setup()
 
     afterEach =>
       childProcess.spawnSync('rm', ['-rf', 'test_app'])
-      stub.restore()
+      installStub.restore()
+      linkStub.restore()
 
     it 'should create application structure', ->
       expect($.fileExists('.gitignore')).to.be.true
