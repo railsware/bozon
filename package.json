@@ -42,8 +42,8 @@
     "sinon": "^1.17.4"
   },
   "versions": {
-    "electron-prebuilt": "1.2.2",
-    "electron-builder": "5.4.4",
+    "electron-prebuilt": "1.2.3",
+    "electron-builder": "5.6.1",
     "electron-packager-tf": "7.4.0",
     "gulp": "^3.9.1",
     "mocha": "^2.5.3",
