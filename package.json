@@ -33,6 +33,9 @@
   "bin": {
     "bozon": "bin/bozon"
   },
+  "engines": {
+    "node": ">= 5.10.1"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "coffee-script": "^1.10.0",
