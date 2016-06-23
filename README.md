@@ -62,7 +62,7 @@ Bozon provides a way to define environment specific and platform specific config
   |  |  |--production.json
   |  |  |--test.json
   |  |--platforms/
-  |  |  |--darwin.json
+  |  |  |--osx.json
   |  |  |--linux.json
   |  |  |--windows.json
 ```
