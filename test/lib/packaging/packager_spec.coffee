@@ -44,7 +44,7 @@ describe 'Packager', ->
           expect(electronPackagerSpy.calledTwice).to.eq(true)
           expect(electronPackagerSpy.getCall(0).args[0]).to.eql({
             "name": "TestApp",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "platform": process.platform,
             "arch": process.arch,
             "dir": "builds/test",
