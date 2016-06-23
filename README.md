@@ -13,7 +13,7 @@ Bozon is a single tool for handling different tasks being performed by multiple 
 * **spectron** - Easily test your Electron apps using ChromeDriver and WebdriverIO
 * **electron-builder** - package and distribute your Electron app
 
-![img](https://api.monosnap.com/rpc/file/download?id=OrfGcc5KS0miV3RWGB92Wgl7HKOjFO)
+![img](https://api.monosnap.com/rpc/file/download?id=KB5BGmknhLmuE38DGEXCFu4rbpBUzr)
 
 ## Installation
 
