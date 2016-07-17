@@ -50,7 +50,7 @@
     "electron-packager-tf": "7.5.3",
     "gulp": "^3.9.1",
     "mocha": "^2.5.3",
-    "spectron": "^3.2.3",
+    "spectron": "^3.2.6",
     "webpack-stream": "^3.2.0"
   }
 }
