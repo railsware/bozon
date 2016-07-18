@@ -2,7 +2,10 @@
   "name": "<%= name %>",
   "version": "0.1.0",
   "description": "<%= name %> application built with Electron",
-  "author": "<%= author %>",
+  "author": {
+    "name": "<%= author %>",
+    "email": ""
+  },
   "license": "MIT",
   "main": "javascripts/main/index.js",
   "dependencies": {
