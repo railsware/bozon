@@ -21,9 +21,9 @@ describe 'SpecRunner', ->
       SpecRunner = require '../../../lib/testing/spec_runner'
 
     describe 'no arguments', ->
-      beforeEach ->
+      beforeEach (done) ->
         runner = new SpecRunner()
-        runner.run()
+        runner.run().then(() -> done())
 
       it 'should package test app and run mocha', (done) ->
         expect(packagerSpy.calledOnce).to.eq(true)
@@ -192,3 +192,46 @@ describe 'SpecRunner', ->
           expect(mochaSpy.getCall(9).args).to.eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require', 'coffee:coffee-script/register']])
           done()
         , 0
+
+  describe 'Spec runner exit code', ->
+    mochaSpy = sinon.stub().returns({status: 321})
+    runResult = {}
+
+    beforeEach =>
+      mockRequire '../../../lib/packaging/packager', packagerSpy
+      mockRequire '../../../lib/utils/bozon',
+        runMocha: mochaSpy
+      mockRequire '../../../lib/testing/utils',
+        uniqFileExtensions: sinon.stub().returns(['ts', 'js', 'coffee'])
+      SpecRunner = reload '../../../lib/testing/spec_runner'
+
+    describe 'no arguments', ->
+      beforeEach ->
+        runner = new SpecRunner()
+          .run().then((result) -> runResult = result)
+
+      it 'should resolve exit code', (done) ->
+        setTimeout ->
+          expect(runResult).to.deep.eq({status: 321})
+          done()
+
+    describe 'unit spec file', =>
+      beforeEach ->
+        runner = new SpecRunner('spec/units/some_unit_spec.js')
+          .run().then((result) -> runResult = result)
+
+      it 'should resolve exit code', (done) ->
+        setTimeout ->
+          expect(runResult).to.deep.eq({status: 321})
+          done()
+
+    describe 'feature spec file', =>
+      beforeEach ->
+        runner = new SpecRunner('spec/features/some_feature_spec.js')
+          .run().then((result) -> runResult = result)
+
+      it 'should resolve exit code', (done) ->
+        setTimeout ->
+          expect(runResult).to.deep.eq({status: 321})
+          done()
+
