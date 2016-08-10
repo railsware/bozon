@@ -27,7 +27,7 @@ Then generate your new project:
 ```bash
 bozon new [name]
 ```
-This will produce the following file structure:
+This will create a new directory `[name]` produce the following file structure:
 
 ```
   |--app/
