@@ -1,7 +1,7 @@
-# bozon 
+# bozon
 > Scaffold, Run, Test and Package [Electron](http://electron.atom.io/) application with ease
 
-[![npm version](https://badge.fury.io/js/bozon.svg)](https://badge.fury.io/js/bozon) 
+[![npm version](https://badge.fury.io/js/bozon.svg)](https://badge.fury.io/js/bozon)
 ![img](https://circleci.com/gh/railsware/bozon.svg?style=shield&circle-token=73a7ce20fc55a51d77657e11c3f5c9d4bf5fdcd9)
 
 ## What is Bozon?
@@ -62,7 +62,7 @@ Bozon provides a way to define environment specific and platform specific config
   |  |  |--production.json
   |  |  |--test.json
   |  |--platforms/
-  |  |  |--osx.json
+  |  |  |--mac.json
   |  |  |--linux.json
   |  |  |--windows.json
 ```
@@ -79,7 +79,7 @@ Packaging Electron application is done by [electron-builder](https://www.npmjs.c
 Application source code is being compiled to `./builds/production/` directory, and packaged versions for different platforms go to `./packages` directory.
 
 ```bash
-bozon package [osx|windows|linux]
+bozon package [mac|windows|linux]
 ```
 
 ## License

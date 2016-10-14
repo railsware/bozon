@@ -59,7 +59,7 @@ describe 'Generator', ->
       expect($.fileExists('config/environments/development.json')).to.be.true
       expect($.fileExists('config/environments/test.json')).to.be.true
       expect($.fileExists('config/environments/production.json')).to.be.true
-      expect($.fileExists('config/platforms/osx.json')).to.be.true
+      expect($.fileExists('config/platforms/mac.json')).to.be.true
       expect($.fileExists('config/platforms/linux.json')).to.be.true
       expect($.fileExists('config/platforms/windows.json')).to.be.true
       expect($.fileExists('resources/icon.icns')).to.be.true

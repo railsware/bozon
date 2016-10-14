@@ -55,9 +55,9 @@ describe 'Runner', =>
 
   describe 'package', =>
     beforeEach =>
-      runner.package('osx')
+      runner.package('mac')
 
     it 'should call create instance of Packager', =>
       expect(packagerMock.calledOnce).to.be.true
-      expect(packagerMock.getCall(0).args[0]).to.eq('osx')
+      expect(packagerMock.getCall(0).args[0]).to.eq('mac')
       expect(packagerSpy.calledOnce).to.be.true

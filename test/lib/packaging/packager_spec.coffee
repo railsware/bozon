@@ -31,12 +31,12 @@ describe 'Packager', ->
 
     describe 'test environment', =>
       beforeEach =>
-        packager = new Packager('osx', 'test')
+        packager = new Packager('mac', 'test')
 
       it 'should run builder', ->
         packager.build().then =>
           expect(builderSpy.calledOnce).to.eq(true)
-          expect(builderSpy.getCall(0).args).to.eql(['osx', 'test'])
+          expect(builderSpy.getCall(0).args).to.eql(['mac', 'test'])
           expect(builderRunSpy.calledOnce).to.eq(true)
 
       it 'should run electron packager', ->

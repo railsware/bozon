@@ -27,7 +27,7 @@ module.exports =
 
   platform: ->
     if process.platform is 'darwin'
-      'osx'
+      'mac'
     else
       process.platform
 

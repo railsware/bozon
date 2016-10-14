@@ -8,16 +8,16 @@ describe 'Builder', ->
     mockRequire '../../../lib/utils/bozon', runGulp: gulpSpy
     Builder = require('../../../lib/building/builder')
 
-  describe 'compile for osx with development env', =>
+  describe 'compile for mac with development env', =>
     beforeEach =>
-      builder = new Builder('osx', 'development')
+      builder = new Builder('mac', 'development')
       builder.run()
 
     it 'should run gulp prepare:app command', ->
       expect(gulpSpy.calledOnce).to.be.true
       expect(gulpSpy.getCall(0).args[0]).to.eql([
         'prepare:app',
-        '--platform=osx',
+        '--platform=mac',
         '--env=development'
       ])
 

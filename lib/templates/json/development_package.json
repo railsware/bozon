@@ -21,7 +21,7 @@
     "win": {
       "iconUrl": "https://github.com/railsware/bozon/blob/master/lib/templates/images/electron.ico?raw=true"
     },
-    "osx": {
+    "mac": {
       "icon": "resources/icon.icns",
       "target": "dmg"
     }

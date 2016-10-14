@@ -25,7 +25,7 @@ describe '#readFileList', =>
       'production.json',
       'test.json',
       'linux.json',
-      'osx.json',
+      'mac.json',
       'windows.json',
       'settings.json',
       'package.json',
