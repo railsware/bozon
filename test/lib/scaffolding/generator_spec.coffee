@@ -18,7 +18,7 @@ describe 'Generator', ->
         bozonVersion: '0.5.6',
         electronBuilderVersion: '5.34.1',
         electronPackagerVersion: '7.5.3',
-        electronPrebuiltVersion: '1.3.6',
+        electronVersion: '1.3.6',
         gulpVersion: '^3.9.1',
         mochaVersion: '^2.5.3',
         spectronVersion: '^3.2.6'
@@ -73,7 +73,7 @@ describe 'Generator', ->
     it 'package.json should contain actual information', ->
       expect($.fileContains('package.json', '"name": "TestApp"')).to.be.true
       expect($.fileContains('package.json', '"version": "0.1.0"')).to.be.true
-      expect($.fileContains('package.json', '"electron-prebuilt": "1.3.6"')).to.be.true
+      expect($.fileContains('package.json', '"electron": "1.3.6"')).to.be.true
 
     it 'app package.json should contain actual information', ->
       expect($.fileContains('app/package.json', '"name": "TestApp"')).to.be.true

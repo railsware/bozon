@@ -9,7 +9,7 @@
   "devDependencies": {
     "electron-builder": "<%= electronBuilderVersion %>",
     "electron-packager-tf": "<%= electronPackagerVersion %>",
-    "electron-prebuilt": "<%= electronPrebuiltVersion %>",
+    "electron": "<%= electronVersion %>",
     "gulp": "<%= gulpVersion %>",
     "mocha": "<%= mochaVersion %>",
     "spectron": "<%= spectronVersion %>",
