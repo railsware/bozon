@@ -15,8 +15,9 @@ describe 'Generator', ->
     it 'should set defaults for template variables', ->
       date = new Date()
       expect(generator.defaults).to.eql({
+        id: "bozonapp",
         bozonVersion: '0.5.6',
-        electronBuilderVersion: '5.34.1',
+        electronBuilderVersion: '7.13.0',
         electronPackagerVersion: '7.5.3',
         electronVersion: '1.4.0',
         gulpVersion: '^3.9.1',

@@ -16,7 +16,7 @@
     "webpack-stream": "<%= webpackStreamVersion %>"
   },
   "build": {
-    "appId": "your.id",
+    "appId": "com.electron.<%= id %>",
     "category": "your.app.category.type",
     "win": {
       "iconUrl": "https://github.com/railsware/bozon/blob/master/lib/templates/images/electron.ico?raw=true"
