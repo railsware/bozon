@@ -27,12 +27,20 @@ describe '#bozon', ->
       expect(gulpTaskSpy.getCall(0).args[0]).to.eq('compile')
 
   describe '#src', ->
-    beforeEach =>
-      bozon.src('javascripts')
+    afterEach =>
+      gulpSrcSpy.reset()
 
     it 'should set gulp src', =>
+      bozon.src('javascripts')
       expect(gulpSrcSpy.calledOnce).to.be.true
       expect(gulpSrcSpy.getCall(0).args[0]).to.eq("#{process.cwd()}/app/javascripts")
+
+    it 'should set multiple gulp sources', =>
+      bozon.src(['javascripts', 'styles'])
+      expect(gulpSrcSpy.calledOnce).to.be.true
+      expect(gulpSrcSpy.getCall(0).args[0]).to.instanceof(Array)
+      expect(gulpSrcSpy.getCall(0).args[0][0]).to.eq("#{process.cwd()}/app/javascripts")
+      expect(gulpSrcSpy.getCall(0).args[0][1]).to.eq("#{process.cwd()}/app/styles")
 
   describe '#dest', ->
     beforeEach =>
