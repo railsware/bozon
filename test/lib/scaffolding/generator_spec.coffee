@@ -22,7 +22,7 @@ describe 'Generator', ->
         electronVersion: '1.4.15',
         gulpVersion: '^3.9.1',
         mochaVersion: '^3.2.0',
-        spectronVersion: '^3.4.0'
+        spectronVersion: '^3.6.0'
         webpackStreamVersion: '^3.2.0'
         name: 'TestApp',
         author: null,

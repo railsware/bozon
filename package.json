@@ -25,7 +25,7 @@
     "del": "^2.2.0",
     "ejs": "^2.4.2",
     "gulp-json-editor": "^2.2.1",
-    "inquirer": "^1.0.3",
+    "inquirer": "^3.0.1",
     "merge-config": "^2.0.0",
     "underscore.string": "^3.3.4"
   },
@@ -50,7 +50,7 @@
     "electron-packager-tf": "7.5.3",
     "gulp": "^3.9.1",
     "mocha": "^3.2.0",
-    "spectron": "^3.4.0",
+    "spectron": "^3.6.0",
     "webpack-stream": "^3.2.0"
   }
 }
