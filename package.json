@@ -39,7 +39,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "coffee-script": "^1.10.0",
-    "mocha": "^2.5.3",
+    "mocha": "^3.2.0",
     "mock-require": "^1.3.0",
     "require-reload": "^0.2.2",
     "sinon": "^1.17.4"
@@ -49,7 +49,7 @@
     "electron-builder": "7.13.0",
     "electron-packager-tf": "7.5.3",
     "gulp": "^3.9.1",
-    "mocha": "^3.1.2",
+    "mocha": "^3.2.0",
     "spectron": "^3.4.0",
     "webpack-stream": "^3.2.0"
   }
