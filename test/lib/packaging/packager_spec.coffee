@@ -9,24 +9,24 @@ describe 'Packager', ->
     electronBuilderSpy =
       build: electronBuilderBuildSpy
       Platform:
+        'MAC':
+          createTarget: -> 'mac'
         'LINUX':
           createTarget: -> 'linux'
         'WINDOWS':
           createTarget: -> 'windows'
-    electronPackagerSpy = sinon.spy (options, callback) =>
-      callback(null, 'path')
+    checkerSpy =
+      ensure: -> true
     builderRunSpy = sinon.stub().returns(Promise.resolve(true))
     builderSpy = sinon.spy ->
       run: builderRunSpy
 
     beforeEach =>
+      mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/building/builder', builderSpy
       mockRequire '../../../lib/utils/bozon',
-        requireLocal: (name) =>
-          if name is 'electron-builder'
-            electronBuilderSpy
-          else
-            electronPackagerSpy
+        requireLocal: (name) => electronBuilderSpy
+
       Packager = require('../../../lib/packaging/packager')
 
     describe 'test environment', =>
@@ -39,16 +39,27 @@ describe 'Packager', ->
           expect(builderSpy.getCall(0).args).to.eql(['mac', 'test'])
           expect(builderRunSpy.calledOnce).to.eq(true)
 
-      it 'should run electron packager', ->
+      it 'should run builder', ->
         packager.build().then =>
-          expect(electronPackagerSpy.calledTwice).to.eq(true)
-          expect(electronPackagerSpy.getCall(0).args[0]).to.eql({
-            "name": "TestApp",
-            "version": "1.4.3",
-            "platform": process.platform,
-            "arch": process.arch,
-            "dir": "builds/test",
-            "out": ".tmp"
+          expect(electronBuilderBuildSpy.callCount).to.eq(2)
+          expect(electronBuilderBuildSpy.getCall(1).args[0]).to.eql({
+            "targets": "mac",
+            "config": {
+              "directories": {
+                "app": "builds/test"
+                "buildResources": "resources"
+                "output": ".tmp"
+              },
+              "linux": {
+                "target": "dir"
+              },
+              "mac": {
+                "target": "dir"
+              },
+              "win": {
+                "target": "dir"
+              }
+            }
           })
 
     describe 'development environment', =>
@@ -63,10 +74,10 @@ describe 'Packager', ->
 
       it 'should run electron builder', ->
         packager.build().then =>
-          expect(electronBuilderBuildSpy.callCount).to.eq(2)
-          expect(electronBuilderBuildSpy.getCall(1).args[0]).to.eql({
+          expect(electronBuilderBuildSpy.callCount).to.eq(4)
+          expect(electronBuilderBuildSpy.getCall(3).args[0]).to.eql({
             "targets": "linux",
-            "devMetadata": {
+            "config": {
               "directories": {
                 "app": "builds/development"
                 "buildResources": "resources"
@@ -87,10 +98,10 @@ describe 'Packager', ->
 
       it 'should run electron builder', ->
         packager.build().then =>
-          expect(electronBuilderBuildSpy.callCount).to.eq(4)
-          expect(electronBuilderBuildSpy.getCall(3).args[0]).to.eql({
+          expect(electronBuilderBuildSpy.callCount).to.eq(6)
+          expect(electronBuilderBuildSpy.getCall(5).args[0]).to.eql({
             "targets": "windows",
-            "devMetadata": {
+            "config": {
               "directories": {
                 "app": "builds/production"
                 "buildResources": "resources"

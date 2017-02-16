@@ -8,7 +8,6 @@
   },
   "devDependencies": {
     "electron-builder": "<%= electronBuilderVersion %>",
-    "electron-packager-tf": "<%= electronPackagerVersion %>",
     "electron": "<%= electronVersion %>",
     "gulp": "<%= gulpVersion %>",
     "mocha": "<%= mochaVersion %>",
@@ -17,13 +16,10 @@
   },
   "build": {
     "appId": "com.electron.<%= id %>",
-    "category": "your.app.category.type",
     "win": {
-      "iconUrl": "https://github.com/railsware/bozon/blob/master/lib/templates/images/electron.ico?raw=true"
     },
     "mac": {
-      "icon": "resources/icon.icns",
-      "target": "dmg"
+      "category": "your.app.category.type",
     }
   }
 }

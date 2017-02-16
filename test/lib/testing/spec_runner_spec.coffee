@@ -8,12 +8,14 @@ describe 'SpecRunner', ->
   packagerSpy = sinon.stub().returns
     build: buildSpy
   mochaSpy = sinon.spy()
+  checkerSpy = ensure: -> true
 
   describe 'CoffeeScript specs', ->
     utilsSpy = sinon.stub().returns(['js', 'coffee'])
 
     beforeEach =>
       mockRequire '../../../lib/packaging/packager', packagerSpy
+      mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -23,7 +25,8 @@ describe 'SpecRunner', ->
     describe 'no arguments', ->
       beforeEach (done) ->
         runner = new SpecRunner()
-        runner.run().then(() -> done())
+        runner.run().then()
+        done()
 
       it 'should package test app and run mocha', (done) ->
         expect(packagerSpy.calledOnce).to.eq(true)
@@ -67,6 +70,7 @@ describe 'SpecRunner', ->
   describe 'JavaScript specs', ->
     beforeEach =>
       mockRequire '../../../lib/packaging/packager', packagerSpy
+      mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -120,6 +124,7 @@ describe 'SpecRunner', ->
   describe 'Typescript specs', ->
     beforeEach =>
       mockRequire '../../../lib/packaging/packager', packagerSpy
+      mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -172,6 +177,7 @@ describe 'SpecRunner', ->
   describe 'Mixed type specs files', ->
     beforeEach =>
       mockRequire '../../../lib/packaging/packager', packagerSpy
+      mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -199,6 +205,7 @@ describe 'SpecRunner', ->
 
     beforeEach =>
       mockRequire '../../../lib/packaging/packager', packagerSpy
+      mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
         runMocha: mochaSpy
       mockRequire '../../../lib/testing/utils',
@@ -234,4 +241,3 @@ describe 'SpecRunner', ->
         setTimeout ->
           expect(runResult).to.deep.eq({status: 321})
           done()
-
