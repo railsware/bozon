@@ -19,7 +19,7 @@
     "win": {
     },
     "mac": {
-      "category": "your.app.category.type",
+      "category": "your.app.category.type"
     }
   }
 }
