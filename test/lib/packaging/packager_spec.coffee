@@ -51,13 +51,13 @@ describe 'Packager', ->
                 "output": ".tmp"
               },
               "linux": {
-                "target": "dir"
+                "target": ["dir"]
               },
               "mac": {
-                "target": "dir"
+                "target": ["dir"]
               },
               "win": {
-                "target": "dir"
+                "target": ["dir"]
               }
             }
           })
