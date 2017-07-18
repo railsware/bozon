@@ -10,7 +10,7 @@ describe '#bozon', ->
   beforeEach =>
     mockRequire 'child_process', spawnSync: childProcessSpy
     bozon = require('./../../../lib/bozon')
-    sinon.stub bozon, 'requireLocal', =>
+    sinon.stub(bozon, 'requireLocal').callsFake =>
       task: gulpTaskSpy
       src: gulpSrcSpy
       dest: gulpDestSpy

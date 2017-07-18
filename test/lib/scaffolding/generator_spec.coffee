@@ -16,7 +16,7 @@ describe 'Generator', ->
       date = new Date()
       expect(generator.defaults).to.eql({
         id: "bozonapp",
-        bozonVersion: '0.7.3',
+        bozonVersion: '0.7.4',
         electronBuilderVersion: '18.6.2',
         electronVersion: '1.6.10',
         gulpVersion: '^3.9.1',
@@ -68,7 +68,7 @@ describe 'Generator', ->
       expect($.fileExists('spec/features/main_spec.js')).to.be.true
 
     it 'should call install packages', ->
-      expect(generator.installPackages).to.be.calledOnce
+      expect(generator.installPackages.calledOnce).to.be.true
 
     it 'package.json should contain actual information', ->
       expect($.fileContains('package.json', '"name": "TestApp"')).to.be.true

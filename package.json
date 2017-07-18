@@ -37,12 +37,12 @@
     "node": ">= 5.10.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.0",
     "coffee-script": "^1.12.7",
-    "mocha": "^3.4.1",
+    "mocha": "^3.4.2",
     "mock-require": "^2.0.2",
     "require-reload": "^0.2.2",
-    "sinon": "^2.2.0"
+    "sinon": "^2.3.8"
   },
   "versions": {
     "electron": "1.6.10",
