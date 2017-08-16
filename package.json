@@ -20,12 +20,12 @@
   "author": "Railsware, Alex Chaplinsky",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.0.1",
+    "chalk": "^2.1.0",
     "commander": "^2.11.0",
     "del": "^3.0.0",
-    "ejs": "^2.5.6",
+    "ejs": "^2.5.7",
     "gulp-json-editor": "^2.2.1",
-    "inquirer": "^3.2.0",
+    "inquirer": "^3.2.1",
     "merge-config": "^2.0.0",
     "underscore.string": "^3.3.4"
   },
@@ -37,12 +37,12 @@
     "node": ">= 5.10.1"
   },
   "devDependencies": {
-    "chai": "^4.1.0",
+    "chai": "^4.1.1",
     "coffee-script": "^1.12.7",
-    "mocha": "^3.4.2",
+    "mocha": "^3.5.0",
     "mock-require": "^2.0.2",
     "require-reload": "^0.2.2",
-    "sinon": "^2.3.8"
+    "sinon": "^3.2.0"
   },
   "versions": {
     "electron": "1.6.11",
