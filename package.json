@@ -46,7 +46,7 @@
   },
   "versions": {
     "electron": "1.7.9",
-    "electron-builder": "19.22.2",
+    "electron-builder": "19.45.2",
     "gulp": "^3.9.1",
     "mocha": "^3.5.3",
     "spectron": "^3.7.2",
