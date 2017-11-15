@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "0.7.8",
+  "version": "0.7.7",
   "description": "Framework for building Electron applications",
   "repository": {
     "type": "git",
@@ -39,10 +39,10 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "coffee-script": "^1.12.7",
-    "mocha": "^3.5.3",
+    "mocha": "^4.0.1",
     "mock-require": "^2.0.2",
     "require-reload": "^0.2.2",
-    "sinon": "^3.3.0"
+    "sinon": "^4.1.2"
   },
   "versions": {
     "electron": "1.7.9",
