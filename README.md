@@ -17,10 +17,14 @@ Bozon is a single tool for handling different tasks being performed by multiple 
 
 ## Installation
 
-
+ 
 ```bash
 npm install -g bozon
 ```
+
+Bozon tool should be installed globally in order to be used for all your electron apps.
+
+## Scaffolding
 
 Then generate your new project:
 
@@ -28,6 +32,8 @@ Then generate your new project:
 bozon new [name]
 ```
 This will create a new directory `[name]` produce the following file structure:
+
+  * Use `--skip-install` option if you want to skip running `npm install`
 
 ```
   |--app/
