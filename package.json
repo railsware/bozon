@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "description": "Framework for building Electron applications",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
     "del": "^3.0.0",
     "ejs": "^2.5.7",
     "gulp-json-editor": "^2.2.1",
-    "inquirer": "^3.3.0",
+    "inquirer": "^4.0.0",
     "merge-config": "^2.0.0",
     "underscore.string": "^3.3.4"
   },
