@@ -17,10 +17,10 @@ describe 'Generator', ->
       expect(generator.defaults).to.eql({
         id: "bozonapp",
         bozonVersion: '0.7.7',
-        electronBuilderVersion: '19.45.2',
+        electronBuilderVersion: '19.45.4',
         electronVersion: '1.7.9',
         gulpVersion: '^3.9.1',
-        mochaVersion: '^3.5.3',
+        mochaVersion: '^4.0.1',
         spectronVersion: '^3.7.2'
         webpackStreamVersion: '^3.2.0'
         name: 'TestApp',
