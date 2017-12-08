@@ -16,7 +16,7 @@ describe 'Generator', ->
       date = new Date()
       expect(generator.defaults).to.eql({
         id: "bozonapp",
-        bozonVersion: '0.7.8',
+        bozonVersion: '0.7.9',
         electronBuilderVersion: '19.48.2',
         electronVersion: '1.7.9',
         gulpVersion: '^3.9.1',
