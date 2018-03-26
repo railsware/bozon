@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "description": "Framework for building Electron applications",
   "repository": {
     "type": "git",
