@@ -33,13 +33,13 @@ describe 'Generator', ->
     installStub = {}
     linkStub = {}
 
-    beforeEach =>
+    beforeEach ->
       generator = new Generator('test_app', {})
       installStub = sinon.stub(generator, 'installPackages')
       linkStub = sinon.stub(generator, 'linkBozon')
       generator.setup()
 
-    afterEach =>
+    afterEach ->
       childProcess.spawnSync('rm', ['-rf', 'test_app'])
       installStub.restore()
       linkStub.restore()
@@ -77,6 +77,12 @@ describe 'Generator', ->
       expect($.fileContains('package.json', '"electron": "1.7.9"')).to.be.true
 
     it 'app package.json should contain actual information', ->
-      expect($.fileContains('app/package.json', '"name": "TestApp"')).to.be.true
-      expect($.fileContains('app/package.json', '"version": "0.1.0"')).to.be.true
-      expect($.fileContains('app/package.json', '"main": "javascripts/main/index.js"')).to.be.true
+      expect(
+        $.fileContains 'app/package.json', '"name": "TestApp"'
+      ).to.be.true
+      expect(
+        $.fileContains 'app/package.json', '"version": "0.1.0"'
+      ).to.be.true
+      expect(
+        $.fileContains 'app/package.json', '"main": "javascripts/main/index.js"'
+      ).to.be.true

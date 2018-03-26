@@ -13,7 +13,7 @@ describe 'SpecRunner', ->
   describe 'CoffeeScript specs', ->
     utilsSpy = sinon.stub().returns(['js', 'coffee'])
 
-    beforeEach =>
+    beforeEach ->
       mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
@@ -34,11 +34,12 @@ describe 'SpecRunner', ->
         expect(buildSpy.calledOnce).to.eq(true)
         setTimeout ->
           expect(mochaSpy.calledOnce).to.eq(true)
-          expect(mochaSpy.getCall(0).args).to.eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'coffee:coffee-script/register']])
+          expect(mochaSpy.getCall(0).args).to.
+            eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'coffee:coffee-script/register']])
           done()
         , 0
 
-    describe 'unit spec file', =>
+    describe 'unit spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/units/some_unit_spec.coffee')
         runner.run()
@@ -52,7 +53,7 @@ describe 'SpecRunner', ->
           done()
         , 0
 
-    describe 'feature spec file', =>
+    describe 'feature spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/features/some_feature_spec.coffee')
         runner.run()
@@ -68,7 +69,7 @@ describe 'SpecRunner', ->
         , 0
 
   describe 'JavaScript specs', ->
-    beforeEach =>
+    beforeEach ->
       mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
@@ -88,11 +89,12 @@ describe 'SpecRunner', ->
         expect(buildSpy.calledThrice).to.eq(true)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(4)
-          expect(mochaSpy.getCall(3).args).to.eql([['--recursive', path.join(process.cwd(), 'spec')]])
+          expect(mochaSpy.getCall(3).args).to
+            .eql([['--recursive', path.join(process.cwd(), 'spec')]])
           done()
         , 0
 
-    describe 'unit spec file', =>
+    describe 'unit spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/units/some_unit_spec.js')
         runner.run()
@@ -106,7 +108,7 @@ describe 'SpecRunner', ->
           done()
         , 0
 
-    describe 'feature spec file', =>
+    describe 'feature spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/features/some_feature_spec.js')
         runner.run()
@@ -117,12 +119,13 @@ describe 'SpecRunner', ->
         expect(buildSpy.callCount).to.eq(4)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(6)
-          expect(mochaSpy.getCall(5).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js')]])
+          expect(mochaSpy.getCall(5).args).to
+            .eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js')]])
           done()
         , 0
 
   describe 'Typescript specs', ->
-    beforeEach =>
+    beforeEach ->
       mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
@@ -142,11 +145,12 @@ describe 'SpecRunner', ->
         expect(buildSpy.callCount).to.eq(5)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(7)
-          expect(mochaSpy.getCall(6).args).to.eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require']])
+          expect(mochaSpy.getCall(6).args).to
+            .eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require']])
           done()
         , 0
 
-    describe 'unit spec file', =>
+    describe 'unit spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/units/some_unit_spec.ts')
         runner.run()
@@ -159,7 +163,7 @@ describe 'SpecRunner', ->
           done()
         , 0
 
-    describe 'feature spec file', =>
+    describe 'feature spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/features/some_feature_spec.js')
         runner.run()
@@ -170,12 +174,13 @@ describe 'SpecRunner', ->
         expect(buildSpy.callCount).to.eq(6)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(9)
-          expect(mochaSpy.getCall(8).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js'), '--compilers', 'ts:typescript-require']])
+          expect(mochaSpy.getCall(8).args).to
+            .eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js'), '--compilers', 'ts:typescript-require']])
           done()
         , 0
 
   describe 'Mixed type specs files', ->
-    beforeEach =>
+    beforeEach ->
       mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
@@ -195,7 +200,8 @@ describe 'SpecRunner', ->
         expect(buildSpy.callCount).to.eq(7)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(10)
-          expect(mochaSpy.getCall(9).args).to.eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require', 'coffee:coffee-script/register']])
+          expect(mochaSpy.getCall(9).args).to
+            .eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require', 'coffee:coffee-script/register']])
           done()
         , 0
 
@@ -203,7 +209,7 @@ describe 'SpecRunner', ->
     mochaSpy = sinon.stub().returns({status: 321})
     runResult = {}
 
-    beforeEach =>
+    beforeEach ->
       mockRequire '../../../lib/packaging/packager', packagerSpy
       mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/utils/bozon',
@@ -222,7 +228,7 @@ describe 'SpecRunner', ->
           expect(runResult).to.deep.eq({status: 321})
           done()
 
-    describe 'unit spec file', =>
+    describe 'unit spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/units/some_unit_spec.js')
           .run().then((result) -> runResult = result)
@@ -232,7 +238,7 @@ describe 'SpecRunner', ->
           expect(runResult).to.deep.eq({status: 321})
           done()
 
-    describe 'feature spec file', =>
+    describe 'feature spec file', ->
       beforeEach ->
         runner = new SpecRunner('spec/features/some_feature_spec.js')
           .run().then((result) -> runResult = result)
