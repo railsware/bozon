@@ -48,8 +48,8 @@
     "electron": "2.0.0-beta.8",
     "electron-builder": "20.11.0",
     "gulp": "^3.9.1",
-    "mocha": "^4.0.1",
+    "mocha": "^5.1.1",
     "spectron": "^3.8.0",
-    "webpack-stream": "^3.2.0"
+    "webpack-stream": "^4.0.3"
   }
 }

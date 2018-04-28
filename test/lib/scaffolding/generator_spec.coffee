@@ -20,9 +20,9 @@ describe 'Generator', ->
         electronBuilderVersion: '20.11.0',
         electronVersion: '2.0.0-beta.8',
         gulpVersion: '^3.9.1',
-        mochaVersion: '^4.0.1',
+        mochaVersion: '^5.1.1',
         spectronVersion: '^3.8.0'
-        webpackStreamVersion: '^3.2.0'
+        webpackStreamVersion: '^4.0.3'
         name: 'TestApp',
         author: null,
         year: date.getFullYear()
