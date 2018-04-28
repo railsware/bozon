@@ -17,8 +17,8 @@ describe 'Generator', ->
       expect(generator.defaults).to.eql({
         id: "bozonapp",
         bozonVersion: '0.7.10',
-        electronBuilderVersion: '19.56.2',
-        electronVersion: '1.8.6',
+        electronBuilderVersion: '20.11.0',
+        electronVersion: '2.0.0-beta.8',
         gulpVersion: '^3.9.1',
         mochaVersion: '^4.0.1',
         spectronVersion: '^3.8.0'
@@ -74,7 +74,7 @@ describe 'Generator', ->
     it 'package.json should contain actual information', ->
       expect($.fileContains('package.json', '"name": "TestApp"')).to.be.true
       expect($.fileContains('package.json', '"version": "0.1.0"')).to.be.true
-      expect($.fileContains('package.json', '"electron": "1.8.6"')).to.be.true
+      expect($.fileContains('package.json', '"electron": "2.0.0-beta.8"')).to.be.true
 
     it 'app package.json should contain actual information', ->
       expect(
