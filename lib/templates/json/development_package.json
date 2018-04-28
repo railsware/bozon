@@ -4,7 +4,7 @@
   "description": "Desktop application build with Electron",
   "repository": "",
   "scripts": {
-    "postinstall": "install-app-deps"
+    "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
     "electron-builder": "<%= electronBuilderVersion %>",
