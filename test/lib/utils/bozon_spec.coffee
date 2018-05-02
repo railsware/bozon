@@ -28,7 +28,7 @@ describe '#bozon', ->
 
   describe '#src', ->
     afterEach ->
-      gulpSrcSpy.reset()
+      gulpSrcSpy.resetHistory()
 
     it 'should set gulp src', ->
       bozon.src('javascripts')
