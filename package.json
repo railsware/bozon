@@ -8,7 +8,7 @@
   },
   "main": "lib",
   "scripts": {
-    "test": "mocha test/lib/bin/*.* --compilers coffee:coffee-script/register && mocha test/lib/building/*.* --compilers coffee:coffee-script/register && mocha test/lib/packaging/*.* --compilers coffee:coffee-script/register && mocha test/lib/scaffolding/*.* --compilers coffee:coffee-script/register && mocha test/lib/testing/*.* --compilers coffee:coffee-script/register && mocha test/lib/utils/*.* --compilers coffee:coffee-script/register"
+    "test": "mocha test/lib/bin/*.* --require coffee-script/register && mocha test/lib/building/*.* --require coffee-script/register && mocha test/lib/packaging/*.* --require coffee-script/register && mocha test/lib/scaffolding/*.* --require coffee-script/register && mocha test/lib/testing/*.* --require coffee-script/register && mocha test/lib/utils/*.* --require coffee-script/register"
   },
   "keywords": [
     "electron",
