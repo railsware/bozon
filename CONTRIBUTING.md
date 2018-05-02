@@ -7,7 +7,7 @@ The following is a set of guidelines for contributing to Bozon. These are just g
 ## Submitting Issues
 * You can create an issue [here](https://github.com/railsware/bozon/issues), but before doing that please check existing issues and join conversation instead of creating new one if you find topic related to your issue. Otherwise read the notes below and include as many details as possible with your report. If you can, please include:
 
- * The version of Bozob you are using
+ * The version of Bozon you are using
  * The operating system you are using
  * What you were doing when the issue arose and what you expected to happen
 
