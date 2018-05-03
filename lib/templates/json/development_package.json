@@ -4,9 +4,10 @@
   "description": "Desktop application build with Electron",
   "repository": "",
   "scripts": {
-    "postinstall": "electron-builder install-app-deps && npm link bozon"
+    "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
+    "bozon": "<%= bozonVersion %>",
     "electron-builder": "<%= electronBuilderVersion %>",
     "electron": "<%= electronVersion %>",
     "gulp": "<%= gulpVersion %>",

@@ -31,18 +31,15 @@ describe 'Generator', ->
   describe '#setup', ->
     tmpDir = path.join(process.cwd(), '.tmp')
     installStub = {}
-    linkStub = {}
 
     beforeEach ->
       generator = new Generator('test_app', {})
       installStub = sinon.stub(generator, 'installPackages')
-      linkStub = sinon.stub(generator, 'linkBozon')
       generator.setup()
 
     afterEach ->
       childProcess.spawnSync('rm', ['-rf', 'test_app'])
       installStub.restore()
-      linkStub.restore()
 
     it 'should create application structure', ->
       expect($.fileExists('.gitignore')).to.be.true
