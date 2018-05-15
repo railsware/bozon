@@ -46,7 +46,7 @@
   },
   "versions": {
     "electron": "2.0.0",
-    "electron-builder": "20.11.1",
+    "electron-builder": "20.13.3",
     "gulp": "^3.9.1",
     "mocha": "^5.1.1",
     "spectron": "^3.8.0",
