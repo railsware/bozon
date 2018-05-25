@@ -369,9 +369,9 @@ growl@1.10.5:
   version "1.10.5"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.5.tgz#f2735dc2283674fa67478b10181059355c369e5e"
 
-gulp-json-editor@^2.2.1:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/gulp-json-editor/-/gulp-json-editor-2.3.0.tgz#a9c8d7d4b23b2a810cf0ca4a93b5ad549608459d"
+gulp-json-editor@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/gulp-json-editor/-/gulp-json-editor-2.4.1.tgz#ef9dfcc7a29c664bdd0e992a331d2f1b0e64650d"
   dependencies:
     deepmerge "^2.1.0"
     detect-indent "^5.0.0"
