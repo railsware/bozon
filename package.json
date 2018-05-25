@@ -39,10 +39,10 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "coffee-script": "^1.12.7",
-    "mocha": "^5.1.1",
+    "mocha": "^5.2.0",
     "mock-require": "^3.0.2",
     "require-reload": "^0.2.2",
-    "sinon": "^5.0.3"
+    "sinon": "^5.0.10"
   },
   "versions": {
     "electron": "2.0.0",
