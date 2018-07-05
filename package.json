@@ -21,11 +21,11 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.3.0",
-    "commander": "^2.11.0",
+    "commander": "^2.16.0",
     "del": "^3.0.0",
     "ejs": "^2.5.7",
     "gulp-json-editor": "^2.4.1",
-    "inquirer": "^5.2.0",
+    "inquirer": "^6.0.0",
     "merge-config": "^2.0.0",
     "underscore.string": "^3.3.4"
   },
@@ -42,13 +42,13 @@
     "mocha": "^5.2.0",
     "mock-require": "^3.0.2",
     "require-reload": "^0.2.2",
-    "sinon": "^5.0.10"
+    "sinon": "^6.1.0"
   },
   "versions": {
-    "electron": "2.0.2",
-    "electron-builder": "20.14.7",
+    "electron": "2.0.4",
+    "electron-builder": "20.19.1",
     "gulp": "^3.9.1",
-    "mocha": "^5.1.1",
+    "mocha": "^5.2.0",
     "spectron": "^3.8.0",
     "webpack-stream": "^4.0.3"
   }
