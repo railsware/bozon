@@ -7,21 +7,21 @@ jobs:
       - checkout
 
       - run:
-        name: Install Javascript dependencies
-        command: |
-          yarn install
+          name: Install Javascript dependencies
+          command: |
+            yarn install
 
       - run:
-        name: Verify that committed yarn.lock is up to date
-        command: |
-          git diff-index --exit-code --quiet HEAD -- yarn.lock || { echo 'Run yarn and commit changes to yarn.lock!'; false; }
+          name: Verify that committed yarn.lock is up to date
+          command: |
+            git diff-index --exit-code --quiet HEAD -- yarn.lock || { echo 'Run yarn and commit changes to yarn.lock!'; false; }
 
       - run:
-        name: Test Javascript
-        command: yarn test
+          name: Test Javascript
+          command: yarn test
 
       - store_test_results:
-        path: spec/reports
+          path: spec/reports
 
 workflows:
   version: 2
