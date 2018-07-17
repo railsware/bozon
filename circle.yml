@@ -1,3 +1,30 @@
-machine:
-  node:
-    version: 8.11.1
+version: 2
+jobs:
+  build_and_test:
+    docker:
+      - image: circleci/node:8.11.1-stretch-browsers
+    steps:
+      - checkout
+
+      - run:
+        name: Install Javascript dependencies
+        command: |
+          yarn install
+
+      - run:
+        name: Verify that committed yarn.lock is up to date
+        command: |
+          git diff-index --exit-code --quiet HEAD -- yarn.lock || { echo 'Run yarn and commit changes to yarn.lock!'; false; }
+
+      - run:
+        name: Test Javascript
+        command: yarn test
+
+      - store_test_results:
+        path: spec/reports
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_and_test
