@@ -4,7 +4,25 @@ jobs:
     docker:
       - image: circleci/node:8.11.1-stretch-browsers
     steps:
+
+      - restore_cache:
+          keys:
+            - v1-bozon-git
+
       - checkout
+
+      - save_cache:
+          paths:
+            - ~/bozon/.git
+          # Yes, the key is constant, meaning we'll have just one git cache
+          # and pull the delta every time. That still saves a lot of clone time.
+          # DON'T make a new cache for each revision!
+          key: v1-bozon-git
+
+      - restore_cache:
+          keys:
+            - v1-bozon-yarn-{{ arch }}-{{ .Branch }}
+            - v1-bozon-yarn-{{ arch }}-master
 
       - run:
           name: Install Javascript dependencies
