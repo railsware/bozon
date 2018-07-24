@@ -22,9 +22,9 @@ describe 'SpecRunner', ->
         uniqFileExtensions: utilsSpy
       SpecRunner = require '../../../lib/testing/spec_runner'
 
-    describe 'no arguments', ->
+    describe 'empty options', ->
       beforeEach (done) ->
-        runner = new SpecRunner()
+        runner = new SpecRunner({})
         runner.run().then()
         done()
 
@@ -35,13 +35,13 @@ describe 'SpecRunner', ->
         setTimeout ->
           expect(mochaSpy.calledOnce).to.eq(true)
           expect(mochaSpy.getCall(0).args).to.
-            eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'coffee:coffee-script/register']])
+            eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'coffee:coffee-script/register', '--timeout', 2000, '--exit']])
           done()
         , 0
 
     describe 'unit spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/units/some_unit_spec.coffee')
+        runner = new SpecRunner(path: 'spec/units/some_unit_spec.coffee')
         runner.run()
 
       it 'should run mocha specs without packaging test app', (done) ->
@@ -49,13 +49,13 @@ describe 'SpecRunner', ->
         expect(buildSpy.calledOnce).to.eq(true)
         setTimeout ->
           expect(mochaSpy.calledTwice).to.eq(true)
-          expect(mochaSpy.getCall(1).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/units/some_unit_spec.coffee'), '--compilers', 'coffee:coffee-script/register']])
+          expect(mochaSpy.getCall(1).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/units/some_unit_spec.coffee'), '--compilers', 'coffee:coffee-script/register', '--timeout', 2000, '--exit']])
           done()
         , 0
 
     describe 'feature spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/features/some_feature_spec.coffee')
+        runner = new SpecRunner(path: 'spec/features/some_feature_spec.coffee')
         runner.run()
 
       it 'should package test app and run mocha specs', (done) ->
@@ -64,7 +64,7 @@ describe 'SpecRunner', ->
         expect(buildSpy.calledTwice).to.eq(true)
         setTimeout ->
           expect(mochaSpy.calledThrice).to.eq(true)
-          expect(mochaSpy.getCall(2).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.coffee'), '--compilers', 'coffee:coffee-script/register']])
+          expect(mochaSpy.getCall(2).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.coffee'), '--compilers', 'coffee:coffee-script/register', '--timeout', 2000, '--exit']])
           done()
         , 0
 
@@ -80,7 +80,7 @@ describe 'SpecRunner', ->
 
     describe 'no arguments', ->
       beforeEach ->
-        runner = new SpecRunner()
+        runner = new SpecRunner({})
         runner.run()
 
       it 'should package test app and run mocha', (done) ->
@@ -90,13 +90,13 @@ describe 'SpecRunner', ->
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(4)
           expect(mochaSpy.getCall(3).args).to
-            .eql([['--recursive', path.join(process.cwd(), 'spec')]])
+            .eql([['--recursive', path.join(process.cwd(), 'spec'), '--timeout', 2000, '--exit']])
           done()
         , 0
 
     describe 'unit spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/units/some_unit_spec.js')
+        runner = new SpecRunner(path: 'spec/units/some_unit_spec.js')
         runner.run()
 
       it 'should run mocha specs without packaging test app', (done) ->
@@ -104,13 +104,13 @@ describe 'SpecRunner', ->
         expect(packagerSpy.calledThrice).to.eq(true)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(5)
-          expect(mochaSpy.getCall(4).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/units/some_unit_spec.js')]])
+          expect(mochaSpy.getCall(4).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/units/some_unit_spec.js'), '--timeout', 2000, '--exit']])
           done()
         , 0
 
     describe 'feature spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/features/some_feature_spec.js')
+        runner = new SpecRunner(path: 'spec/features/some_feature_spec.js')
         runner.run()
 
       it 'should package test app and run mocha specs', (done) ->
@@ -120,7 +120,7 @@ describe 'SpecRunner', ->
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(6)
           expect(mochaSpy.getCall(5).args).to
-            .eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js')]])
+            .eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js'), '--timeout', 2000, '--exit']])
           done()
         , 0
 
@@ -136,7 +136,7 @@ describe 'SpecRunner', ->
 
     describe 'no arguments', ->
       beforeEach ->
-        runner = new SpecRunner()
+        runner = new SpecRunner({})
         runner.run()
 
       it 'should package test app and run mocha', (done) ->
@@ -146,26 +146,26 @@ describe 'SpecRunner', ->
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(7)
           expect(mochaSpy.getCall(6).args).to
-            .eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require']])
+            .eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require', '--timeout', 2000, '--exit']])
           done()
         , 0
 
     describe 'unit spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/units/some_unit_spec.ts')
+        runner = new SpecRunner(path: 'spec/units/some_unit_spec.ts')
         runner.run()
 
       it 'should run mocha specs without packaging test app', (done) ->
         expect(buildSpy.callCount).to.eq(5)
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(8)
-          expect(mochaSpy.getCall(7).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/units/some_unit_spec.ts'), '--compilers', 'ts:typescript-require']])
+          expect(mochaSpy.getCall(7).args).to.eql([['--recursive', path.join(process.cwd(), 'spec/units/some_unit_spec.ts'), '--compilers', 'ts:typescript-require', '--timeout', 2000, '--exit']])
           done()
         , 0
 
     describe 'feature spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/features/some_feature_spec.js')
+        runner = new SpecRunner(path: 'spec/features/some_feature_spec.js')
         runner.run()
 
       it 'should package test app and run mocha specs', (done) ->
@@ -175,7 +175,7 @@ describe 'SpecRunner', ->
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(9)
           expect(mochaSpy.getCall(8).args).to
-            .eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js'), '--compilers', 'ts:typescript-require']])
+            .eql([['--recursive', path.join(process.cwd(), 'spec/features/some_feature_spec.js'), '--compilers', 'ts:typescript-require', '--timeout', 2000, '--exit']])
           done()
         , 0
 
@@ -191,7 +191,7 @@ describe 'SpecRunner', ->
 
     describe 'no arguments', ->
       beforeEach ->
-        runner = new SpecRunner()
+        runner = new SpecRunner({})
         runner.run()
 
       it 'should package test app and run mocha', (done) ->
@@ -201,9 +201,25 @@ describe 'SpecRunner', ->
         setTimeout ->
           expect(mochaSpy.callCount).to.eq(10)
           expect(mochaSpy.getCall(9).args).to
-            .eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require', 'coffee:coffee-script/register']])
+            .eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require', 'coffee:coffee-script/register', '--timeout', 2000, '--exit']])
           done()
         , 0
+
+  describe 'Timeout option', ->
+    beforeEach ->
+      runner = new SpecRunner({timeout: 5000})
+      runner.run()
+
+    it 'should run mocha with timeout 5000 ms', (done) ->
+      expect(packagerSpy.callCount).to.eq(8)
+      expect(packagerSpy.getCall(7).args).to.eql([helper.platform(), 'test'])
+      expect(buildSpy.callCount).to.eq(8)
+      setTimeout ->
+        expect(mochaSpy.callCount).to.eq(11)
+        expect(mochaSpy.getCall(10).args).to
+          .eql([['--recursive', path.join(process.cwd(), 'spec'), '--compilers', 'ts:typescript-require', 'coffee:coffee-script/register', '--timeout', 5000, '--exit']])
+        done()
+      , 0
 
   describe 'Spec runner exit code', ->
     mochaSpy = sinon.stub().returns({status: 321})
@@ -220,7 +236,7 @@ describe 'SpecRunner', ->
 
     describe 'no arguments', ->
       beforeEach ->
-        runner = new SpecRunner()
+        runner = new SpecRunner({})
           .run().then((result) -> runResult = result)
 
       it 'should resolve exit code', (done) ->
@@ -230,7 +246,7 @@ describe 'SpecRunner', ->
 
     describe 'unit spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/units/some_unit_spec.js')
+        runner = new SpecRunner(path: 'spec/units/some_unit_spec.js')
           .run().then((result) -> runResult = result)
 
       it 'should resolve exit code', (done) ->
@@ -240,7 +256,7 @@ describe 'SpecRunner', ->
 
     describe 'feature spec file', ->
       beforeEach ->
-        runner = new SpecRunner('spec/features/some_feature_spec.js')
+        runner = new SpecRunner(path: 'spec/features/some_feature_spec.js')
           .run().then((result) -> runResult = result)
 
       it 'should resolve exit code', (done) ->
