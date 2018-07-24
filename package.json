@@ -45,8 +45,8 @@
     "sinon": "^6.1.4"
   },
   "versions": {
-    "electron": "2.0.4",
-    "electron-builder": "20.19.1",
+    "electron": "2.0.5",
+    "electron-builder": "20.25.0",
     "gulp": "^3.9.1",
     "mocha": "^5.2.0",
     "spectron": "^3.8.0",
