@@ -83,29 +83,57 @@ describe 'Packager', ->
                 "buildResources": "resources"
                 "output": "packages"
               }
-            }
+            },
+            "publish": "never"
           })
 
     describe 'production environment', ->
-      beforeEach ->
-        packager = new Packager('windows', 'production')
+      describe 'no publish option', ->
+        beforeEach ->
+          packager = new Packager('windows', 'production')
 
-      it 'should run builder', ->
-        packager.build().then ->
-          expect(builderSpy.callCount).to.eq(5)
-          expect(builderSpy.getCall(4).args).to.eql(['windows', 'production'])
-          expect(builderRunSpy.callCount).to.eq(5)
+        it 'should run builder', ->
+          packager.build().then ->
+            expect(builderSpy.callCount).to.eq(5)
+            expect(builderSpy.getCall(4).args).to.eql(['windows', 'production'])
+            expect(builderRunSpy.callCount).to.eq(5)
 
-      it 'should run electron builder', ->
-        packager.build().then ->
-          expect(electronBuilderBuildSpy.callCount).to.eq(6)
-          expect(electronBuilderBuildSpy.getCall(5).args[0]).to.eql({
-            "targets": "windows",
-            "config": {
-              "directories": {
-                "app": "builds/production"
-                "buildResources": "resources"
-                "output": "packages"
-              }
-            }
-          })
+        it 'should run electron builder', ->
+          packager.build().then ->
+            expect(electronBuilderBuildSpy.callCount).to.eq(6)
+            expect(electronBuilderBuildSpy.getCall(5).args[0]).to.eql({
+              "targets": "windows",
+              "config": {
+                "directories": {
+                  "app": "builds/production"
+                  "buildResources": "resources"
+                  "output": "packages"
+                }
+              },
+              "publish": "never"
+            })
+
+      describe 'with publish option', ->
+        beforeEach ->
+          packager = new Packager('windows', 'production', true)
+
+        it 'should run builder', ->
+          packager.build().then ->
+            expect(builderSpy.callCount).to.eq(7)
+            expect(builderSpy.getCall(5).args).to.eql(['windows', 'production'])
+            expect(builderRunSpy.callCount).to.eq(7)
+
+        it 'should run electron builder', ->
+          packager.build().then ->
+            expect(electronBuilderBuildSpy.callCount).to.eq(8)
+            expect(electronBuilderBuildSpy.getCall(7).args[0]).to.eql({
+              "targets": "windows",
+              "config": {
+                "directories": {
+                  "app": "builds/production"
+                  "buildResources": "resources"
+                  "output": "packages"
+                }
+              },
+              "publish": "always"
+            })
