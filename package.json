@@ -45,11 +45,11 @@
     "sinon": "^7.1.0"
   },
   "versions": {
-    "electron": "3.0.2",
+    "electron": "3.0.6",
     "electron-builder": "20.28.4",
     "gulp": "^3.9.1",
     "mocha": "^5.2.0",
-    "spectron": "^4.0.0",
+    "spectron": "^5.0.0",
     "webpack-stream": "^4.0.3"
   }
 }
