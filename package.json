@@ -24,7 +24,7 @@
     "commander": "^2.19.0",
     "del": "^3.0.0",
     "ejs": "^2.5.7",
-    "gulp-json-editor": "^2.4.2",
+    "gulp-json-editor": "^2.4.3",
     "inquirer": "^6.2.0",
     "merge-config": "^2.0.0",
     "underscore.string": "^3.3.5"
@@ -42,7 +42,7 @@
     "mocha": "^5.2.0",
     "mock-require": "^3.0.2",
     "require-reload": "^0.2.2",
-    "sinon": "^7.1.0"
+    "sinon": "^7.1.1"
   },
   "versions": {
     "electron": "3.0.6",
