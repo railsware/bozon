@@ -21,7 +21,6 @@ describe 'Generator', ->
         electronVersion: '4.1.4',
         mochaVersion: '^5.2.0',
         spectronVersion: '^5.0.0'
-        webpackStreamVersion: '^4.0.3'
         name: 'TestApp',
         author: null,
         year: date.getFullYear()

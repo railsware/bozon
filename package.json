@@ -28,7 +28,8 @@
     "gulp-json-editor": "^2.5.1",
     "inquirer": "^6.3.1",
     "merge-config": "^2.0.0",
-    "underscore.string": "^3.3.5"
+    "underscore.string": "^3.3.5",
+    "webpack-stream": "^5.2.1"
   },
   "preferGlobal": "true",
   "bin": {
@@ -49,7 +50,6 @@
     "electron": "4.1.4",
     "electron-builder": "20.39.0",
     "mocha": "^5.2.0",
-    "spectron": "^5.0.0",
-    "webpack-stream": "^4.0.3"
+    "spectron": "^5.0.0"
   }
 }

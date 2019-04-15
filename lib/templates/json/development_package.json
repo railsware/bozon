@@ -11,8 +11,7 @@
     "electron-builder": "<%= electronBuilderVersion %>",
     "electron": "<%= electronVersion %>",
     "mocha": "<%= mochaVersion %>",
-    "spectron": "<%= spectronVersion %>",
-    "webpack-stream": "<%= webpackStreamVersion %>"
+    "spectron": "<%= spectronVersion %>"
   },
   "build": {
     "appId": "com.electron.<%= id %>",
