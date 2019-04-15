@@ -10,7 +10,6 @@
     "bozon": "<%= bozonVersion %>",
     "electron-builder": "<%= electronBuilderVersion %>",
     "electron": "<%= electronVersion %>",
-    "gulp": "<%= gulpVersion %>",
     "mocha": "<%= mochaVersion %>",
     "spectron": "<%= spectronVersion %>",
     "webpack-stream": "<%= webpackStreamVersion %>"

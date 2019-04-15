@@ -19,7 +19,6 @@ describe 'Generator', ->
         bozonVersion: '0.8.12',
         electronBuilderVersion: '20.39.0',
         electronVersion: '4.1.4',
-        gulpVersion: '^3.9.1',
         mochaVersion: '^5.2.0',
         spectronVersion: '^5.0.0'
         webpackStreamVersion: '^4.0.3'
