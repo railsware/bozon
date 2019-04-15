@@ -24,6 +24,7 @@
     "commander": "^2.20.0",
     "del": "^4.1.0",
     "ejs": "^2.5.7",
+    "electron": "^4.1.4",
     "gulp": "^4.0.0",
     "gulp-json-editor": "^2.5.1",
     "inquirer": "^6.3.1",

@@ -9,7 +9,6 @@
   "devDependencies": {
     "bozon": "<%= bozonVersion %>",
     "electron-builder": "<%= electronBuilderVersion %>",
-    "electron": "<%= electronVersion %>",
     "mocha": "<%= mochaVersion %>",
     "spectron": "<%= spectronVersion %>"
   },
