@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps"
   },
+  "dependencies": {},
   "devDependencies": {
     "bozon": "<%= bozonVersion %>",
     "mocha": "<%= mochaVersion %>",
