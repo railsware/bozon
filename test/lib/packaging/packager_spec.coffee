@@ -22,10 +22,9 @@ describe 'Packager', ->
       run: builderRunSpy
 
     beforeEach ->
+      mockRequire 'electron-builder', electronBuilderSpy
       mockRequire '../../../lib/utils/checker', checkerSpy
       mockRequire '../../../lib/building/builder', builderSpy
-      mockRequire '../../../lib/utils/bozon',
-        requireLocal: (name) -> electronBuilderSpy
 
       Packager = require('../../../lib/packaging/packager')
 
