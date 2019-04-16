@@ -16,7 +16,7 @@ describe 'Builder', ->
     it 'should run gulp prepare:app command', ->
       expect(gulpSpy.calledOnce).to.be.true
       expect(gulpSpy.getCall(0).args[0]).to.eql([
-        'prepare:app',
+        'build',
         '--platform=mac',
         '--env=development'
       ])
@@ -29,7 +29,7 @@ describe 'Builder', ->
     it 'should run gulp prepare:app command', =>
       expect(gulpSpy.calledTwice).to.be.true
       expect(gulpSpy.getCall(1).args[0]).to.eql([
-        'prepare:app',
+        'build',
         '--platform=linux',
         '--env=test'
       ])
@@ -42,7 +42,7 @@ describe 'Builder', ->
     it 'should run gulp prepare:app command', =>
       expect(gulpSpy.calledThrice).to.be.true
       expect(gulpSpy.getCall(2).args[0]).to.eql([
-        'prepare:app',
+        'build',
         '--platform=windows',
         '--env=production'
       ])

@@ -9,22 +9,12 @@ describe '#bozon', ->
 
   beforeEach ->
     mockRequire 'child_process', spawnSync: childProcessSpy, spawn: childProcessSpy
+    mockRequire 'gulp', src: gulpSrcSpy, dest: gulpDestSpy
     bozon = require('./../../../lib/bozon')
-    sinon.stub(bozon, 'requireLocal').callsFake ->
-      task: gulpTaskSpy
-      src: gulpSrcSpy
-      dest: gulpDestSpy
 
   afterEach ->
-    bozon.requireLocal.restore()
-
-  describe '#task', ->
-    beforeEach ->
-      bozon.task('compile')
-
-    it 'should set gulp task',->
-      expect(gulpTaskSpy.calledOnce).to.be.true
-      expect(gulpTaskSpy.getCall(0).args[0]).to.eq('compile')
+    mockRequire.stop 'child_process'
+    mockRequire.stop 'gulp'
 
   describe '#src', ->
     afterEach ->
