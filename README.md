@@ -8,16 +8,15 @@
 Bozon is a single tool for handling different tasks being performed by multiple packages, which is used for building desktop applications with Electron. Simplify building, compiling, running, testing, and packaging your application.
 
 * **Electron** - build cross platform desktop apps with web technologies
-* **Gulp** - task runner that helps making all important processes with a single command
 * **Webpack** - building and packaging source code for renderer process done with webpack
-* **spectron** - Easily test your Electron apps using ChromeDriver and WebdriverIO
 * **electron-builder** - package and distribute your Electron app
+* **spectron** - Easily test your Electron apps using ChromeDriver and WebdriverIO
 
 ![img](https://api.monosnap.com/rpc/file/download?id=KB5BGmknhLmuE38DGEXCFu4rbpBUzr)
 
 ## Installation
 
- 
+
 ```bash
 npm install -g bozon
 ```
@@ -46,7 +45,6 @@ This will create a new directory `[name]` produce the following file structure:
   |  |--package.json
   |--config/
   |--spec/
-  |--gulpfile.js
   |--package.json
 ```
 

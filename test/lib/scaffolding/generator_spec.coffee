@@ -39,7 +39,6 @@ describe 'Generator', ->
 
     it 'should create application structure', ->
       expect($.fileExists('.gitignore')).to.be.true
-      expect($.fileExists('gulpfile.js')).to.be.true
       expect($.fileExists('webpack.config.js')).to.be.true
       expect($.fileExists('package.json')).to.be.true
       expect($.fileExists('LICENSE')).to.be.true

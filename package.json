@@ -22,16 +22,18 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
+    "copy": "^0.3.2",
+    "css-loader": "^2.1.1",
     "del": "^4.1.0",
     "ejs": "^2.5.7",
     "electron": "^4.1.4",
     "electron-builder": "^20.39.0",
-    "gulp": "^4.0.0",
-    "gulp-json-editor": "^2.5.1",
     "inquirer": "^6.3.1",
     "merge-config": "^2.0.0",
+    "ora": "^3.4.0",
+    "style-loader": "^0.23.1",
     "underscore.string": "^3.3.5",
-    "webpack-stream": "^5.2.1"
+    "webpack": "^4.30.0"
   },
   "preferGlobal": "true",
   "bin": {
