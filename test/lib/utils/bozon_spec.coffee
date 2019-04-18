@@ -10,7 +10,7 @@ describe '#bozon', ->
   beforeEach ->
     mockRequire 'child_process', spawnSync: childProcessSpy, spawn: childProcessSpy
     mockRequire 'gulp', src: gulpSrcSpy, dest: gulpDestSpy
-    bozon = require('./../../../lib/bozon')
+    bozon = require('./../../../lib/utils/bozon')
 
   afterEach ->
     mockRequire.stop 'child_process'

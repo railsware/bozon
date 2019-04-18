@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/railsware/bozon.git"
   },
-  "main": "lib",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha test/lib/bin/*.* --require coffee-script/register && mocha test/lib/building/*.* --require coffee-script/register && mocha test/lib/packaging/*.* --require coffee-script/register && mocha test/lib/scaffolding/*.* --require coffee-script/register && mocha test/lib/testing/*.* --require coffee-script/register && mocha test/lib/utils/*.* --require coffee-script/register"
   },
@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
+    "chokidar": "^2.1.5",
     "commander": "^2.20.0",
     "copy": "^0.3.2",
     "css-loader": "^2.1.1",
