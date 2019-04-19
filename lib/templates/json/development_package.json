@@ -1,12 +1,13 @@
 {
   "name": "<%= name %>",
   "version": "0.1.0",
-  "description": "Desktop application build with Electron",
+  "description": "<%= name %> application build with Electron",
   "repository": "",
-  "scripts": {
-    "postinstall": "electron-builder install-app-deps"
-  },
   "dependencies": {},
+  "author": {
+    "name": "<%= author %>",
+    "email": ""
+  },
   "devDependencies": {
     "bozon": "<%= bozonVersion %>",
     "mocha": "<%= mochaVersion %>",

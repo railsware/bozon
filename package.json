@@ -52,7 +52,7 @@
     "sinon": "^7.3.1"
   },
   "versions": {
-    "mocha": "^5.2.0",
+    "mocha": "^6.1.4",
     "spectron": "^5.0.0"
   }
 }
