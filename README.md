@@ -35,16 +35,15 @@ This will create a new directory `[name]` produce the following file structure:
   * Use `--skip-install` option if you want to skip running `npm install`
 
 ```
-  |--app/
+  |--config/
+  |--src/
   |  |--images/
   |  |--javascripts/
   |  |  |--renderer/
   |  |  |--main/
   |  |--stylesheets/
   |  |--index.html
-  |  |--package.json
-  |--config/
-  |--spec/
+  |--test/
   |--package.json
 ```
 
@@ -72,7 +71,7 @@ Bozon provides a way to define environment specific and platform specific config
 ```
 
 ## Testing
-Bozon is using [spectron](https://github.com/electron/spectron) and [mocha](https://mochajs.org/) spec runner for testing Electron applications. Both unit and integration tests should go to `./specs` directory. Simply execute for running tests:
+Bozon is using [spectron](https://github.com/electron/spectron) and [mocha](https://mochajs.org/) spec runner for testing Electron applications. Both unit and integration tests should go to `./test` directory. Simply execute for running tests:
 
 ```bash
 bozon test
