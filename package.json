@@ -8,8 +8,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "npx mocha test/lib --recursive --require coffeescript/register --extension coffee",
-    "legacy_test": "mocha test/lib/bin/*.* --require coffee-script/register && mocha test/lib/building/*.* --require coffee-script/register && mocha test/lib/packaging/*.* --require coffee-script/register && mocha test/lib/scaffolding/*.* --require coffee-script/register && mocha test/lib/testing/*.* --require coffee-script/register && mocha test/lib/utils/*.* --require coffee-script/register"
+    "test": "npx mocha test/lib --recursive --require coffeescript/register --extension coffee"
   },
   "keywords": [
     "electron",
