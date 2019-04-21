@@ -8,7 +8,8 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test/lib/bin/*.* --require coffee-script/register && mocha test/lib/building/*.* --require coffee-script/register && mocha test/lib/packaging/*.* --require coffee-script/register && mocha test/lib/scaffolding/*.* --require coffee-script/register && mocha test/lib/testing/*.* --require coffee-script/register && mocha test/lib/utils/*.* --require coffee-script/register"
+    "test": "npx mocha test/lib --recursive --require coffeescript/register --extension coffee",
+    "legacy_test": "mocha test/lib/bin/*.* --require coffee-script/register && mocha test/lib/building/*.* --require coffee-script/register && mocha test/lib/packaging/*.* --require coffee-script/register && mocha test/lib/scaffolding/*.* --require coffee-script/register && mocha test/lib/testing/*.* --require coffee-script/register && mocha test/lib/utils/*.* --require coffee-script/register"
   },
   "keywords": [
     "electron",
@@ -45,7 +46,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "coffee-script": "^1.12.7",
+    "coffeescript": "^2.4.1",
     "mocha": "^6.1.3",
     "mock-require": "^3.0.3",
     "require-reload": "^0.2.2",

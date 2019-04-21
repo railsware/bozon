@@ -2,14 +2,12 @@ path = require('path')
 fs = require('fs')
 global.expect = require('chai').expect
 global.sinon = require('sinon')
-global.mockRequire = require('mock-require')
+global.mock = require('mock-require')
 
 beforeEach ->
-  process.chdir('./test/assets')
 
-afterEach ->
-  process.chdir('./../..')
-  mockRequire.stopAll()
+after ->
+  mock.stopAll()
 
 class Mock
   constructor: (@object, @property) ->
