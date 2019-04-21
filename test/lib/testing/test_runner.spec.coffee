@@ -28,7 +28,7 @@ describe 'Test Runner', ->
 
     describe 'without feature tests', ->
       before ->
-        runner = new TestRunner(path: 'test')
+        runner = new TestRunner(path: 'test/unit')
         runner.run()
 
       after ->
@@ -51,7 +51,7 @@ describe 'Test Runner', ->
         expect(bozon.runMocha.calledOnce).to.be.true
         expect(bozon.runMocha.getCall(0).args[0]).to.eql [
           "--recursive"
-          "test"
+          "test/unit"
           "--timeout"
           2000
           "--exit"
