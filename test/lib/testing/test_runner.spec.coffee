@@ -3,11 +3,8 @@ helper = require('../../helper')
 Checker = ensure: sinon.spy()
 build = sinon.mock().resolves()
 Packager = sinon.mock().returns(build: build)
-start = sinon.spy()
-succeed = sinon.spy()
-fail = sinon.spy()
-ora = sinon.mock().returns start: start, succeed: succeed, fail: fail
 
+ora = require('../../support/ora_mock')
 bozon = require('../../support/bozon_mock')
 utils = require('../../support/test_utils_mock')
 
@@ -21,7 +18,7 @@ TestRunner = require '../../../lib/testing/test_runner'
 
 resetHistory = ->
   Checker.ensure.resetHistory()
-  succeed.resetHistory()
+  ora.succeed.resetHistory()
   ora.resetHistory()
   bozon.runMocha.resetHistory()
   utils.uniqFileExtensions.resetHistory()
@@ -93,5 +90,54 @@ describe 'Test Runner', ->
           2000
           "--exit"
         ]
+
+    describe 'with coffee files', ->
+      before ->
+        utils.uniqFileExtensions = sinon.mock().returns(['js', 'coffee'])
+        runner = new TestRunner(path: 'test/features')
+        runner.run()
+
+      after ->
+        resetHistory()
+        Packager.resetHistory()
+        build.resetHistory()
+
+      it 'should run mocha with options', ->
+        expect(bozon.runMocha.getCall(0).args[0]).to.eql [
+          "--recursive"
+          "test/features"
+          "--require"
+          "coffeescript/register"
+          "--extension"
+          "coffee"
+          "--timeout"
+          2000
+          "--exit"
+        ]
+
+    describe 'with typescript files', ->
+      before ->
+        utils.uniqFileExtensions = sinon.mock().returns(['js', 'ts'])
+        runner = new TestRunner(path: 'test/features')
+        runner.run()
+
+      after ->
+        resetHistory()
+        Packager.resetHistory()
+        build.resetHistory()
+
+      it 'should run mocha with options', ->
+        expect(bozon.runMocha.getCall(0).args[0]).to.eql [
+          "--recursive"
+          "test/features"
+          "--require"
+          "ts-node/register"
+          "--extension"
+          "ts"
+          "--timeout"
+          2000
+          "--exit"
+        ]
+
 
 mock.stopAll()
