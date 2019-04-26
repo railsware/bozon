@@ -2,7 +2,7 @@ helper = require('../../helper')
 childProcess = require('child_process')
 bozon = require('./../../support/bozon_mock')
 
-mock('../../../utils/bozon', bozon)
+mock('../../../lib/utils/bozon', bozon)
 
 Generator = require('./../../../lib/scaffolding/generator')
 
