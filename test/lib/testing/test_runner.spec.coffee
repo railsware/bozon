@@ -91,6 +91,92 @@ describe 'Test Runner', ->
           "--exit"
         ]
 
+    describe 'app packaging', ->
+      afterEach ->
+        resetHistory()
+        Packager.resetHistory()
+        build.resetHistory()
+
+      describe 'spec path equals `test`', ->
+        before ->
+          new TestRunner(path: 'test').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `test/`', ->
+        before ->
+          new TestRunner(path: 'test/').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `./test`', ->
+        before ->
+          new TestRunner(path: './test').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `./test/features`', ->
+        before ->
+          new TestRunner(path: './test/features').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `./test/unit`', ->
+        before ->
+          new TestRunner(path: './test/unit').run()
+
+        it 'should not package app', ->
+          expect(Packager.calledOnce).not.to.be.true
+          expect(build.calledOnce).not.to.be.true
+
+      describe 'spec path equals `spec`', ->
+        before ->
+          new TestRunner(path: 'spec').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `spec/`', ->
+        before ->
+          new TestRunner(path: 'spec/').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `./spec`', ->
+        before ->
+          new TestRunner(path: './spec').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `./spec/features`', ->
+        before ->
+          new TestRunner(path: './spec/features').run()
+
+        it 'should package app', ->
+          expect(Packager.calledOnce).to.be.true
+          expect(build.calledOnce).to.be.true
+
+      describe 'spec path equals `./spec/unit`', ->
+        before ->
+          new TestRunner(path: './spec/unit').run()
+
+        it 'should not package app', ->
+          expect(Packager.calledOnce).not.to.be.true
+          expect(build.calledOnce).not.to.be.true
+
     describe 'with coffee files', ->
       before ->
         utils.uniqFileExtensions = sinon.mock().returns(['js', 'coffee'])
