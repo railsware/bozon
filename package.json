@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
-    "chokidar": "^2.1.5",
+    "chokidar": "^3.0.0",
     "commander": "^2.20.0",
     "copy": "^0.3.2",
     "css-loader": "^2.1.1",
