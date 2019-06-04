@@ -48,7 +48,7 @@ describe 'Generator', ->
     it 'package.json should contain actual information', ->
       expect(helper.fileContains('package.json', '"name": "TestApp"')).to.be.true
       expect(helper.fileContains('package.json', '"version": "0.1.0"')).to.be.true
-      expect(helper.fileContains('package.json', '"bozon": "0.9.2')).to.be.true
+      expect(helper.fileContains('package.json', '"bozon": "0.9.3')).to.be.true
 
     it 'logs generator steps', ->
       expect(bozon.log.getCall(0).args[0]).to.eq '  \u001b[32mcreate\u001b[39m .gitignore'
