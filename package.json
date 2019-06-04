@@ -28,13 +28,13 @@
     "del": "^4.1.1",
     "ejs": "^2.5.7",
     "electron": "^5.0.2",
-    "electron-builder": "^20.40.2",
+    "electron-builder": "^20.41.0",
     "inquirer": "^6.3.1",
     "merge-config": "^2.0.0",
     "ora": "^3.4.0",
     "style-loader": "^0.23.1",
     "underscore.string": "^3.3.5",
-    "webpack": "^4.31.0"
+    "webpack": "^4.32.2"
   },
   "preferGlobal": "true",
   "bin": {
