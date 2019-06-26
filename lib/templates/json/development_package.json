@@ -16,8 +16,10 @@
   "build": {
     "appId": "com.electron.<%= id %>",
     "win": {
+      "publish": null
     },
     "mac": {
+      "publish": null,
       "category": "your.app.category.type"
     }
   }
