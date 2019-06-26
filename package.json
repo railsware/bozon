@@ -24,17 +24,17 @@
     "chokidar": "^3.0.1",
     "commander": "^2.20.0",
     "copy": "^0.3.2",
-    "css-loader": "^2.1.1",
+    "css-loader": "^3.0.0",
     "del": "^4.1.1",
-    "ejs": "^2.5.7",
-    "electron": "^5.0.2",
-    "electron-builder": "^20.41.0",
-    "inquirer": "^6.3.1",
+    "ejs": "^2.6.2",
+    "electron": "^5.0.5",
+    "electron-builder": "^20.44.4",
+    "inquirer": "^6.4.1",
     "merge-config": "^2.0.0",
     "ora": "^3.4.0",
     "style-loader": "^0.23.1",
     "underscore.string": "^3.3.5",
-    "webpack": "^4.32.2"
+    "webpack": "^4.35.0"
   },
   "preferGlobal": "true",
   "bin": {
