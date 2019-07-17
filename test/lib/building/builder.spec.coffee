@@ -56,8 +56,8 @@ describe 'Builder', ->
 
       it 'copies html', ->
         copyCall = copy.getCall(0)
-        expect(copyCall.args[0]).to.eql "#{process.cwd()}/test/assets/src/*.html"
-        expect(copyCall.args[1]).to.eql "#{process.cwd()}/test/assets/builds/development/"
+        expect(copyCall.args[0]).to.eql "#{process.cwd()}/test/assets/src/renderer/*.html"
+        expect(copyCall.args[1]).to.eql "#{process.cwd()}/test/assets/builds/development/renderer"
 
       it 'copies images', ->
         copyCall = copy.getCall(1)
@@ -148,8 +148,8 @@ describe 'Builder', ->
 
       it 'copies html', ->
         copyCall = copy.getCall(0)
-        expect(copyCall.args[0]).to.eql "#{process.cwd()}/test/assets/src/*.html"
-        expect(copyCall.args[1]).to.eql "#{process.cwd()}/test/assets/builds/test/"
+        expect(copyCall.args[0]).to.eql "#{process.cwd()}/test/assets/src/renderer/*.html"
+        expect(copyCall.args[1]).to.eql "#{process.cwd()}/test/assets/builds/test/renderer"
 
       it 'copies images', ->
         copyCall = copy.getCall(1)
@@ -191,8 +191,8 @@ describe 'Builder', ->
 
       it 'copies html', ->
         copyCall = copy.getCall(0)
-        expect(copyCall.args[0]).to.eql "#{process.cwd()}/test/assets/src/*.html"
-        expect(copyCall.args[1]).to.eql "#{process.cwd()}/test/assets/builds/production/"
+        expect(copyCall.args[0]).to.eql "#{process.cwd()}/test/assets/src/renderer/*.html"
+        expect(copyCall.args[1]).to.eql "#{process.cwd()}/test/assets/builds/production/renderer"
 
       it 'copies images', ->
         copyCall = copy.getCall(1)
