@@ -67,7 +67,7 @@ describe 'Builder', ->
       it 'creates json manifest', ->
         expect(fs.writeFile.calledOnce).to.be.true
         expect(fs.writeFile.getCall(0).args[0]).to.eql "#{process.cwd()}/test/assets/builds/development/package.json"
-        expect(fs.writeFile.getCall(0).args[1]).to.eql '{"name":"TestApp","author":"Anonymous","main":"javascripts/main/index.js"}'
+        expect(fs.writeFile.getCall(0).args[1]).to.eql '{"name":"TestApp","author":"Anonymous","main":"main/index.js"}'
 
       it 'bundles renderer javascript', ->
         expect(webpack.getCall(0).args[0]).to.eql require('../../fixtures/webpack/renderer')('development')
@@ -101,9 +101,9 @@ describe 'Builder', ->
 
         describe 'file changed in renderer directory', ->
           it 'should trigger renderer compilation on file change', ->
-            chokidar.on.getCall(1).args[1]("#{process.cwd()}/test/assets/src/javascripts/renderer/index.js", null)
+            chokidar.on.getCall(1).args[1]("#{process.cwd()}/test/assets/src/renderer/javascripts/index.js", null)
             expect(bozon.log.getCall(0).args[0]).to.include(
-              "[\u001b[32mCHANGE\u001b[39m] File '\u001b[33m../src/javascripts/renderer/index.js\u001b[39m' has been changed"
+              "[\u001b[32mCHANGE\u001b[39m] File '\u001b[33m../src/renderer/javascripts/index.js\u001b[39m' has been changed"
             )
             expect(bozon.log.getCall(1).args[0]).to.include '[\u001b[90mRENDER\u001b[39m] Compiling..'
             expect(bozon.log.getCall(2).args[0]).to.include '[\u001b[90mRENDER\u001b[39m] \u001b[36mDone\u001b[39m'
@@ -111,9 +111,9 @@ describe 'Builder', ->
 
         describe 'file changed in main directory', ->
           it 'should trigger main compilation on file change', ->
-            chokidar.on.getCall(1).args[1]("#{process.cwd()}/test/assets/src/javascripts/main/index.js", null)
+            chokidar.on.getCall(1).args[1]("#{process.cwd()}/test/assets/src/main/index.js", null)
             expect(bozon.log.getCall(3).args[0]).to.include(
-              "[\u001b[32mCHANGE\u001b[39m] File '\u001b[33m../src/javascripts/main/index.js\u001b[39m' has been changed"
+              "[\u001b[32mCHANGE\u001b[39m] File '\u001b[33m../src/main/index.js\u001b[39m' has been changed"
             )
             expect(bozon.log.getCall(4).args[0]).to.include '[\u001b[90m~MAIN~\u001b[39m] Compiling..'
             expect(bozon.log.getCall(5).args[0]).to.include '[\u001b[90m~MAIN~\u001b[39m] \u001b[36mDone\u001b[39m'
@@ -159,7 +159,7 @@ describe 'Builder', ->
       it 'creates json manifest', ->
         expect(fs.writeFile.calledOnce).to.be.true
         expect(fs.writeFile.getCall(0).args[0]).to.eql "#{process.cwd()}/test/assets/builds/test/package.json"
-        expect(fs.writeFile.getCall(0).args[1]).to.eql '{"name":"TestApp","author":"Anonymous","main":"javascripts/main/index.js"}'
+        expect(fs.writeFile.getCall(0).args[1]).to.eql '{"name":"TestApp","author":"Anonymous","main":"main/index.js"}'
 
       it 'bundles renderer javascript', ->
         expect(webpack.getCall(0).args[0]).to.eql require('../../fixtures/webpack/renderer')('test')
@@ -202,7 +202,7 @@ describe 'Builder', ->
       it 'creates json manifest', ->
         expect(fs.writeFile.calledOnce).to.be.true
         expect(fs.writeFile.getCall(0).args[0]).to.eql "#{process.cwd()}/test/assets/builds/production/package.json"
-        expect(fs.writeFile.getCall(0).args[1]).to.eql '{"name":"TestApp","author":"Anonymous","main":"javascripts/main/index.js"}'
+        expect(fs.writeFile.getCall(0).args[1]).to.eql '{"name":"TestApp","author":"Anonymous","main":"main/index.js"}'
 
       it 'bundles renderer javascript', ->
         expect(webpack.getCall(0).args[0]).to.eql require('../../fixtures/webpack/renderer')('production')

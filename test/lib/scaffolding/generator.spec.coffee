@@ -27,9 +27,9 @@ describe 'Generator', ->
       expect(helper.fileExists('LICENSE')).to.be.true
       expect(helper.fileExists('README.md')).to.be.true
       expect(helper.fileExists('src/index.html')).to.be.true
-      expect(helper.fileExists('src/javascripts/renderer/index.js')).to.be.true
-      expect(helper.fileExists('src/javascripts/main/index.js')).to.be.true
-      expect(helper.fileExists('src/stylesheets/application.css')).to.be.true
+      expect(helper.fileExists('src/renderer/javascripts/index.js')).to.be.true
+      expect(helper.fileExists('src/renderer/stylesheets/application.css')).to.be.true
+      expect(helper.fileExists('src/main/index.js')).to.be.true
       expect(helper.fileExists('config/settings.json')).to.be.true
       expect(helper.fileExists('config/environments/development.json')).to.be.true
       expect(helper.fileExists('config/environments/test.json')).to.be.true
@@ -57,9 +57,9 @@ describe 'Generator', ->
       expect(bozon.log.getCall(3).args[0]).to.eq '  \u001b[32mcreate\u001b[39m LICENSE'
       expect(bozon.log.getCall(4).args[0]).to.eq '  \u001b[32mcreate\u001b[39m README.md'
       expect(bozon.log.getCall(5).args[0]).to.eq '  \u001b[32mcreate\u001b[39m src/index.html'
-      expect(bozon.log.getCall(6).args[0]).to.eq '  \u001b[32mcreate\u001b[39m src/stylesheets/application.css'
-      expect(bozon.log.getCall(7).args[0]).to.eq '  \u001b[32mcreate\u001b[39m src/javascripts/main/index.js'
-      expect(bozon.log.getCall(8).args[0]).to.eq '  \u001b[32mcreate\u001b[39m src/javascripts/renderer/index.js'
+      expect(bozon.log.getCall(6).args[0]).to.eq '  \u001b[32mcreate\u001b[39m src/renderer/stylesheets/application.css'
+      expect(bozon.log.getCall(7).args[0]).to.eq '  \u001b[32mcreate\u001b[39m src/main/index.js'
+      expect(bozon.log.getCall(8).args[0]).to.eq '  \u001b[32mcreate\u001b[39m src/renderer/javascripts/index.js'
       expect(bozon.log.getCall(9).args[0]).to.eq '  \u001b[32mcreate\u001b[39m resources/icon.icns'
       expect(bozon.log.getCall(10).args[0]).to.eq '  \u001b[32mcreate\u001b[39m resources/icon.ico'
       expect(bozon.log.getCall(11).args[0]).to.eq '  \u001b[32mcreate\u001b[39m config/settings.json'

@@ -1,7 +1,7 @@
 module.exports = (env) => {
   let mode = env === 'test' ? 'development' : env
   return {
-    "entry": `${process.cwd()}/test/assets/src/javascripts/main/index.js`,
+    "entry": `${process.cwd()}/test/assets/src/main/index.js`,
     "mode": mode,
     "node": {
       "__dirname": false,
@@ -9,7 +9,7 @@ module.exports = (env) => {
     },
     "output": {
       "filename": "index.js",
-      "path": `${process.cwd()}/test/assets/builds/${env}/javascripts/main`
+      "path": `${process.cwd()}/test/assets/builds/${env}/main`
     },
     "plugins": [
       {}
