@@ -21,20 +21,20 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
-    "chokidar": "^3.0.1",
+    "chokidar": "^3.0.2",
     "commander": "^2.20.0",
     "copy": "^0.3.2",
     "css-loader": "^3.0.0",
-    "del": "^4.1.1",
+    "del": "^5.0.0",
     "ejs": "^2.6.2",
-    "electron": "^5.0.5",
+    "electron": "^5.0.7",
     "electron-builder": "^20.44.4",
-    "inquirer": "^6.4.1",
+    "inquirer": "^6.5.0",
     "merge-config": "^2.0.0",
     "ora": "^3.4.0",
     "style-loader": "^0.23.1",
     "underscore.string": "^3.3.5",
-    "webpack": "^4.35.0"
+    "webpack": "^4.36.1"
   },
   "preferGlobal": "true",
   "bin": {
