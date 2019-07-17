@@ -11,6 +11,11 @@ module.exports = (env) => {
       "filename": "index.js",
       "path": `${process.cwd()}/test/assets/builds/${env}/main`
     },
+    "resolve": {
+      "modules": [
+        `${process.cwd()}/test/assets/src/resources`
+      ]
+    },
     "plugins": [
       {}
     ],
