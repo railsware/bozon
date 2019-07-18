@@ -36,13 +36,15 @@ This will create a new directory `[name]` produce the following file structure:
 
 ```
   |--config/
+  |--resources/
   |--src/
-  |  |--images/
-  |  |--javascripts/
-  |  |  |--renderer/
-  |  |  |--main/
-  |  |--stylesheets/
-  |  |--index.html
+  |  |--main/
+  |  |  |--index.js
+  |  |--renderer/
+  |  |  |--images/
+  |  |  |--stylesheets/
+  |  |  |--index.js
+  |  |  |--index.html
   |--test/
   |--package.json
 ```
@@ -56,7 +58,7 @@ bozon start
 This will compile Application source code to `./builds/development` directory and run your application from it.
 
 ### Configuration
-Bozon provides a way to define environment specific and platform specific configuration options. These multiple config files are being merged into one single `settings` object during build. This `settings` object is being written into `package.json` file of your application, so that you can use it in your code.
+Bozon provides a way to define environment specific and platform specific configuration options. These multiple config files are being merged into one single `config` object during build. This `config` object is accessible via `CONFIG` variable in `main` process files of your application, so that you can use it in your code.
 ```
   |--config/
   |  |--settings.json
