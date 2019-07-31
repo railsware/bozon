@@ -53,6 +53,6 @@
   },
   "versions": {
     "mocha": "^6.1.4",
-    "spectron": "^5.0.0"
+    "spectron": "^6.0.0"
   }
 }
