@@ -133,11 +133,10 @@ describe '#bozon', ->
         resetChildProcessHistory()
 
       it 'runs electron with development build', ->
-        expect(childProcess.spawnSync.getCall(0).args).to.eql [
-          "#{process.cwd()}/node_modules/.bin/mocha",
-          undefined,
-          {shell: true, stdio: 'inherit'}
-        ]
+        expect(childProcess.spawnSync.getCall(0).args[0]).to.eql "#{process.cwd()}/node_modules/.bin/mocha"
+        expect(childProcess.spawnSync.getCall(0).args[1]).to.eql undefined
+        expect(childProcess.spawnSync.getCall(0).args[2]).to.have.keys ['shell', 'env', 'stdio']
+
     describe 'params present', ->
       before ->
         bozon.runMocha(['test/unit/index'])
@@ -146,11 +145,9 @@ describe '#bozon', ->
         resetChildProcessHistory()
 
       it 'runs electron with development build', ->
-        expect(childProcess.spawnSync.getCall(0).args).to.eql [
-          "#{process.cwd()}/node_modules/.bin/mocha",
-          ["test/unit/index"],
-          {shell: true, stdio: 'inherit'}
-        ]
+        expect(childProcess.spawnSync.getCall(0).args[0]).to.eql "#{process.cwd()}/node_modules/.bin/mocha"
+        expect(childProcess.spawnSync.getCall(0).args[1]).to.eql ["test/unit/index"]
+        expect(childProcess.spawnSync.getCall(0).args[2]).to.have.keys ['shell', 'env', 'stdio']
 
   describe '#runElectron', ->
     describe 'empty params', ->
@@ -161,11 +158,10 @@ describe '#bozon', ->
         resetChildProcessHistory()
 
       it 'runs electron with development build', ->
-        expect(childProcess.spawn.getCall(0).args).to.eql [
-          "#{process.cwd()}/node_modules/.bin/electron",
-          ["#{process.cwd()}/builds/development"],
-          {shell: true, stdio: 'inherit'}
-        ]
+        expect(childProcess.spawn.getCall(0).args[0]).to.eql "#{process.cwd()}/node_modules/.bin/electron"
+        expect(childProcess.spawn.getCall(0).args[1]).to.eql ["#{process.cwd()}/builds/development"]
+        expect(childProcess.spawn.getCall(0).args[2]).to.have.keys ['shell', 'env', 'stdio']
+
     describe 'params present', ->
       before ->
         bozon.runElectron(['--debug'])
@@ -174,39 +170,37 @@ describe '#bozon', ->
         resetChildProcessHistory()
 
       it 'runs electron with development build', ->
-        expect(childProcess.spawn.getCall(0).args).to.eql [
-          "#{process.cwd()}/node_modules/.bin/electron",
-          ["--debug", "#{process.cwd()}/builds/development"],
-          {shell: true, stdio: 'inherit'}
-        ]
+        expect(childProcess.spawn.getCall(0).args[0]).to.eql "#{process.cwd()}/node_modules/.bin/electron"
+        expect(childProcess.spawn.getCall(0).args[1]).to.eql ["--debug", "#{process.cwd()}/builds/development"]
+        expect(childProcess.spawn.getCall(0).args[2]).to.have.keys ['shell', 'env', 'stdio']
 
   describe '#spawnSync', ->
     before ->
-      bozon.spawnSync 'npm', ['install', '-g', 'bozon']
+      bozon.spawnSync 'npm', ['install', '-g', 'bozon'], 'development'
 
     after ->
       resetChildProcessHistory()
 
     it 'passes command and options to childProcess', ->
-      expect(childProcess.spawnSync.getCall(0).args).to.eql [
-        'npm',
-        ['install', '-g', 'bozon'],
-        {shell: true, stdio: 'inherit'}
-      ]
+      expect(childProcess.spawnSync.getCall(0).args[0]).to.eql 'npm'
+      expect(childProcess.spawnSync.getCall(0).args[1]).to.eql ['install', '-g', 'bozon']
+      expect(childProcess.spawnSync.getCall(0).args[2]).to.have.keys ['shell', 'env', 'stdio']
 
   describe '#spawn', ->
     before ->
-      bozon.spawn 'npm', ['install', '-g', 'bozon']
+      bozon.spawn 'npm', ['install', '-g', 'bozon'], 'development'
 
     after ->
       resetChildProcessHistory()
 
     it 'passes command and options to childProcess', ->
-      expect(childProcess.spawn.getCall(0).args).to.eql [
-        'npm',
-        ['install', '-g', 'bozon'],
-        {shell: true, stdio: 'inherit'}
+      expect(childProcess.spawn.getCall(0).args[0]).to.eql 'npm'
+      expect(childProcess.spawn.getCall(0).args[1]).to.eql [
+        'install',
+        '-g',
+        'bozon'
       ]
+      expect(childProcess.spawn.getCall(0).args[2]).to.have.keys ['shell', 'env', 'stdio']
 
   describe '#sourcePath', ->
     describe 'with arguments', ->
