@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Framework for building Electron applications",
   "repository": {
     "type": "git",
@@ -22,19 +22,19 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "chokidar": "^3.0.2",
-    "commander": "^2.20.0",
+    "commander": "^3.0.0",
     "copy": "^0.3.2",
-    "css-loader": "^3.1.0",
+    "css-loader": "^3.2.0",
     "del": "^5.0.0",
     "ejs": "^2.6.2",
-    "electron": "^6.0.0",
+    "electron": "^6.0.1",
     "electron-builder": "^21.2.0",
-    "inquirer": "^6.5.0",
+    "inquirer": "^6.5.1",
     "merge-config": "^2.0.0",
     "ora": "^3.4.0",
-    "style-loader": "^0.23.1",
+    "style-loader": "^1.0.0",
     "underscore.string": "^3.3.5",
-    "webpack": "^4.38.0"
+    "webpack": "^4.39.1"
   },
   "preferGlobal": "true",
   "bin": {
@@ -49,7 +49,7 @@
     "mocha": "^6.2.0",
     "mock-require": "^3.0.3",
     "require-reload": "^0.2.2",
-    "sinon": "^7.3.2"
+    "sinon": "^7.4.1"
   },
   "versions": {
     "mocha": "^6.1.4",
