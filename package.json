@@ -31,7 +31,7 @@
     "electron-builder": "^21.2.0",
     "inquirer": "^7.0.0",
     "merge-config": "^2.0.0",
-    "ora": "^3.4.0",
+    "ora": "^4.0.2",
     "style-loader": "^1.0.0",
     "underscore.string": "^3.3.5",
     "webpack": "^4.41.0"
