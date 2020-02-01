@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "description": "Framework for building Electron applications",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "underscore.string": "^3.3.5",
     "webpack": "^4.41.5"
   },
-  "preferGlobal": "true",
+  "preferGlobal": true,
   "bin": {
     "bozon": "bin/bozon"
   },
