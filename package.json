@@ -22,12 +22,12 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "chokidar": "^3.3.1",
-    "commander": "^4.1.0",
+    "commander": "^4.1.1",
     "copy": "^0.3.2",
     "css-loader": "^3.4.2",
     "del": "^5.1.0",
     "ejs": "^3.0.1",
-    "electron": "^7.1.11",
+    "electron": "^8.0.0",
     "electron-builder": "^22.3.2",
     "inquirer": "^7.0.4",
     "merge-config": "^2.0.0",
@@ -53,6 +53,6 @@
   },
   "versions": {
     "mocha": "^7.0.0",
-    "spectron": "^9.0.0"
+    "spectron": "^10.0.0"
   }
 }
