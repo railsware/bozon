@@ -1,4 +1,4 @@
 .editorcofig
 .circleci/
 test/
-
+yarn-error.log
