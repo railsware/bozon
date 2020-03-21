@@ -22,19 +22,19 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "chokidar": "^3.3.1",
-    "commander": "^4.1.1",
+    "commander": "^5.0.0",
     "copy": "^0.3.2",
     "css-loader": "^3.4.2",
     "del": "^5.1.0",
     "ejs": "^3.0.1",
-    "electron": "^8.0.0",
-    "electron-builder": "^22.3.2",
-    "inquirer": "^7.0.4",
+    "electron": "^8.1.1",
+    "electron-builder": "^22.4.1",
+    "inquirer": "^7.1.0",
     "merge-config": "^2.0.0",
     "ora": "^4.0.3",
     "style-loader": "^1.1.3",
     "underscore.string": "^3.3.5",
-    "webpack": "^4.41.5"
+    "webpack": "^4.42.0"
   },
   "preferGlobal": true,
   "bin": {
@@ -46,10 +46,16 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "coffeescript": "^2.5.1",
-    "mocha": "^7.0.1",
+    "mocha": "^7.1.1",
     "mock-require": "^3.0.3",
     "require-reload": "^0.2.2",
-    "sinon": "^8.1.1"
+    "sinon": "^9.0.1"
+  },
+  "resolutions": {
+    "js-yaml": "^3.13.1",
+    "minimist": "^1.2.5",
+    "kind-of": "^6.0.3",
+    "set-value": "^3.0.1"
   },
   "versions": {
     "mocha": "^7.0.0",
