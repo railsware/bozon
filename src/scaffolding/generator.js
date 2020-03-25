@@ -3,19 +3,21 @@ const childProcess = require('child_process')
 const chalk = require('chalk')
 const ejs = require('ejs')
 const fs = require('fs')
-const _ = require('underscore.string')
+const { classify, underscored } = require('underscore.string')
+
+const bozon = require('utils/bozon')
+
 const json = require('../../package.json')
-const bozon = require('../utils/bozon')
 
 const $ = path.join
 
 class Generator {
   constructor(name, options) {
-    this.name = _.underscored(name)
+    this.name = underscored(name)
     this.options = options
     this.defaults = {
       id: 'bozonapp',
-      name: _.classify(name),
+      name: classify(name),
       author: null,
       year: new Date().getFullYear(),
       bozonVersion: json.version,
@@ -30,7 +32,7 @@ class Generator {
     var questioner = new Questioner({ name: this.defaults.name })
     questioner.prompt(function(answers) {
       self.defaults.id = answers.name.toLowerCase()
-      self.defaults.name = _.classify(answers.name)
+      self.defaults.name = classify(answers.name)
       self.defaults.author = answers.author
       self.setup()
     })

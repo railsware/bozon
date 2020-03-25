@@ -1,8 +1,8 @@
 const bozon = require('../utils/bozon')
 const ora = require('ora')
 const chalk = require('chalk')
-const Checker = require('../utils/checker')
-const Builder = require('../building/builder')
+const Checker = require('utils/checker')
+const Builder = require('building/builder')
 
 class Starter {
   constructor(options) {

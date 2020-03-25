@@ -2,8 +2,8 @@ const path = require('path')
 const ora = require('ora')
 const chalk = require('chalk')
 const electronBuilder = require('electron-builder')
-const Checker = require('../utils/checker')
-const Builder = require('../building/builder')
+const Checker = require('utils/checker')
+const Builder = require('building/builder')
 
 class Packager {
   constructor(platform, environment, publish) {

@@ -1,6 +1,6 @@
 var inquirer = require('inquirer')
 var chalk = require('chalk')
-var _ = require('underscore.string')
+var { isBlank } = require('underscore.string')
 
 class Questioner {
   constructor(options) {
@@ -15,14 +15,14 @@ class Questioner {
         message: 'What is the name of your app?',
         default: this.name,
         validate: function (value) {
-          return _.isBlank(value) ? 'You have to provide application name' : true
+          return isBlank(value) ? 'You have to provide application name' : true
         }
       }, {
         type: 'input',
         name: 'author',
         message: 'Please specify author name (ex: John Doe):',
         validate: function (value) {
-          return _.isBlank(value) ? 'You have to provide author name' : true
+          return isBlank(value) ? 'You have to provide author name' : true
         }
       }
     ]

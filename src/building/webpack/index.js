@@ -1,6 +1,6 @@
 const fs = require('fs');
 const webpack = require('webpack');
-const bozon = require('./../../utils/bozon');
+const bozon = require('utils/bozon');
 const mainDefault = require('./main');
 const rendererDefault = require('./renderer');
 const preloadDefault = require('./preload');

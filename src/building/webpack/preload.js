@@ -1,4 +1,4 @@
-const bozon = require('./../../utils/bozon');
+const bozon = require('utils/bozon');
 
 module.exports = (mode, env) => {
   return {

@@ -2,9 +2,9 @@ const fs = require('fs')
 const ora = require('ora')
 const chalk = require('chalk')
 const utils = require('./utils')
-const Checker = require('../utils/checker')
-const Packager = require('./../packaging/packager')
-const bozon = require('./../utils/bozon')
+const Checker = require('utils/checker')
+const Packager = require('packaging/packager')
+const bozon = require('utils/bozon')
 
 class TestRunner {
   constructor(options) {
