@@ -1,11 +1,12 @@
-const path = require('path')
-const ora = require('ora')
-const chalk = require('chalk')
-const electronBuilder = require('electron-builder')
-const Checker = require('utils/checker')
-const Builder = require('building/builder')
+import path from 'path'
+import ora from 'ora'
+import chalk from 'chalk'
+import Checker from 'utils/checker'
+import Builder from 'building/builder'
 
-class Packager {
+const electronBuilder = require('electron-builder')
+
+export default class Packager {
   constructor(platform, environment, publish) {
     Checker.ensure()
     this.platform = platform
@@ -76,5 +77,3 @@ class Packager {
     })
   }
 }
-
-module.exports = Packager

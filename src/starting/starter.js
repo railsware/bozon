@@ -1,10 +1,10 @@
-const bozon = require('../utils/bozon')
-const ora = require('ora')
-const chalk = require('chalk')
-const Checker = require('utils/checker')
-const Builder = require('building/builder')
+import bozon from '../utils/bozon'
+import ora from 'ora'
+import chalk from 'chalk'
+import Checker from 'utils/checker'
+import Builder from 'building/builder'
 
-class Starter {
+export default class Starter {
   constructor(options) {
     Checker.ensure()
     this.options = options
@@ -24,5 +24,3 @@ class Starter {
     })
   }
 }
-
-module.exports = Starter

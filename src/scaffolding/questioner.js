@@ -1,8 +1,8 @@
-var inquirer = require('inquirer')
-var chalk = require('chalk')
-var { isBlank } = require('underscore.string')
+import inquirer from 'inquirer'
+import chalk from 'chalk'
+import { isBlank } from 'underscore.string'
 
-class Questioner {
+export default class Questioner {
   constructor(options) {
     this.name = options.name
   }
@@ -39,5 +39,3 @@ class Questioner {
     })
   }
 }
-
-module.exports = Questioner

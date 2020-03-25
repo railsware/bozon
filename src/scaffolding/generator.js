@@ -1,17 +1,17 @@
-const path = require('path')
-const childProcess = require('child_process')
-const chalk = require('chalk')
-const ejs = require('ejs')
-const fs = require('fs')
-const { classify, underscored } = require('underscore.string')
+import path from 'path'
+import childProcess from 'child_process'
+import chalk from 'chalk'
+import ejs from 'ejs'
+import fs from 'fs'
+import { classify, underscored } from 'underscore.string'
 
-const bozon = require('utils/bozon')
+import bozon from 'utils/bozon'
 
-const json = require('../../package.json')
+import json from '../../package.json'
 
 const $ = path.join
 
-class Generator {
+export default class Generator {
   constructor(name, options) {
     this.name = underscored(name)
     this.options = options
@@ -183,5 +183,3 @@ class Generator {
     bozon.log('')
   }
 }
-
-module.exports = Generator

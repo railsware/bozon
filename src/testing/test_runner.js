@@ -1,12 +1,12 @@
-const fs = require('fs')
-const ora = require('ora')
-const chalk = require('chalk')
-const utils = require('./utils')
-const Checker = require('utils/checker')
-const Packager = require('packaging/packager')
-const bozon = require('utils/bozon')
+import fs from 'fs'
+import ora from 'ora'
+import chalk from 'chalk'
+import { uniqFileExtensions } from './utils'
+import Checker from 'utils/checker'
+import Packager from 'packaging/packager'
+import bozon from 'utils/bozon'
 
-class TestRunner {
+export default class TestRunner {
   constructor(options) {
     Checker.ensure()
     this.compilers = {
@@ -69,7 +69,7 @@ class TestRunner {
 
   filteredExtensions() {
     var array = []
-    utils.uniqFileExtensions(this.specPath).forEach((extension) => {
+    uniqFileExtensions(this.specPath).forEach((extension) => {
       if (Object.keys(this.compilers).indexOf(extension) !== -1) {
         array.push(extension)
       }
@@ -82,5 +82,3 @@ class TestRunner {
       this.specPath.match(/feature/)
   }
 }
-
-module.exports = TestRunner

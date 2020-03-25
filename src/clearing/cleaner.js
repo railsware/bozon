@@ -1,9 +1,9 @@
-const del = require('del')
-const path = require('path')
-const chalk = require('chalk')
-const ora = require('ora')
+import del from 'del'
+import path from 'path'
+import chalk from 'chalk'
+import ora from 'ora'
 
-class Cleaner {
+export default class Cleaner {
   constructor() {
     this.spinner = ora({
       text: chalk.cyan('Cleaning app directory'),
@@ -19,5 +19,3 @@ class Cleaner {
     this.spinner.succeed(chalk.cyan('Cleaned app directory'))
   }
 }
-
-module.exports = Cleaner

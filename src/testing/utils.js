@@ -1,44 +1,42 @@
-var fs = require('fs')
-var path = require('path')
+import fs from 'fs'
+import path from 'path'
 
-module.exports.isFile = function (pathString) {
+const isFile = function (pathString) {
   return fs.lstatSync(pathString).isFile()
 }
 
-module.exports.readFileList = function (pathString, filelist) {
-  var _this = this
-  filelist = filelist || []
+const readFileList = function (pathString, filelist) {
+  let list = filelist || []
 
-  var files = fs.readdirSync(pathString)
+  const files = fs.readdirSync(pathString)
 
   files.forEach(function (file) {
-    var newPath = path.join(pathString, file)
+    const newPath = path.join(pathString, file)
     if (fs.statSync(newPath).isDirectory()) {
-      filelist = _this.readFileList(newPath, filelist)
+      list = readFileList(newPath, filelist)
     } else {
-      filelist.push(file)
+      list.push(file)
     }
   })
-  return filelist
+  return list
 }
 
-module.exports.extension = function (file) {
-  var array = file.split('.')
+const extension = function (file) {
+  const array = file.split('.')
   return array[array.length - 1]
 }
 
-module.exports.uniqFileExtensions = function (pathString) {
-  if (this.isFile(pathString)) {
-    return [this.extension(pathString)]
+export const uniqFileExtensions = function (pathString) {
+  if (isFile(pathString)) {
+    return [extension(pathString)]
   } else {
-    var _this = this
-    var extensions = []
+    const extensions = []
 
-    var fileList = this.readFileList(pathString)
+    const fileList = readFileList(pathString)
     fileList.forEach(function (file) {
-      var extension = _this.extension(file)
-      if (extensions.indexOf(extension) === -1) {
-        extensions.push(extension)
+      const ext = extension(file)
+      if (extensions.indexOf(ext) === -1) {
+        extensions.push(ext)
       }
     })
     return extensions
