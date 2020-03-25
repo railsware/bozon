@@ -1,5 +1,4 @@
 import commander from 'commander'
-// import { create, start, clear, pack, test, run } from 'runner'
 
 import { perform } from 'index'
 

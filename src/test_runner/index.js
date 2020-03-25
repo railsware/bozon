@@ -3,7 +3,7 @@ import ora from 'ora'
 import chalk from 'chalk'
 import { uniqFileExtensions } from './utils'
 import Checker from 'utils/checker'
-import Packager from 'packaging/packager'
+import Packager from 'packager'
 import bozon from 'utils/bozon'
 
 export default class TestRunner {

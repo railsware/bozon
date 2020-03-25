@@ -2,7 +2,7 @@ import bozon from '../utils/bozon'
 import ora from 'ora'
 import chalk from 'chalk'
 import Checker from 'utils/checker'
-import Builder from 'building/builder'
+import Builder from 'builder'
 
 export default class Starter {
   constructor(options) {

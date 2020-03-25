@@ -2,7 +2,7 @@ import path from 'path'
 import ora from 'ora'
 import chalk from 'chalk'
 import Checker from 'utils/checker'
-import Builder from 'building/builder'
+import Builder from 'builder'
 
 const electronBuilder = require('electron-builder')
 
