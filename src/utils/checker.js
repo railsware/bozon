@@ -1,7 +1,6 @@
 var fs = require('fs')
 var path = require('path')
 var chalk = require('chalk')
-var childProcess = require('child_process')
 
 var Checker = {
   files: ['package.json'],
@@ -15,10 +14,9 @@ var Checker = {
     this.files.forEach(function(file) {
       try {
         fs.lstatSync(path.join(process.cwd(), file))
-      }
-      catch (e) {
-        _this.log("\n  Could not find "
-          + chalk.yellow(file) +
+      } catch (e) {
+        _this.log('\n  Could not find ' +
+          chalk.yellow(file) +
           ".. It doesn't look like you are in electron app root directory.\n")
       }
     })
@@ -27,9 +25,8 @@ var Checker = {
   ensureDependencies: function() {
     try {
       fs.lstatSync(path.join(process.cwd(), 'node_modules'))
-    }
-    catch (e) {
-      this.log("\n  Run " + chalk.cyan('npm install') +".. \n")
+    } catch (e) {
+      this.log('\n  Run ' + chalk.cyan('npm install') + '.. \n')
     }
   },
 

@@ -1,7 +1,7 @@
 import electron from 'electron'
 import path from 'path'
 
-electron.app.on('ready', function() {
+electron.app.on('ready', function () {
   let window = new electron.BrowserWindow({
     title: CONFIG.name,
     width: CONFIG.width,
@@ -13,7 +13,7 @@ electron.app.on('ready', function() {
 
   window.loadURL(`file://${path.join(__dirname, '..', 'renderer', 'index.html')}`)
 
-  window.webContents.on('did-finish-load', function(){
+  window.webContents.on('did-finish-load', function () {
     window.webContents.send('loaded', {
       appName: CONFIG.name,
       electronVersion: process.versions.electron,
@@ -22,7 +22,7 @@ electron.app.on('ready', function() {
     })
   })
 
-  window.on('closed', function() {
+  window.on('closed', function () {
     window = null
   })
 })

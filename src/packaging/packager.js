@@ -67,7 +67,7 @@ class Packager {
           output: 'packages'
         }
       },
-      "publish": this.publish
+      publish: this.publish
     }).then(() => {
       this.spinner.succeed()
     }).catch((error) => {

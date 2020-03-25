@@ -5,7 +5,6 @@ const mainDefault = require('./main');
 const rendererDefault = require('./renderer');
 const preloadDefault = require('./preload');
 
-
 class WebpackConfig {
   constructor(env, platform) {
     this.env = env;
@@ -17,7 +16,7 @@ class WebpackConfig {
   }
 
   build() {
-    let configs = {
+    const configs = {
       renderer: Object.assign({}, this.rendererDefault, this.config.renderer),
       main: Object.assign({}, this.mainDefault, this.config.main)
     };
@@ -42,15 +41,16 @@ class WebpackConfig {
 
   settings() {
     const json = JSON.parse(fs.readFileSync(bozon.source('package.json')));
-    let settings = bozon.config(this.env, this.platform);
+    const settings = bozon.config(this.env, this.platform);
     settings.name = json.name;
     settings.version = json.version;
     return settings;
   }
 
   localConfig() {
-    let configFile = bozon.source('webpack.config.js');
-    this.config = fs.existsSync(configFile) ? eval(fs.readFileSync(configFile).toString(  )) : {};
+    const configFile = bozon.source('webpack.config.js');
+    // eslint-disable-next-line no-eval
+    this.config = fs.existsSync(configFile) ? eval(fs.readFileSync(configFile).toString()) : {};
   }
 }
 

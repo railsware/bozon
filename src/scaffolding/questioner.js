@@ -38,7 +38,6 @@ class Questioner {
       callback(answers)
     })
   }
-
 }
 
 module.exports = Questioner

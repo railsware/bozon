@@ -9,6 +9,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "npx webpack",
+    "lint": "npx eslint src",
     "test": "npx mocha test/lib --recursive --require coffeescript/register --extension coffee"
   },
   "keywords": [
@@ -51,8 +52,15 @@
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "coffeescript": "^2.5.1",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "mocha": "^7.1.1",
     "mock-require": "^3.0.3",
+    "prettier": "2.0.2",
     "require-reload": "^0.2.2",
     "sinon": "^9.0.1",
     "webpack-cli": "^3.3.11",

@@ -1,18 +1,21 @@
-const path = require('path');
+const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
-module.exports ={
+module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
   mode: 'development',
   target: 'node',
   node: {
     __dirname: false,
-    __filename: false,
+    __filename: false
   },
   externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js'
+  },
+  resolve: {
+    modules: ['node_modules', 'src']
   },
   module: {
     rules: [

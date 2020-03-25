@@ -11,7 +11,7 @@ commander
   .option('--skip-install')
   .description('Generate scaffold for new Electron application')
   .action(function (name, command) {
-    let options = {
+    const options = {
       skipInstall: command.skipInstall !== undefined
     }
     create(name, options)
@@ -26,9 +26,9 @@ commander
   .action(function (command) {
     let options
     if (command.inspect) {
-      options = ['--inspect='+command.inspect]
+      options = ['--inspect=' + command.inspect]
     } else if (command.inspectBrk) {
-      options = ['--inspect-brk='+command.inspectBrk]
+      options = ['--inspect-brk=' + command.inspectBrk]
     } else {
       options = []
     }
@@ -40,7 +40,7 @@ commander
   .option('--timeout <miliseconds>')
   .description('Run tests from spec/ directory')
   .action(function (path, command) {
-    let options = {
+    const options = {
       path: path,
       timeout: command.timeout
     }

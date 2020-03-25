@@ -7,7 +7,6 @@ const Packager = require('./../packaging/packager')
 const bozon = require('./../utils/bozon')
 
 class TestRunner {
-
   constructor(options) {
     Checker.ensure()
     this.compilers = {
@@ -23,7 +22,7 @@ class TestRunner {
   }
 
   run() {
-    return new Promise( (resolve) => {
+    return new Promise((resolve) => {
       if (this.shouldPackageApp()) {
         var packager = new Packager(bozon.platform(), 'test')
         packager.build().then(() => {
@@ -82,7 +81,6 @@ class TestRunner {
     return this.specPath.match(/(spec|test)\/?$/) ||
       this.specPath.match(/feature/)
   }
-
 }
 
 module.exports = TestRunner
