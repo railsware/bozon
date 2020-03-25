@@ -15,9 +15,9 @@ describe 'Builder', ->
   mock('webpack', webpack)
   mock('chokidar', chokidar)
   mock('electron', electron)
-  mock('./../../../lib/utils/bozon', bozon)
+  mock('./../../../src/utils/bozon', bozon)
 
-  Builder = require('./../../../lib/building/builder')
+  Builder = require('./../../../src/building/builder')
 
   restoreMocks = ->
     electron.resetHistory()

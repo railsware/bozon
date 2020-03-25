@@ -1,29 +1,30 @@
-var program = require('commander')
-var runner = require('./runner')
-var json = require('../../package.json')
+import commander from 'commander'
+import json from '../package.json'
+import { create, start, clear, pack, test, run } from './runner'
 
-program
+commander
   .version(json.version)
   .usage('[options]')
 
-program
+commander
   .command('new <name>')
   .option('--skip-install')
   .description('Generate scaffold for new Electron application')
   .action(function (name, command) {
-    options = {
+    let options = {
       skipInstall: command.skipInstall !== undefined
     }
-    runner.new(name, options)
+    create(name, options)
   })
 
-program
+commander
   .command('start')
   .alias('s')
   .option('--inspect <port>')
   .option('--inspect-brk <port>')
   .description('Compile and run application')
   .action(function (command) {
+    let options
     if (command.inspect) {
       options = ['--inspect='+command.inspect]
     } else if (command.inspectBrk) {
@@ -31,47 +32,47 @@ program
     } else {
       options = []
     }
-    runner.start(options)
+    start(options)
   })
 
-program
+commander
   .command('test [spec]')
   .option('--timeout <miliseconds>')
   .description('Run tests from spec/ directory')
   .action(function (path, command) {
-    options = {
+    let options = {
       path: path,
       timeout: command.timeout
     }
-    runner.test(options).then(function(result) {
+    test(options).then(function(result) {
       process.exit(result.status);
     })
   })
 
-program
+commander
   .command('clear')
   .description('Clear builds and releases directories')
   .action(function () {
-    runner.clear()
+    clear()
   })
 
-program
+commander
   .command('package <platform>')
   .option('--publish')
   .description('Build and Package applications for platforms defined in package.json')
   .action(function (platform, command) {
-    runner.package(platform, command.publish)
+    pack(platform, command.publish)
   })
 
-program
+commander
   .command('run <task>')
   .description('Run the defined task')
   .action(function (task) {
-    runner.run(task)
+    run(task)
   })
 
-program.parse(process.argv)
+commander.parse(process.argv)
 
 if (!process.argv.slice(2).length) {
-  program.outputHelp()
+  commander.outputHelp()
 }

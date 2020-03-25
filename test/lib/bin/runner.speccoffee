@@ -11,13 +11,13 @@ TestRunner = sinon.mock().returns(run: testRun)
 build = sinon.spy()
 Packager = sinon.mock().returns(build: build)
 
-mock('../../../lib/scaffolding/generator', Generator)
-mock('../../../lib/starting/starter', Starter)
-mock('../../../lib/clearing/cleaner', Cleaner)
-mock('../../../lib/testing/test_runner', TestRunner)
-mock('../../../lib/packaging/packager', Packager)
+mock('../../../src/scaffolding/generator', Generator)
+mock('../../../src/starting/starter', Starter)
+mock('../../../src/clearing/cleaner', Cleaner)
+mock('../../../src/testing/test_runner', TestRunner)
+mock('../../../src/packaging/packager', Packager)
 
-runner = require('../../../lib/bin/runner')
+runner = require('../../../src/runner')
 
 describe 'Runner', ->
   after ->

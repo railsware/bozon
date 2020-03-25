@@ -23,7 +23,7 @@ resetConfigHistory = ->
   configFile.resetHistory()
   configGet.resetHistory()
 
-bozon = require('./../../../lib/utils/bozon')
+bozon = require('./../../../src/utils/bozon')
 
 describe '#bozon', ->
   describe '#srcDir', ->

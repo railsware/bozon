@@ -6,7 +6,7 @@ del = sinon.spy()
 mock('ora', ora)
 mock('del', del)
 
-Cleaner = require('../../../lib/clearing/cleaner')
+Cleaner = require('../../../src/clearing/cleaner')
 
 describe 'Cleaner', ->
   describe '#run', ->

@@ -22,12 +22,12 @@ resetHistory = ->
   Builder.resetHistory()
   electronBuilder.build.resetHistory()
 
-mock('./../../../lib/utils/checker', Checker)
-mock('./../../../lib/building/builder', Builder)
+mock('./../../../src/utils/checker', Checker)
+mock('./../../../src/building/builder', Builder)
 mock('electron-builder', electronBuilder)
 mock('ora', ora)
 
-Packager = require('./../../../lib/packaging/packager')
+Packager = require('./../../../src/packaging/packager')
 
 describe 'Packager', ->
   describe '#build', ->

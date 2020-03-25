@@ -5,7 +5,6 @@ const copy = require("copy");
 const chalk = require("chalk");
 const webpack = require("webpack");
 const chokidar = require("chokidar");
-const electron = require("electron");
 const bozon = require("../utils/bozon");
 const WebpackConfig = require("./webpack");
 
@@ -86,7 +85,7 @@ class Builder {
 
   manifest() {
     return new Promise((resolve, reject) => {
-      const json = require(bozon.source("package.json"));
+      const json = JSON.parse(fs.readFileSync(bozon.source("package.json")));
       let settings = {
         name: json.name,
         version: json.version,

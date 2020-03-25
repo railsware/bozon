@@ -1,5 +1,4 @@
 const fs = require('fs')
-const path = require('path')
 const ora = require('ora')
 const chalk = require('chalk')
 const utils = require('./utils')

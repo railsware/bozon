@@ -139,7 +139,7 @@ class Generator {
   }
 
   copy(src, dest) {
-    var template = $(__dirname, "..", "templates", src)
+    var template = $(__dirname, "..",  "templates", src)
     var destination = $(process.cwd(), this.name, dest)
     fs.writeFileSync(destination, fs.readFileSync(template))
     bozon.log("  " + chalk.green("create") + " " + dest)
@@ -149,6 +149,7 @@ class Generator {
     if (typeof data === "undefined") {
       data = {}
     }
+    console.log($(__dirname, "..", "templates", src))
     var template = $(__dirname, "..", "templates", src)
     var destination = $(process.cwd(), this.name, dest)
     var str = fs.readFileSync(template, "utf8")

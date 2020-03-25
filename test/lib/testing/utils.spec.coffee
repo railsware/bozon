@@ -1,6 +1,6 @@
 helper = require('../../helper')
 
-utils = require('./../../../lib/testing/utils')
+utils = require('./../../../src/testing/utils')
 
 describe 'Testing utils', ->
   before ->

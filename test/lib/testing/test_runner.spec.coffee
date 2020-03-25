@@ -9,12 +9,12 @@ bozon = require('../../support/bozon_mock')
 utils = require('../../support/test_utils_mock')
 
 mock('ora', ora)
-mock('../../../lib/utils/bozon', bozon)
-mock('../../../lib/utils/checker', Checker)
-mock('../../../lib/packaging/packager', Packager)
-mock('../../../lib/testing/utils', utils)
+mock('../../../src/utils/bozon', bozon)
+mock('../../../src/utils/checker', Checker)
+mock('../../../src/packaging/packager', Packager)
+mock('../../../src/testing/utils', utils)
 
-TestRunner = require '../../../lib/testing/test_runner'
+TestRunner = require '../../../src/testing/test_runner'
 
 resetHistory = ->
   Checker.ensure.resetHistory()
