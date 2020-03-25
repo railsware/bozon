@@ -18,6 +18,3 @@ export const pack = (platform, publish = false) =>
 
 export const test = (options) =>
   new TestRunner(options).run()
-
-export const run = () =>
-  console.log('run')
