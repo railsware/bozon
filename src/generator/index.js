@@ -4,6 +4,7 @@ import chalk from 'chalk'
 import ejs from 'ejs'
 import fs from 'fs'
 import { classify, underscored } from 'underscore.string'
+import Questionnaire from './questionnaire'
 
 import bozon from 'utils/bozon'
 
@@ -24,17 +25,15 @@ export default class Generator {
       mochaVersion: json.versions.mocha,
       spectronVersion: json.versions.spectron
     }
+    this.questioner = new Questionnaire({ name: this.defaults.name })
   }
 
   generate() {
-    var self = this
-    var Questioner = require('./questioner')
-    var questioner = new Questioner({ name: this.defaults.name })
-    questioner.prompt(function(answers) {
-      self.defaults.id = answers.name.toLowerCase()
-      self.defaults.name = classify(answers.name)
-      self.defaults.author = answers.author
-      self.setup()
+    this.questioner.prompt(answers => {
+      this.defaults.id = answers.name.toLowerCase()
+      this.defaults.name = classify(answers.name)
+      this.defaults.author = answers.author
+      this.setup()
     })
   }
 
