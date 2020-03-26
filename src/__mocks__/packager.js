@@ -1,5 +1,5 @@
 const Packager = jest.fn()
-Packager.build = jest.fn()
+Packager.build = jest.fn().mockResolvedValue(true)
 
 Packager.mockReturnValue({
   build: Packager.build
