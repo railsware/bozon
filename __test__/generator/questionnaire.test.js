@@ -1,6 +1,7 @@
 import Questionnaire from 'generator/questionnaire'
 import inquirer from 'inquirer'
 
+jest.unmock('generator/questionnaire')
 jest.spyOn(console, 'log').mockImplementation()
 
 const callback = jest.fn()

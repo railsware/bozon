@@ -25,11 +25,11 @@ export default class Generator {
       mochaVersion: json.versions.mocha,
       spectronVersion: json.versions.spectron
     }
-    this.questioner = new Questionnaire({ name: this.defaults.name })
+    this.questionnaire = new Questionnaire({ name: this.defaults.name })
   }
 
   generate() {
-    this.questioner.prompt(answers => {
+    this.questionnaire.prompt(answers => {
       this.defaults.id = answers.name.toLowerCase()
       this.defaults.name = classify(answers.name)
       this.defaults.author = answers.author
@@ -150,7 +150,6 @@ export default class Generator {
     if (typeof data === 'undefined') {
       data = {}
     }
-    console.log($(__dirname, '..', 'templates', src))
     var template = $(__dirname, '..', 'templates', src)
     var destination = $(process.cwd(), this.name, dest)
     var str = fs.readFileSync(template, 'utf8')
