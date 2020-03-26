@@ -6,12 +6,6 @@ import Cleaner from 'cleaner'
 import Packager from 'packager'
 import TestRunner from 'test_runner'
 
-jest.mock('generator')
-jest.mock('starter')
-jest.mock('cleaner')
-jest.mock('packager')
-jest.mock('test_runner')
-
 describe('create', () => {
   it('passes app name to generator', () => {
     create('myapp')

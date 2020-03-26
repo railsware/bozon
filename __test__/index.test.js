@@ -2,8 +2,6 @@ import commander from 'commander'
 
 import { perform } from 'index'
 
-jest.mock('commander')
-
 describe('bozon cli', () => {
   beforeEach(() => {
     perform()
