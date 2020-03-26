@@ -1,11 +1,11 @@
-const fs = require('fs');
-const webpack = require('webpack');
-const bozon = require('utils/bozon');
-const mainDefault = require('./main');
-const rendererDefault = require('./renderer');
-const preloadDefault = require('./preload');
+import fs from 'fs'
+import webpack from 'webpack'
+import bozon from 'utils/bozon'
+import mainDefault from './main'
+import rendererDefault from './renderer'
+import preloadDefault from './preload'
 
-class WebpackConfig {
+export default class WebpackConfig {
   constructor(env, platform) {
     this.env = env;
     this.platform = platform;
@@ -53,5 +53,3 @@ class WebpackConfig {
     this.config = fs.existsSync(configFile) ? eval(fs.readFileSync(configFile).toString()) : {};
   }
 }
-
-module.exports = WebpackConfig;

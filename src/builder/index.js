@@ -1,14 +1,14 @@
-const fs = require('fs')
-const path = require('path')
-const ora = require('ora')
-const copy = require('copy')
-const chalk = require('chalk')
-const webpack = require('webpack')
-const chokidar = require('chokidar')
-const bozon = require('../utils/bozon')
-const WebpackConfig = require('./webpack')
+import fs from 'fs'
+import path from 'path'
+import ora from 'ora'
+import copy from 'copy'
+import chalk from 'chalk'
+import webpack from 'webpack'
+import chokidar from 'chokidar'
+import bozon from 'utils/bozon'
+import WebpackConfig from 'builder/webpack_config'
 
-class Builder {
+export default class Builder {
   constructor(platform, environment) {
     this.platform = platform
     this.environment = environment
@@ -162,5 +162,3 @@ class Builder {
     return `${hours}:${minutes}:${seconds}`
   }
 }
-
-module.exports = Builder

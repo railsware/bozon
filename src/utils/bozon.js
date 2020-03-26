@@ -1,6 +1,6 @@
-const path = require('path');
-const childProcess = require('child_process');
-const Config = require('merge-config');
+import path from 'path'
+import childProcess from 'child_process'
+import Config from 'merge-config'
 
 const bozon = {
   srcDir: 'src',
@@ -37,7 +37,7 @@ const bozon = {
   },
 
   runMocha: function(params) {
-    return this.spawnSync(this.binary('mocha'), params, 'test');
+    return this.spawnSync(this.binary('mocha'), params);
   },
 
   runElectron: function(options) {
@@ -87,6 +87,5 @@ const bozon = {
   log: function(message) {
     console.log(message);
   }
-};
-
-module.exports = bozon;
+}
+export default bozon

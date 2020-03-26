@@ -1,6 +1,6 @@
-const bozon = require('utils/bozon');
+import bozon from 'utils/bozon'
 
-module.exports = (mode, env) => {
+export default (mode, env) => {
   return {
     target: 'electron-preload',
     entry: bozon.sourcePath('preload/index.js'),

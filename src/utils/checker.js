@@ -1,39 +1,35 @@
-var fs = require('fs')
-var path = require('path')
-var chalk = require('chalk')
+import fs from 'fs'
+import path from 'path'
+import chalk from 'chalk'
 
-var Checker = {
-  files: ['package.json'],
-  ensure: function() {
-    this.ensureFilesPresence()
-    this.ensureDependencies()
-  },
-
-  ensureFilesPresence: function() {
-    var _this = this
-    this.files.forEach(function(file) {
-      try {
-        fs.lstatSync(path.join(process.cwd(), file))
-      } catch (e) {
-        _this.log('\n  Could not find ' +
-          chalk.yellow(file) +
-          ".. It doesn't look like you are in electron app root directory.\n")
-      }
-    })
-  },
-
-  ensureDependencies: function() {
+const ensureFilesPresence = () => {
+  ['package.json'].forEach((file) => {
     try {
-      fs.lstatSync(path.join(process.cwd(), 'node_modules'))
+      fs.lstatSync(path.join(process.cwd(), file))
     } catch (e) {
-      this.log('\n  Run ' + chalk.cyan('npm install') + '.. \n')
+      log('\n  Could not find ' +
+        chalk.yellow(file) +
+        ".. It doesn't look like you are in electron app root directory.\n")
     }
-  },
+  })
+}
 
-  log: function(error) {
-    console.log(error)
-    process.exit()
+const ensureDependencies = () => {
+  try {
+    fs.lstatSync(path.join(process.cwd(), 'node_modules'))
+  } catch (e) {
+    log('\n  Run ' + chalk.cyan('npm install') + '.. \n')
   }
 }
 
-module.exports = Checker
+const log = (error) => {
+  console.log(error)
+  process.exit()
+}
+
+const ensure = () => {
+  ensureFilesPresence()
+  ensureDependencies()
+}
+
+export default { ensure }
