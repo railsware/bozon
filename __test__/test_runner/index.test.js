@@ -2,11 +2,10 @@
 import TestRunner from 'test_runner'
 import ora from 'ora'
 import Checker from 'utils/checker'
-import { runMocha } from 'utils/bozon'
+import { runMocha } from 'utils'
 
 jest.mock('fs')
 jest.mock('utils/checker')
-jest.mock('utils/bozon')
 jest.unmock('test_runner')
 
 describe('TestRunner', () => {

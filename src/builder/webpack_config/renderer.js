@@ -1,4 +1,4 @@
-import { sourcePath, destinationPath } from 'utils/bozon'
+import { sourcePath, destinationPath } from 'utils'
 
 export default (mode, env) => {
   return {

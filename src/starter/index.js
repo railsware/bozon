@@ -1,7 +1,7 @@
-import { runElectron, platform } from 'utils/bozon'
 import ora from 'ora'
 import chalk from 'chalk'
 import Checker from 'utils/checker'
+import { runElectron, platform } from 'utils'
 import Builder from 'builder'
 
 export default class Starter {

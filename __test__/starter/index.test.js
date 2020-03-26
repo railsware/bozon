@@ -2,14 +2,13 @@ import Starter from 'starter'
 import Builder from 'builder'
 import Checker from 'utils/checker'
 import ora from 'ora'
-import { runElectron } from 'utils/bozon'
+import { runElectron } from 'utils'
 
 jest.unmock('starter')
 
 jest.spyOn(console, 'log').mockImplementation()
 
 jest.mock('utils/checker')
-jest.mock('utils/bozon')
 
 const setup = async () => {
   const starter = new Starter([{ inspect: true }])
@@ -31,8 +30,8 @@ describe('Starter', () => {
       })
     })
 
-    it('instantiates builder with platform and env', async () => {
-      expect(Builder).toHaveBeenCalledWith('mac', 'development')
+    it('instantiates builder with platform and env', () => {
+      expect(Builder).toHaveBeenCalledWith('linux', 'development')
     })
 
     it('runs builder', () => {

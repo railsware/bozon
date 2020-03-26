@@ -1,6 +1,6 @@
 import fs from 'fs'
 import webpack from 'webpack'
-import { source, config } from 'utils/bozon'
+import { source, config } from 'utils'
 import mainDefault from './main'
 import rendererDefault from './renderer'
 import preloadDefault from './preload'

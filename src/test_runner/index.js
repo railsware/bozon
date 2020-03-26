@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import { uniqFileExtensions } from './utils'
 import Checker from 'utils/checker'
 import Packager from 'packager'
-import { platform, runMocha, source } from 'utils/bozon'
+import { platform, runMocha, source } from 'utils'
 
 export default class TestRunner {
   constructor(options) {

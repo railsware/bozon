@@ -5,7 +5,7 @@ import copy from 'copy'
 import chalk from 'chalk'
 import webpack from 'webpack'
 import chokidar from 'chokidar'
-import { source, sourcePath, destinationPath } from 'utils/bozon'
+import { source, sourcePath, destinationPath } from 'utils'
 import WebpackConfig from 'builder/webpack_config'
 
 export default class Builder {
