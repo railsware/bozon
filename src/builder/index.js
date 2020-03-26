@@ -24,14 +24,15 @@ class Builder {
     return Promise.all(this.buildQueue())
       .then(() => {
         this.manifest()
-        this.spinner.succeed()
+        this.spinner.succeed(
+          `${chalk.cyan('Building Electron application:')} ${chalk.green('Done')}`)
         if (this.environment === 'development') {
           this.watch()
         }
       })
       .catch((error) => {
-        this.spinner.fail('Failed to build application')
-        console.error(error)
+        this.spinner.fail(chalk.cyan(`${chalk.cyan('Building Electron application:')} ${chalk.yellow('Failed')}`))
+        throw error
       })
   }
 
@@ -115,7 +116,7 @@ class Builder {
     })
     watcher.on('ready', () => {
       this.spinner.stopAndPersist({
-        text: chalk.green('Watching for changes..'),
+        text: chalk.green('Watching for changes..\n'),
         symbol: '👀'
       })
     })

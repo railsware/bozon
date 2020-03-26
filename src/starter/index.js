@@ -1,4 +1,4 @@
-import bozon from '../utils/bozon'
+import bozon from 'utils/bozon'
 import ora from 'ora'
 import chalk from 'chalk'
 import Checker from 'utils/checker'
@@ -20,7 +20,7 @@ export default class Starter {
     this.builder.run().then(() => {
       this.spinner.start()
       bozon.runElectron(this.options)
-      this.spinner.succeed()
-    })
+      this.spinner.succeed(`${chalk.cyan('Starting application:')} ${chalk.green('Done')}\n`)
+    }).catch(error => bozon.log(error))
   }
 }
