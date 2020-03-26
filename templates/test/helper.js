@@ -8,7 +8,7 @@ module.exports = {
       case 'linux':
         return path.join(__dirname, '..', '.tmp', 'linux', '<%= name%>');
       default:
-        throw 'Unsupported platform';
+        throw Error('Unsupported platform');
     }
   }
 };
