@@ -1,20 +1,20 @@
-import bozon from 'utils/bozon'
+import { sourcePath, destinationPath } from 'utils/bozon'
 
 export default (mode, env) => {
   return {
     target: 'electron-main',
-    entry: bozon.sourcePath('main/index.js'),
+    entry: sourcePath('main/index.js'),
     mode: mode,
     node: {
       __dirname: false,
       __filename: false
     },
     output: {
-      path: bozon.destinationPath('main', env),
+      path: destinationPath('main', env),
       filename: 'index.js'
     },
     resolve: {
-      modules: [bozon.sourcePath('resources')]
+      modules: [sourcePath('resources')]
     },
     plugins: []
   };

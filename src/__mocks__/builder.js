@@ -7,6 +7,7 @@ Builder.__setBuildError = message => {
 
 Builder.run = jest.fn(() => {
   if (buildError) {
+    console.log('before reject')
     return Promise.reject(Error(buildError))
   }
   return Promise.resolve()

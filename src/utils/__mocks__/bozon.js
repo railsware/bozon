@@ -1,8 +1,9 @@
-const platform = jest.fn().mockReturnValue('mac')
-const runElectron = jest.fn()
-const runMocha = jest.fn()
-const log = jest.fn()
-const source = jest.fn(value => value)
-const bozon = { platform, runElectron, runMocha, log, source }
-
-export default bozon
+export const platform = jest.fn().mockReturnValue('mac')
+export const runElectron = jest.fn()
+export const runMocha = jest.fn()
+export const log = jest.fn()
+export const source = jest.fn(value => value)
+export const sourcePath = jest.fn(value => `/test/home/src/${value}`)
+export const destinationPath = jest.fn(
+  (value, env) => `/test/home/builds/${env}/${value}`
+)

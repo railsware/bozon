@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import { uniqFileExtensions } from './utils'
 import Checker from 'utils/checker'
 import Packager from 'packager'
-import bozon from 'utils/bozon'
+import { platform, runMocha, source } from 'utils/bozon'
 
 export default class TestRunner {
   constructor(options) {
@@ -24,18 +24,18 @@ export default class TestRunner {
   run() {
     return new Promise((resolve) => {
       if (this.shouldPackageApp()) {
-        var packager = new Packager(bozon.platform(), 'test')
+        var packager = new Packager(platform(), 'test')
         packager.build().then(() => {
-          resolve(bozon.runMocha(this.mochaOptions()))
+          resolve(runMocha(this.mochaOptions()))
         })
       } else {
-        resolve(bozon.runMocha(this.mochaOptions()))
+        resolve(runMocha(this.mochaOptions()))
       }
     })
   }
 
   testDir() {
-    return fs.existsSync(bozon.source('test')) ? './test' : './spec'
+    return fs.existsSync(source('test')) ? './test' : './spec'
   }
 
   mochaOptions() {

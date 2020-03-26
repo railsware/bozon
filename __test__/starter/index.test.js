@@ -2,9 +2,11 @@ import Starter from 'starter'
 import Builder from 'builder'
 import Checker from 'utils/checker'
 import ora from 'ora'
-import bozon from 'utils/bozon'
+import { runElectron } from 'utils/bozon'
 
 jest.unmock('starter')
+
+jest.spyOn(console, 'log').mockImplementation()
 
 jest.mock('utils/checker')
 jest.mock('utils/bozon')
@@ -42,7 +44,7 @@ describe('Starter', () => {
     })
 
     it('runs electron app', () => {
-      expect(bozon.runElectron).toHaveBeenCalled()
+      expect(runElectron).toHaveBeenCalled()
     })
 
     it('stops spinner with success', () => {
@@ -61,7 +63,7 @@ describe('Starter', () => {
     })
 
     it('should not run electron app', () => {
-      expect(bozon.runElectron).toHaveBeenCalledTimes(0)
+      expect(runElectron).toHaveBeenCalledTimes(0)
     })
   })
 })

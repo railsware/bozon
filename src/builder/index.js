@@ -5,7 +5,7 @@ import copy from 'copy'
 import chalk from 'chalk'
 import webpack from 'webpack'
 import chokidar from 'chokidar'
-import bozon from 'utils/bozon'
+import { source, sourcePath, destinationPath } from 'utils/bozon'
 import WebpackConfig from 'builder/webpack_config'
 
 export default class Builder {
@@ -52,14 +52,14 @@ export default class Builder {
       webpack(config, (error, stats) => {
         if (error || stats.hasErrors()) {
           this.spinner.fail(chalk.red('Webpack failed to bundle application'))
-          bozon.log(stats.compilation.errors)
+          console.log(stats.compilation.errors)
           return reject(error)
         }
         if (stats.compilation.warnings.length) {
           this.spinner.fail(
             chalk.yellow('Webpack bundled application with warnings')
           )
-          bozon.log(stats.compilation.warnings)
+          console.log(stats.compilation.warnings)
         }
         if (callback) callback()
         return resolve()
@@ -70,8 +70,8 @@ export default class Builder {
   copy(input, output, callback) {
     return new Promise((resolve, reject) => {
       copy(
-        bozon.sourcePath(input),
-        bozon.destinationPath(output, this.environment),
+        sourcePath(input),
+        destinationPath(output, this.environment),
         (error, file) => {
           if (error) {
             return reject(error)
@@ -86,7 +86,7 @@ export default class Builder {
 
   manifest() {
     return new Promise((resolve, reject) => {
-      const json = JSON.parse(fs.readFileSync(bozon.source('package.json')))
+      const json = JSON.parse(fs.readFileSync(source('package.json')))
       const settings = {
         name: json.name,
         version: json.version,
@@ -96,7 +96,7 @@ export default class Builder {
         repository: json.repository
       }
       fs.writeFile(
-        bozon.destinationPath('package.json', this.environment),
+        destinationPath('package.json', this.environment),
         JSON.stringify(settings),
         (err) => {
           if (err) {
@@ -110,7 +110,7 @@ export default class Builder {
   }
 
   watch() {
-    const watcher = chokidar.watch(bozon.sourcePath('**/*.*'), {
+    const watcher = chokidar.watch(sourcePath('**/*.*'), {
       ignored: /node_modules/,
       persistent: true
     })
@@ -124,7 +124,7 @@ export default class Builder {
       this.log(
         chalk.green('CHANGE'),
         `File '${chalk.yellow(
-          path.relative(bozon.source(), file)
+          path.relative(source(), file)
         )}' has been changed`
       )
       if (file.match(/main/)) {
@@ -151,7 +151,7 @@ export default class Builder {
 
   log(key, message) {
     const time = this.timestamp()
-    bozon.log(`[${chalk.grey(time)}] [${key}] ${message}`)
+    console.log(`[${chalk.grey(time)}] [${key}] ${message}`)
   }
 
   timestamp() {

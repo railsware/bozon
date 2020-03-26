@@ -2,7 +2,7 @@
 import TestRunner from 'test_runner'
 import ora from 'ora'
 import Checker from 'utils/checker'
-import bozon from 'utils/bozon'
+import { runMocha } from 'utils/bozon'
 
 jest.mock('fs')
 jest.mock('utils/checker')
@@ -27,7 +27,7 @@ describe('TestRunner', () => {
   })
 
   it('calls mocha', () => {
-    expect(bozon.runMocha).toHaveBeenCalledWith([
+    expect(runMocha).toHaveBeenCalledWith([
       '--recursive',
       './spec',
       '--timeout',

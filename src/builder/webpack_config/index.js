@@ -1,6 +1,6 @@
 import fs from 'fs'
 import webpack from 'webpack'
-import bozon from 'utils/bozon'
+import { source, config } from 'utils/bozon'
 import mainDefault from './main'
 import rendererDefault from './renderer'
 import preloadDefault from './preload'
@@ -40,15 +40,15 @@ export default class WebpackConfig {
   }
 
   settings() {
-    const json = JSON.parse(fs.readFileSync(bozon.source('package.json')));
-    const settings = bozon.config(this.env, this.platform);
+    const json = JSON.parse(fs.readFileSync(source('package.json')));
+    const settings = config(this.env, this.platform);
     settings.name = json.name;
     settings.version = json.version;
     return settings;
   }
 
   localConfig() {
-    const configFile = bozon.source('webpack.config.js');
+    const configFile = source('webpack.config.js');
     // eslint-disable-next-line no-eval
     this.config = fs.existsSync(configFile) ? eval(fs.readFileSync(configFile).toString()) : {};
   }

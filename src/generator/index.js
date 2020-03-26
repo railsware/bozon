@@ -6,8 +6,6 @@ import fs from 'fs'
 import { classify, underscored } from 'underscore.string'
 import Questionnaire from './questionnaire'
 
-import bozon from 'utils/bozon'
-
 import json from '../../package.json'
 
 const $ = path.join
@@ -119,14 +117,14 @@ export default class Generator {
 
   installPackages() {
     if (!this.options.skipInstall) {
-      bozon.log('  Running ' + chalk.cyan('npm install') + '..')
+      console.log('  Running ' + chalk.cyan('npm install') + '..')
       childProcess.spawnSync('npm', ['install'], {
         cwd: './' + this.name,
         shell: true,
         stdio: 'inherit'
       })
     } else {
-      bozon.log('  Skipping ' + chalk.cyan('npm install') + '..')
+      console.log('  Skipping ' + chalk.cyan('npm install') + '..')
     }
   }
 
@@ -134,7 +132,7 @@ export default class Generator {
     try {
       return fs.mkdirSync($.apply(this, arguments))
     } catch (err) {
-      bozon.log(`\n ${chalk.red(err.message)} \n`)
+      console.log(`\n ${chalk.red(err.message)} \n`)
       process.exit(0)
     }
   }
@@ -143,7 +141,7 @@ export default class Generator {
     var template = $(__dirname, '..', 'templates', src)
     var destination = $(process.cwd(), this.name, dest)
     fs.writeFileSync(destination, fs.readFileSync(template))
-    bozon.log('  ' + chalk.green('create') + ' ' + dest)
+    console.log('  ' + chalk.green('create') + ' ' + dest)
   }
 
   copyTpl(src, dest, data) {
@@ -155,29 +153,29 @@ export default class Generator {
     var str = fs.readFileSync(template, 'utf8')
 
     fs.writeFileSync(destination, ejs.render(str, data))
-    bozon.log('  ' + chalk.green('create') + ' ' + dest)
+    console.log('  ' + chalk.green('create') + ' ' + dest)
   }
 
   printInstructions() {
-    bozon.log('')
-    bozon.log(
+    console.log('')
+    console.log(
       `Success! Created ${this.name} at ${$(process.cwd(), this.name)}`
     )
-    bozon.log('Inside that directory, you can run several commands:')
-    bozon.log('')
-    bozon.log(chalk.cyan('  bozon start'.padStart(5)))
-    bozon.log('    Starts the Electron app in development mode.')
-    bozon.log('')
-    bozon.log(chalk.cyan('  bozon test'.padStart(5)))
-    bozon.log('    Starts the test runner.')
-    bozon.log('')
-    bozon.log(chalk.cyan('  bozon package <platform>'.padStart(5)))
-    bozon.log('    Packages Electron application for specified platform.')
-    bozon.log('')
-    bozon.log('')
-    bozon.log('We suggest you to start with typing:')
-    bozon.log(chalk.cyan(`  cd ${this.name}`))
-    bozon.log(chalk.cyan('  bozon start'))
-    bozon.log('')
+    console.log('Inside that directory, you can run several commands:')
+    console.log('')
+    console.log(chalk.cyan('  bozon start'.padStart(5)))
+    console.log('    Starts the Electron app in development mode.')
+    console.log('')
+    console.log(chalk.cyan('  bozon test'.padStart(5)))
+    console.log('    Starts the test runner.')
+    console.log('')
+    console.log(chalk.cyan('  bozon package <platform>'.padStart(5)))
+    console.log('    Packages Electron application for specified platform.')
+    console.log('')
+    console.log('')
+    console.log('We suggest you to start with typing:')
+    console.log(chalk.cyan(`  cd ${this.name}`))
+    console.log(chalk.cyan('  bozon start'))
+    console.log('')
   }
 }

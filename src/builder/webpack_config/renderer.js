@@ -1,12 +1,12 @@
-import bozon from 'utils/bozon'
+import { sourcePath, destinationPath } from 'utils/bozon'
 
 export default (mode, env) => {
   return {
     target: 'electron-renderer',
-    entry: bozon.sourcePath('renderer/javascripts/index.js'),
+    entry: sourcePath('renderer/javascripts/index.js'),
     mode: mode,
     output: {
-      path: bozon.destinationPath('renderer', env),
+      path: destinationPath('renderer', env),
       filename: 'index.js'
     },
     module: {
@@ -26,8 +26,8 @@ export default (mode, env) => {
     },
     resolve: {
       modules: [
-        bozon.sourcePath('renderer/stylesheets'),
-        bozon.sourcePath('renderer/images')
+        sourcePath('renderer/stylesheets'),
+        sourcePath('renderer/images')
       ]
     }
   };
