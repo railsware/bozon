@@ -1,4 +1,9 @@
 .editorcofig
+.eslintrc.js
+.prettierrc.js
+.jest.config.js
+.webpack.config.js
+.babel.config.js
 .circleci/
 test/
 node_modules/
