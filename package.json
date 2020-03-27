@@ -11,7 +11,8 @@
     "build": "npx webpack",
     "lint": "npx eslint src",
     "test": "npx jest",
-    "test:legacy": "npx mocha test/lib --recursive --require coffeescript/register --extension coffee"
+    "publish": "npm publish",
+    "release": "yarn build && yarn publish"
   },
   "keywords": [
     "electron",
