@@ -11,4 +11,5 @@ __test__/
 __mocks__/
 src/
 node_modules/
+CONTRIBUTING.md
 yarn-error.log
