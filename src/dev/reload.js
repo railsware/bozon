@@ -31,4 +31,4 @@ fs.watch(path.resolve(__dirname, '..', 'renderer'), {}, reloadRenderer)
 
 // Disable main process reloading for now
 // fs.watch(path.resolve(__dirname, '..', 'preload'), {}, reloadMain)
-// fs.watch(path.resolve(__dirname), {}, reloadMain)
+fs.watch(path.resolve(__dirname), {}, reloadMain)
