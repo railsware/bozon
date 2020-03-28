@@ -1,4 +1,4 @@
-import del from 'del'
+import fs from 'fs-extra'
 import path from 'path'
 import chalk from 'chalk'
 import ora from 'ora'
@@ -11,13 +11,13 @@ export default class Cleaner {
     })
   }
 
-  run() {
+  async run() {
     this.spinner.start()
-    del([
-      path.join(process.cwd(), 'builds', '**'),
-      path.join(process.cwd(), 'packages', '**'),
-      path.join(process.cwd(), '.tmp', '**')
-    ])
+    await Promise.all(
+      ['builds', 'packages', '.tmp'].map((dir) => {
+        fs.remove(path.join(process.cwd(), dir))
+      })
+    )
     this.spinner.succeed(chalk.cyan('Cleaned app directory'))
   }
 }
