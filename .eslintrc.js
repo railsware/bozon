@@ -7,9 +7,10 @@ module.exports = {
   },
   extends: ['standard'],
   globals: {
-    CONFIG: 'readonly',
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
+    __non_webpack_require__: 'readonly',
+    CONFIG: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 2018,

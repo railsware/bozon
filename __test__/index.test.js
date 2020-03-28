@@ -11,7 +11,7 @@ describe('bozon cli', () => {
 
   describe('version', () => {
     it('sets current version', () => {
-      expect(commander.version).toHaveBeenCalledWith('1.0.0-alpha.1')
+      expect(commander.version).toHaveBeenCalledWith('1.0.0-alpha.2')
     })
 
     it('sets usage instruction', () => {
