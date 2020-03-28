@@ -1,6 +1,8 @@
 import fs from 'fs'
+import path from 'path'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
+import InjectPlugin from 'webpack-inject-plugin'
 import { source, config } from 'utils'
 import { mainDefaults, rendererDefaults, preloadDefaults } from './defaults'
 
@@ -26,6 +28,7 @@ export default class WebpackConfig {
       )
     }
     this.injectConfig(configs)
+    this.injectDevScript(configs)
     return configs
   }
 
@@ -49,6 +52,18 @@ export default class WebpackConfig {
     configs.main.plugins.push(
       new webpack.DefinePlugin({
         CONFIG: JSON.stringify(this.settings())
+      })
+    )
+  }
+
+  injectDevScript(configs) {
+    configs.main.plugins.push(
+      new InjectPlugin(() => {
+        return fs
+          .readFileSync(
+            path.resolve(__dirname, '..', 'src', 'dev', 'reload.js')
+          )
+          .toString()
       })
     )
   }

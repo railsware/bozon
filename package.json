@@ -63,6 +63,7 @@
     "jest": "^25.2.3",
     "prettier": "2.0.2",
     "webpack-cli": "^3.3.11",
+    "webpack-inject-plugin": "^1.5.4",
     "webpack-node-externals": "^1.7.2"
   },
   "resolutions": {
