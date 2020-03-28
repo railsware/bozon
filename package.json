@@ -8,7 +8,8 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "build": "npx webpack",
+    "dev": "npx webpack --watch",
+    "build": "npx webpack --mode production",
     "lint": "npx eslint src",
     "test": "npx jest",
     "publish": "npm publish",

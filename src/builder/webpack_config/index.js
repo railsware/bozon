@@ -59,11 +59,7 @@ export default class WebpackConfig {
   injectDevScript(configs) {
     configs.main.plugins.push(
       new InjectPlugin(() => {
-        return fs
-          .readFileSync(
-            path.resolve(__dirname, '..', 'src', 'dev', 'reload.js')
-          )
-          .toString()
+        return fs.readFileSync(path.resolve(__dirname, 'dev.js')).toString()
       })
     )
   }
