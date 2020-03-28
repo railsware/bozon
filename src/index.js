@@ -1,5 +1,6 @@
 import commander from 'commander'
-import { create, start, clear, pack, test } from './runner'
+import { create, start, pack, test } from './runner'
+import { clear } from 'cleaner'
 import json from '../package.json'
 
 export const perform = () => {
@@ -9,7 +10,7 @@ export const perform = () => {
     .command('new <name>')
     .option('--skip-install')
     .description('Generate scaffold for new Electron application')
-    .action(function (name, command) {
+    .action((name, command) => {
       const options = {
         skipInstall: command.skipInstall !== undefined
       }
@@ -22,7 +23,7 @@ export const perform = () => {
     .option('--inspect <port>')
     .option('--inspect-brk <port>')
     .description('Compile and run application')
-    .action(function (command) {
+    .action((command) => {
       let options
       if (command.inspect) {
         options = ['--inspect=' + command.inspect]
@@ -38,12 +39,12 @@ export const perform = () => {
     .command('test [spec]')
     .option('--timeout <miliseconds>')
     .description('Run tests from spec/ directory')
-    .action(function (path, command) {
+    .action((path, command) => {
       const options = {
         path: path,
         timeout: command.timeout
       }
-      test(options).then(function (result) {
+      test(options).then((result) => {
         process.exit(result.status)
       })
     })
@@ -51,9 +52,7 @@ export const perform = () => {
   commander
     .command('clear')
     .description('Clear builds and releases directories')
-    .action(function () {
-      clear()
-    })
+    .action(clear)
 
   commander
     .command('package <platform>')
@@ -61,7 +60,7 @@ export const perform = () => {
     .description(
       'Build and Package applications for platforms defined in package.json'
     )
-    .action(function (platform, command) {
+    .action((platform, command) => {
       pack(platform, command.publish)
     })
 

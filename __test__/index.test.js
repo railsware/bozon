@@ -1,6 +1,7 @@
 import commander from 'commander'
 
 import { perform } from 'index'
+import { clear } from 'cleaner'
 
 jest.unmock('index')
 
@@ -66,6 +67,10 @@ describe('bozon cli', () => {
   describe('clear', () => {
     it('sets clear command', () => {
       expect(commander.command).toHaveBeenNthCalledWith(4, 'clear')
+    })
+
+    it('sets clear function as action', () => {
+      expect(commander.action).toHaveBeenCalledWith(clear)
     })
   })
 

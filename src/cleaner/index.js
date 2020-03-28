@@ -1,23 +1,21 @@
-import { emptyDir } from 'fs-extra'
 import path from 'path'
-import chalk from 'chalk'
+import { emptyDir } from 'fs-extra'
 import ora from 'ora'
+import chalk from 'chalk'
 
-export default class Cleaner {
-  constructor() {
-    this.spinner = ora({
-      text: chalk.cyan('Cleaning app directory'),
-      color: 'cyan'
-    })
-  }
+const DIRECTORIES = ['builds', 'packages', '.tmp']
 
-  async run() {
-    this.spinner.start()
-    await Promise.all(
-      ['builds', 'packages', '.tmp'].map((dir) => {
-        emptyDir(path.join(process.cwd(), dir))
-      })
-    )
-    this.spinner.succeed(chalk.cyan('Cleaned app directory'))
-  }
+export const clear = async () => {
+  const spinner = createSpinner('Cleaning app directory')
+  spinner.start()
+  await Promise.all(DIRECTORIES.map((dir) => clearDir(dir)))
+  spinner.succeed(chalk.cyan('Cleaned app directory'))
+}
+
+const createSpinner = (message) => {
+  return ora({ text: chalk.cyan(message), color: 'cyan' })
+}
+
+const clearDir = (dir) => {
+  return emptyDir(path.join(process.cwd(), dir))
 }

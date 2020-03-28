@@ -1,8 +1,7 @@
-import { create, start, clear, pack, test } from 'runner'
+import { create, start, pack, test } from 'runner'
 
 import Generator from 'generator'
 import Start from 'starter'
-import Cleaner from 'cleaner'
 import Packager from 'packager'
 import TestRunner from 'test_runner'
 
@@ -31,14 +30,6 @@ describe('start', () => {
     start({ inspect: true })
     expect(Start).toHaveBeenCalledWith({ inspect: true })
     expect(Start.run).toHaveBeenCalled()
-  })
-})
-
-describe('clear', () => {
-  it('calls cleaner', () => {
-    clear()
-    expect(Cleaner).toHaveBeenCalled()
-    expect(Cleaner.run).toHaveBeenCalled()
   })
 })
 

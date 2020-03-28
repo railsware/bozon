@@ -1,4 +1,4 @@
-import Cleaner from 'cleaner'
+import { clear } from 'cleaner'
 
 import { emptyDir } from 'fs-extra'
 import chalk from 'chalk'
@@ -6,11 +6,8 @@ import ora from 'ora'
 
 jest.unmock('cleaner')
 
-describe('Cleaner', () => {
-  beforeEach(() => {
-    const cleaner = new Cleaner()
-    cleaner.run()
-  })
+describe('clear', () => {
+  beforeEach(async () => await clear())
 
   it('shows spinner', () => {
     expect(ora).toHaveBeenCalledWith({
