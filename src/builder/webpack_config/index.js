@@ -32,7 +32,6 @@ export default class WebpackConfig {
   merge(defaults, config) {
     return merge({
       customizeArray(a, b, key) {
-        console.log('customizeArray', key)
         if (UNIQUENESS_KEYS.indexOf(key) !== -1) {
           return Array.from(new Set([...a, ...b]))
         } else if (key === 'module.rules') {
