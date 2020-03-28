@@ -1,21 +1,6 @@
 module.exports = {
   renderer: {
-    entry: './src/renderer/javascripts/index.js',
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [
-            {
-              loader: 'style-loader'
-            },
-            {
-              loader: 'css-loader'
-            }
-          ]
-        }
-      ]
-    }
+    entry: './src/renderer/javascripts/index.js'
   },
   preload: {
     entry: './src/preload/index.js'

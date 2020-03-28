@@ -33,6 +33,21 @@ export const rendererDefaults = (mode, env) => {
       path: destinationPath('renderer', env),
       filename: 'index.js'
     },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader: 'css-loader'
+            }
+          ]
+        }
+      ]
+    },
     resolve: {
       modules: [
         'node_modules',

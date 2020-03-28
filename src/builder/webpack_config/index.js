@@ -5,6 +5,7 @@ import { source, config } from 'utils'
 import { mainDefaults, rendererDefaults, preloadDefaults } from './defaults'
 
 const UNIQUENESS_KEYS = ['resolve.modules']
+
 export default class WebpackConfig {
   constructor(env, platform) {
     this.env = env
@@ -15,8 +16,14 @@ export default class WebpackConfig {
   build() {
     const configs = {
       main: this.merge(mainDefaults(this.mode(), this.env), this.config.main),
-      renderer: this.merge(rendererDefaults(this.mode(), this.env), this.config.renderer),
-      preload: this.merge(preloadDefaults(this.mode(), this.env), this.config.preload)
+      renderer: this.merge(
+        rendererDefaults(this.mode(), this.env),
+        this.config.renderer
+      ),
+      preload: this.merge(
+        preloadDefaults(this.mode(), this.env),
+        this.config.preload
+      )
     }
     this.injectConfig(configs)
     return configs
@@ -25,7 +32,16 @@ export default class WebpackConfig {
   merge(defaults, config) {
     return merge({
       customizeArray(a, b, key) {
-        if (UNIQUENESS_KEYS.indexOf(key) !== 1) return Array.from(new Set([...a, ...b]))
+        console.log('customizeArray', key)
+        if (UNIQUENESS_KEYS.indexOf(key) !== -1) {
+          return Array.from(new Set([...a, ...b]))
+        } else if (key === 'module.rules') {
+          const tests = b.map((obj) => obj.test.toString())
+          return [
+            ...a.filter((obj) => tests.indexOf(obj.test.toString()) === -1),
+            ...b
+          ]
+        }
       }
     })(defaults, config)
   }
