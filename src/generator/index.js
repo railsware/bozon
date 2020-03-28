@@ -3,10 +3,9 @@ import childProcess from 'child_process'
 import chalk from 'chalk'
 import ejs from 'ejs'
 import fs from 'fs'
+import latestVersion from 'latest-version'
 import { classify, underscored } from 'underscore.string'
 import Questionnaire from './questionnaire'
-
-import json from '../../package.json'
 
 const $ = path.join
 
@@ -18,16 +17,14 @@ export default class Generator {
       id: 'bozonapp',
       name: classify(name),
       author: null,
-      year: new Date().getFullYear(),
-      bozonVersion: json.version,
-      mochaVersion: json.versions.mocha,
-      spectronVersion: json.versions.spectron
+      year: new Date().getFullYear()
     }
     this.questionnaire = new Questionnaire({ name: this.defaults.name })
   }
 
-  generate() {
-    this.questionnaire.prompt(answers => {
+  async generate() {
+    await this.getVersions()
+    return this.questionnaire.prompt(async (answers) => {
       this.defaults.id = answers.name.toLowerCase()
       this.defaults.name = classify(answers.name)
       this.defaults.author = answers.author
@@ -58,6 +55,12 @@ export default class Generator {
     this.mkdir(this.name, 'test')
     this.mkdir(this.name, 'test', 'units')
     this.mkdir(this.name, 'test', 'features')
+  }
+
+  async getVersions() {
+    this.defaults.bozonVersion = await latestVersion('bozon')
+    this.defaults.mochaVersion = await latestVersion('mocha')
+    this.defaults.spectronVersion = await latestVersion('spectron')
   }
 
   copyTemplates() {
