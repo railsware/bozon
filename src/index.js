@@ -10,12 +10,7 @@ export const perform = () => {
     .command('new <name>')
     .option('--skip-install')
     .description('Generate scaffold for new Electron application')
-    .action((name, command) => {
-      const options = {
-        skipInstall: command.skipInstall !== undefined
-      }
-      create(name, options)
-    })
+    .action(create)
 
   commander
     .command('start')
@@ -23,31 +18,13 @@ export const perform = () => {
     .option('--inspect <port>')
     .option('--inspect-brk <port>')
     .description('Compile and run application')
-    .action((command) => {
-      let options
-      if (command.inspect) {
-        options = ['--inspect=' + command.inspect]
-      } else if (command.inspectBrk) {
-        options = ['--inspect-brk=' + command.inspectBrk]
-      } else {
-        options = []
-      }
-      start(options)
-    })
+    .action(start)
 
   commander
     .command('test [spec]')
-    .option('--timeout <miliseconds>')
+    .option('--timeout <milliseconds>')
     .description('Run tests from spec/ directory')
-    .action((path, command) => {
-      const options = {
-        path: path,
-        timeout: command.timeout
-      }
-      test(options).then((result) => {
-        process.exit(result.status)
-      })
-    })
+    .action(test)
 
   commander
     .command('clear')
@@ -60,9 +37,7 @@ export const perform = () => {
     .description(
       'Build and Package applications for platforms defined in package.json'
     )
-    .action((platform, command) => {
-      pack(platform, command.publish)
-    })
+    .action(pack)
 
   commander.parse(process.argv)
 

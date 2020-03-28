@@ -1,6 +1,7 @@
 import commander from 'commander'
 
 import { perform } from 'index'
+import { create, start, test, pack } from 'runner'
 import { clear } from 'cleaner'
 
 jest.unmock('index')
@@ -28,6 +29,10 @@ describe('bozon cli', () => {
     it('adds option to new command', () => {
       expect(commander.option).toHaveBeenNthCalledWith(1, '--skip-install')
     })
+
+    it('sets create function as action', () => {
+      expect(commander.action).toHaveBeenCalledWith(create)
+    })
   })
 
   describe('start', () => {
@@ -49,6 +54,10 @@ describe('bozon cli', () => {
         '--inspect-brk <port>'
       )
     })
+
+    it('sets start function as action', () => {
+      expect(commander.action).toHaveBeenCalledWith(start)
+    })
   })
 
   describe('test', () => {
@@ -59,8 +68,12 @@ describe('bozon cli', () => {
     it('adds timeout option to test command', () => {
       expect(commander.option).toHaveBeenNthCalledWith(
         4,
-        '--timeout <miliseconds>'
+        '--timeout <milliseconds>'
       )
+    })
+
+    it('sets test function as action', () => {
+      expect(commander.action).toHaveBeenCalledWith(test)
     })
   })
 
@@ -82,6 +95,10 @@ describe('bozon cli', () => {
     it('adds publish option to package command', () => {
       expect(commander.option).toHaveBeenNthCalledWith(5, '--publish')
     })
+
+    it('sets pack function as action', () => {
+      expect(commander.action).toHaveBeenCalledWith(pack)
+    })
   })
 
   it('sets descriptions for commands', () => {
@@ -90,5 +107,9 @@ describe('bozon cli', () => {
 
   it('sets actions for commands', () => {
     expect(commander.action).toHaveBeenCalledTimes(5)
+  })
+
+  it('it parses process argv', () => {
+    expect(commander.parse).toHaveBeenCalledWith(process.argv)
   })
 })
