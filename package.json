@@ -27,7 +27,6 @@
     "chalk": "^3.0.0",
     "chokidar": "^3.3.1",
     "commander": "^5.0.0",
-    "copy": "^0.3.2",
     "css-loader": "^3.4.2",
     "ejs": "^3.0.1",
     "electron": "^8.2.0",

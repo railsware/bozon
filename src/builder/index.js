@@ -1,7 +1,7 @@
 import fs from 'fs'
+import { copy } from 'fs-extra'
 import path from 'path'
 import ora from 'ora'
-import copy from 'copy'
 import chalk from 'chalk'
 import webpack from 'webpack'
 import chokidar from 'chokidar'
@@ -25,21 +25,29 @@ export default class Builder {
       .then(() => {
         this.manifest()
         this.spinner.succeed(
-          `${chalk.cyan('Building Electron application:')} ${chalk.green('Done')}`)
+          `${chalk.cyan('Building Electron application:')} ${chalk.green(
+            'Done'
+          )}`
+        )
         if (this.environment === 'development') {
           this.watch()
         }
       })
       .catch((error) => {
-        this.spinner.fail(chalk.cyan(`${chalk.cyan('Building Electron application:')} ${chalk.yellow('Failed')}`))
+        this.spinner.fail(
+          chalk.cyan(
+            `${chalk.cyan('Building Electron application:')} ${chalk.yellow(
+              'Failed'
+            )}`
+          )
+        )
         throw error
       })
   }
 
   buildQueue() {
     const queue = [
-      this.copy('renderer/*.html', 'renderer'),
-      this.copy('images/**/*', 'images'),
+      this.copyHTML(),
       this.bundle(this.config.renderer),
       this.bundle(this.config.main)
     ]
@@ -64,6 +72,14 @@ export default class Builder {
         if (callback) callback()
         return resolve()
       })
+    })
+  }
+
+  copyHTML() {
+    fs.readdirSync(sourcePath('renderer')).forEach((file) => {
+      if (file.match(/\.html$/)) {
+        this.copy(`renderer/${file}`, `renderer/${file}`)
+      }
     })
   }
 
@@ -123,9 +139,7 @@ export default class Builder {
     watcher.on('change', (file, stats) => {
       this.log(
         chalk.green('CHANGE'),
-        `File '${chalk.yellow(
-          path.relative(source(), file)
-        )}' has been changed`
+        `File '${chalk.yellow(path.relative(source(), file))}' has been changed`
       )
       if (file.match(/main/)) {
         const key = chalk.grey('~MAIN~')

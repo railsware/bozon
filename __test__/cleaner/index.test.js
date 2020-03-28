@@ -1,6 +1,6 @@
 import Cleaner from 'cleaner'
 
-import fs from 'fs-extra'
+import { emptyDir } from 'fs-extra'
 import chalk from 'chalk'
 import ora from 'ora'
 
@@ -21,9 +21,9 @@ describe('Cleaner', () => {
   })
 
   it('clears directories', () => {
-    expect(fs.remove).toHaveBeenNthCalledWith(1, '/test/home/builds')
-    expect(fs.remove).toHaveBeenNthCalledWith(2, '/test/home/packages')
-    expect(fs.remove).toHaveBeenNthCalledWith(3, '/test/home/.tmp')
+    expect(emptyDir).toHaveBeenNthCalledWith(1, '/test/home/builds')
+    expect(emptyDir).toHaveBeenNthCalledWith(2, '/test/home/packages')
+    expect(emptyDir).toHaveBeenNthCalledWith(3, '/test/home/.tmp')
   })
 
   it('stops spinner with success message', () => {
