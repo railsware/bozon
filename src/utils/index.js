@@ -24,7 +24,7 @@ export const destinationPath = (suffix, env) => {
   return path.join(process.cwd(), 'builds', env, suffix)
 }
 
-export const runElectron = () => {
+export const runElectron = (params = []) => {
   const env = Object.create(process.env)
   const options = [
     'nodemon',
@@ -32,7 +32,7 @@ export const runElectron = () => {
     '-e js',
     path.join('node_modules', '.bin', 'electron'),
     path.join('builds', 'development')
-  ]
+  ].concat(params)
   env.NODE_ENV = 'development'
   return spawn('npx', options, {
     env: env,
@@ -41,7 +41,7 @@ export const runElectron = () => {
   })
 }
 
-export const runMocha = params => {
+export const runMocha = (params = []) => {
   const env = Object.create(process.env)
   env.NODE_ENV = 'test'
   const options = ['mocha'].concat(params)
