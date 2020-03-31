@@ -28,7 +28,7 @@ export default class WebpackConfig {
       )
     }
     this.injectConfig(configs)
-    this.injectDevScript(configs)
+    if (this.env === 'development') { this.injectDevScript(configs) }
     return configs
   }
 
