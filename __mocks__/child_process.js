@@ -1,4 +1,4 @@
-const spawn = jest.fn()
-const spawnSync = jest.fn()
+export const spawn = jest.fn()
+export const spawnSync = jest.fn()
 
 export default { spawn, spawnSync }

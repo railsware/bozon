@@ -69,8 +69,8 @@ describe('utils', () => {
     it('returns current platform', () => {
       runElectron()
       expect(childProcess.spawn).toHaveBeenCalledWith(
-        '/test/home/node_modules/.bin/electron',
-        ['/test/home/builds/development'],
+        'npx',
+        ['nodemon', '-w builds/development/main', '-e js', 'node_modules/.bin/electron', 'builds/development'],
         { env: {}, shell: true, stdio: 'inherit' }
       )
     })
@@ -78,10 +78,10 @@ describe('utils', () => {
 
   describe('runMocha', () => {
     it('returns current platform', () => {
-      runMocha()
+      runMocha(['--recursive', './test/features'])
       expect(childProcess.spawnSync).toHaveBeenCalledWith(
-        '/test/home/node_modules/.bin/mocha',
-        undefined,
+        'npx',
+        ['mocha', '--recursive', './test/features'],
         { env: {}, shell: true, stdio: 'inherit' }
       )
     })

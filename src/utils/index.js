@@ -1,32 +1,8 @@
 import path from 'path'
-import childProcess from 'child_process'
+import { spawn, spawnSync } from 'child_process'
 import Config from 'merge-config'
 
 const srcDir = 'src'
-
-const binary = name => {
-  return path.join(process.cwd(), 'node_modules', '.bin', name)
-}
-
-const spawn = (command, options, environment) => {
-  const env = Object.create(process.env)
-  if (env) env.NODE_ENV = environment
-  return childProcess.spawn(command, options, {
-    shell: true,
-    env: env,
-    stdio: 'inherit'
-  })
-}
-
-const spawnSync = (command, options, environment) => {
-  const env = Object.create(process.env)
-  if (env) env.NODE_ENV = environment
-  return childProcess.spawnSync(command, options, {
-    shell: true,
-    env: env,
-    stdio: 'inherit'
-  })
-}
 
 export const source = function() {
   const prefix = process.cwd()
@@ -48,18 +24,32 @@ export const destinationPath = (suffix, env) => {
   return path.join(process.cwd(), 'builds', env, suffix)
 }
 
-export const runElectron = options => {
-  if (typeof options === 'undefined') {
-    options = []
-  }
-  options = options.concat([
-    path.join(process.cwd(), 'builds', 'development')
-  ])
-  return spawn(binary('electron'), options, 'development')
+export const runElectron = () => {
+  const env = Object.create(process.env)
+  const options = [
+    'nodemon',
+    `-w ${path.join('builds', 'development', 'main')}`,
+    '-e js',
+    path.join('node_modules', '.bin', 'electron'),
+    path.join('builds', 'development')
+  ]
+  env.NODE_ENV = 'development'
+  return spawn('npx', options, {
+    env: env,
+    shell: true,
+    stdio: 'inherit'
+  })
 }
 
 export const runMocha = params => {
-  return spawnSync(binary('mocha'), params)
+  const env = Object.create(process.env)
+  env.NODE_ENV = 'test'
+  const options = ['mocha'].concat(params)
+  return spawnSync('npx', options, {
+    env: env,
+    shell: true,
+    stdio: 'inherit'
+  })
 }
 
 export const platform = () => {
