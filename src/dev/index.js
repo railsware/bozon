@@ -2,16 +2,19 @@ import { app } from 'electron'
 import fs from 'fs'
 import path from 'path'
 
-const browserWindows = {}
+const browserWindows = []
 
 const reloadRenderer = () => {
-  Object.values(browserWindows).forEach(window => window.webContents.reloadIgnoringCache())
+  Object.values(browserWindows).forEach(window => {
+    if (window) window.webContents.reloadIgnoringCache()
+  })
 }
 
 app.on('browser-window-created', (_, bw) => {
-  browserWindows[bw.id] = bw
+  browserWindows.push(bw)
   bw.on('closed', () => {
-    delete browserWindows[bw.id]
+    console.log(browserWindows.indexOf(bw))
+    browserWindows.splice(browserWindows.indexOf(bw), 1)
   })
 })
 
