@@ -69,9 +69,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "resolutions": {
-    "js-yaml": "^3.13.1",
-    "minimist": "^1.2.5",
-    "kind-of": "^6.0.3",
-    "set-value": "^3.0.1"
+    "js-yaml": "^3.13.1"
   }
 }
