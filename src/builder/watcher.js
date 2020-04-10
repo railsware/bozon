@@ -7,6 +7,9 @@ import { bundle } from 'builder/bundle'
 import { source, sourcePath, destinationPath, log, logReplace } from 'utils'
 
 const DEBOUNCE = 1000
+const MAIN_KEY = '~MAIN~'
+const RENDER_EKY = 'RENDER'
+const PRELOAD_KEY = '~PREL~'
 
 export const watch = (config, env, spinner) => {
   const watcher = chokidar.watch(sourcePath('**/*.*'), {
@@ -29,14 +32,14 @@ export const watch = (config, env, spinner) => {
 const handleChange = (file, config, env) => {
   log(fileChangedMessage(path.relative(source(), file)))
   if (file.match(/src\/main/)) {
-    processChange('~MAIN~', bundle(config.main))
+    processChange(MAIN_KEY, bundle(config.main))
   } else if (file.match(/src\/preload/)) {
-    processChange('~PREL~', bundle(config.preload))
+    processChange(PRELOAD_KEY, bundle(config.preload))
   } else if (file.match(/\.html$/)) {
-    log(compilingMessage('RENDER'))
-    processChange('RENDER', copyHTMLFile(file, htmlDestination(file, env)))
+    log(compilingMessage(RENDER_EKY))
+    processChange(RENDER_EKY, copyHTMLFile(file, htmlDestination(file, env)))
   } else {
-    processChange('RENDER', bundle(config.renderer))
+    processChange(RENDER_EKY, bundle(config.renderer))
   }
 }
 
