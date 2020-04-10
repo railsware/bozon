@@ -38,7 +38,7 @@ describe('Questionnaire', () => {
         choices: ['yarn', 'npm'],
         name: 'packageManager',
         type: 'list'
-      } 
+      }
     ])
   })
 
