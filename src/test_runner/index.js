@@ -1,10 +1,10 @@
 import fs from 'fs'
-import ora from 'ora'
 import chalk from 'chalk'
 import { uniqFileExtensions } from './utils'
 import Checker from 'utils/checker'
 import Packager from 'packager'
 import { platform, runMocha, source } from 'utils'
+import { log } from 'utils/logger'
 
 export default class TestRunner {
   constructor(options) {
@@ -15,10 +15,7 @@ export default class TestRunner {
     }
     this.specPath = !options.path ? this.testDir() : options.path
     this.timeout = !options.timeout ? 2000 : options.timeout
-    this.spinner = ora({
-      text: chalk.cyan('Running test suite'),
-      color: 'cyan'
-    })
+    log(chalk.bold('Running test suite...'))
   }
 
   run() {
@@ -39,7 +36,6 @@ export default class TestRunner {
   }
 
   mochaOptions() {
-    this.spinner.succeed()
     var options = ['--recursive', this.specPath]
     options = this.registerCompilers(options)
     return this.addCommandOptions(options)

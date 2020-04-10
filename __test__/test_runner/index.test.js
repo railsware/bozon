@@ -1,11 +1,11 @@
-
 import TestRunner from 'test_runner'
-import ora from 'ora'
 import Checker from 'utils/checker'
 import { runMocha } from 'utils'
+import { log } from 'utils/logger'
 
 jest.mock('fs')
 jest.mock('utils/checker')
+jest.mock('utils/logger')
 jest.unmock('test_runner')
 
 describe('TestRunner', () => {
@@ -19,10 +19,7 @@ describe('TestRunner', () => {
   })
 
   it('shows spinner', () => {
-    expect(ora).toHaveBeenCalledWith({
-      color: 'cyan',
-      text: 'Running test suite'
-    })
+    expect(log).toHaveBeenCalledWith('Running test suite...')
   })
 
   it('calls mocha', () => {

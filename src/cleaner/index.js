@@ -1,19 +1,14 @@
 import path from 'path'
 import { emptyDir } from 'fs-extra'
-import ora from 'ora'
 import chalk from 'chalk'
+import { startSpinner, stopSpinner } from 'utils/logger'
 
 const DIRECTORIES = ['builds', 'packages', '.tmp']
 
 export const clear = async () => {
-  const spinner = createSpinner('Cleaning app directory')
-  spinner.start()
+  startSpinner(chalk.bold('Cleaning app directory'))
   await Promise.all(DIRECTORIES.map((dir) => clearDir(dir)))
-  spinner.succeed(chalk.cyan('Cleaned app directory'))
-}
-
-const createSpinner = (message) => {
-  return ora({ text: chalk.cyan(message), color: 'cyan' })
+  stopSpinner(`${chalk.bold('Cleaned app directory')} ${chalk.green('✓')}`)
 }
 
 const clearDir = (dir) => {

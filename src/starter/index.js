@@ -1,26 +1,23 @@
-import ora from 'ora'
 import chalk from 'chalk'
 import Checker from 'utils/checker'
 import { runElectron, platform } from 'utils'
-import Builder from 'builder'
+import { Builder } from 'builder'
+import { startSpinner, stopSpinner } from 'utils/logger'
 
-export default class Starter {
-  constructor(options) {
-    Checker.ensure()
-    this.options = options
-    this.environment = 'development'
-    this.spinner = ora({
-      text: chalk.cyan('Starting application\n'),
-      color: 'cyan'
-    })
-  }
+const RUN_START = chalk.bold('Starting application')
+const RUN_SUCCESS = `${chalk.bold('Starting application')} ${chalk.green('✓')}`
 
-  run() {
-    this.builder = new Builder(platform(), this.environment)
-    this.builder.run().then(() => {
-      this.spinner.start()
-      runElectron(this.options)
-      this.spinner.succeed(`${chalk.cyan('Starting application:')} ${chalk.green('Done')}\n`)
-    }).catch(error => console.log(error))
-  }
+const run = params => {
+  Checker.ensure()
+  Builder.run(platform(), 'development', params.flags)
+    .then(() => onBuildSuccess(params))
+    .catch(() => {})
 }
+
+const onBuildSuccess = params => {
+  startSpinner(RUN_START)
+  runElectron(params.options)
+  stopSpinner(RUN_SUCCESS)
+}
+
+export const Starter = { run }

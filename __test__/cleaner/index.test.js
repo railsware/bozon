@@ -2,19 +2,17 @@ import { clear } from 'cleaner'
 
 import { emptyDir } from 'fs-extra'
 import chalk from 'chalk'
-import ora from 'ora'
+
+import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.unmock('cleaner')
+jest.mock('utils/logger')
 
 describe('clear', () => {
   beforeEach(async () => await clear())
 
   it('shows spinner', () => {
-    expect(ora).toHaveBeenCalledWith({
-      color: 'cyan',
-      text: 'Cleaning app directory'
-    })
-    expect(ora.start).toHaveBeenCalled()
+    expect(startSpinner).toHaveBeenCalledWith('Cleaning app directory')
   })
 
   it('clears directories', () => {
@@ -24,7 +22,7 @@ describe('clear', () => {
   })
 
   it('stops spinner with success message', () => {
-    expect(chalk.cyan).toHaveBeenCalledWith('Cleaned app directory')
-    expect(ora.succeed).toHaveBeenCalledWith('Cleaned app directory')
+    expect(chalk.bold).toHaveBeenCalledWith('Cleaned app directory')
+    expect(stopSpinner).toHaveBeenCalledWith('Cleaned app directory ✓')
   })
 })

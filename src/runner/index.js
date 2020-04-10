@@ -1,5 +1,5 @@
 import Generator from 'generator'
-import Starter from 'starter'
+import { Starter } from 'starter'
 import Packager from 'packager'
 import TestRunner from 'test_runner'
 
@@ -9,15 +9,18 @@ export const create = (name, command) => {
 }
 
 export const start = command => {
-  let options
-  if (command.inspect) {
-    options = ['--inspect=' + command.inspect]
-  } else if (command.inspectBrk) {
-    options = ['--inspect-brk=' + command.inspectBrk]
-  } else {
-    options = []
+  const params = {
+    options: [],
+    flags: {
+      reload: !!command.reload
+    }
   }
-  new Starter(options).run()
+  if (command.inspect) {
+    params.options = ['--inspect=' + command.inspect]
+  } else if (command.inspectBrk) {
+    params.options = ['--inspect-brk=' + command.inspectBrk]
+  }
+  Starter.run(params)
 }
 
 export const pack = (platform, command) => {

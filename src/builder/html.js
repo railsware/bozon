@@ -18,7 +18,7 @@ export const copyHTMLFile = (input, output) => {
       if (error) {
         return reject(error)
       } else {
-        return resolve()
+        return resolve(null)
       }
     })
   })

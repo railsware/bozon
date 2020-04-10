@@ -1,4 +1,3 @@
-import ora from 'ora'
 import chalk from 'chalk'
 import { ensureDirSync } from 'fs-extra'
 import WebpackConfig from 'builder/webpack_config'
@@ -7,42 +6,53 @@ import { buildHTML } from 'builder/html'
 import { bundle } from 'builder/bundle'
 import { watch } from 'builder/watcher'
 import { source, sourcePath, destinationPath } from 'utils'
+import { log, startSpinner, stopSpinner } from 'utils/logger'
 
-export const BUILD_START = chalk.cyan('Building Electron application')
-export const BUILD_FAILED = `${chalk.cyan('Building Electron application:')} ${chalk.yellow('Failed')}`
-export const BUILD_SUCCEED = `${chalk.cyan('Building Electron application:')} ${chalk.green('Done')}`
+const BUILD_START = chalk.bold('Building Electron application')
+const BUILD_FAILED = `${chalk.yellow('Failed to build application')} ${chalk.red('✖')}`
+const BUILD_SUCCEED = `${chalk.bold('Building Electron application')} ${chalk.green('✓')}`
 
-export default class Builder {
-  constructor(platform, environment) {
-    this.platform = platform
-    this.environment = environment
-    this.config = new WebpackConfig(this.environment, this.platform).build()
-    this.spinner = ora({ text: BUILD_START, color: 'cyan' })
-  }
+const run = (platform, env, flags) => {
+  startSpinner(BUILD_START)
+  const config = new WebpackConfig(env, platform).build()
+  ensureDirSync(destinationPath('', env))
 
-  run() {
-    this.spinner.start()
-    ensureDirSync(destinationPath('', this.environment))
-    return Promise.all(this.buildQueue())
-      .then(() => {
-        this.spinner.succeed(BUILD_SUCCEED)
-        if (this.environment === 'development') {
-          watch(this.config, this.environment, this.spinner)
-        }
-      })
-      .catch((error) => {
-        this.spinner.fail(BUILD_FAILED)
-        throw error
-      })
-  }
+  return Promise.all(buildQueue(config, env))
+    .then(warnings => {
+      onBuildSuccess(config, env, flags, warnings)
+    })
+    .catch(onBuildError)
+}
 
-  buildQueue() {
-    return [
-      buildHTML(sourcePath('renderer'), destinationPath('renderer', this.environment)),
-      buildManifest(source('package.json'), destinationPath('package.json', this.environment)),
-      bundle(this.config.renderer, this.spinner),
-      bundle(this.config.main, this.spinner),
-      bundle(this.config.preload, this.spinner)
-    ]
+const onBuildSuccess = (config, env, flags, warnings) => {
+  stopSpinner(BUILD_SUCCEED)
+  onBuildWarnings(warnings)
+  if (env === 'development' && flags.reload) {
+    watch(config, env)
   }
 }
+
+const onBuildError = error => {
+  stopSpinner(BUILD_FAILED)
+  log(chalk.grey(error))
+  process.stdin.end()
+  process.kill(process.pid)
+}
+
+const onBuildWarnings = warnings => {
+  warnings.forEach(item => {
+    if (item) log(chalk.yellow(`⚠ ${item}`))
+  })
+}
+
+const buildQueue = (config, env) => {
+  return [
+    buildHTML(sourcePath('renderer'), destinationPath('renderer', env)),
+    buildManifest(source('package.json'), destinationPath('package.json', env)),
+    bundle(config.renderer),
+    bundle(config.main),
+    bundle(config.preload)
+  ]
+}
+
+export const Builder = { run }

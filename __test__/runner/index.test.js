@@ -1,7 +1,7 @@
 import { create, start, pack, test } from 'runner'
 
 import Generator from 'generator'
-import Start from 'starter'
+import { Starter } from 'starter'
 import Packager from 'packager'
 import TestRunner from 'test_runner'
 
@@ -24,14 +24,17 @@ describe('create', () => {
 describe('start', () => {
   it('starts the app without options', () => {
     start({})
-    expect(Start).toHaveBeenCalled()
-    expect(Start.run).toHaveBeenCalled()
+    expect(Starter.run).toHaveBeenCalled()
   })
 
   it('starts the app with inspect option', () => {
     start({ inspect: true })
-    expect(Start).toHaveBeenCalledWith(['--inspect=true'])
-    expect(Start.run).toHaveBeenCalled()
+    expect(Starter.run).toHaveBeenCalledWith({
+      flags: {
+        reload: false
+      },
+      options: ['--inspect=true']
+    })
   })
 })
 

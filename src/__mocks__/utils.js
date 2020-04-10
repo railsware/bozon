@@ -6,3 +6,5 @@ export const sourcePath = jest.fn(value => `/test/home/src/${value}`)
 export const destinationPath = jest.fn(
   (value, env) => `/test/home/builds/${env}/${value}`
 )
+export const log = jest.fn()
+export const logReplace = jest.fn()

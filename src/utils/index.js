@@ -1,6 +1,5 @@
 import path from 'path'
 import { spawn, spawnSync } from 'child_process'
-import chalk from 'chalk'
 import Config from 'merge-config'
 
 const srcDir = 'src'
@@ -79,16 +78,4 @@ export const config = (env, platform) => {
   config.file(source('config', 'environments', env + '.json'))
   config.file(source('config', 'platforms', platform + '.json'))
   return config.get()
-}
-
-export const log = (message) => {
-  process.stdout.write(`[${chalk.cyan('bozon')}] ${message}`)
-}
-
-export const logReplace = (message) => {
-  process.stdout.clearLine()
-  process.stdout.clearLine()
-  process.stdout.cursorTo(0)
-  log(message)
-  process.stdout.cursorTo(0)
 }

@@ -4,24 +4,22 @@ import chokidar from 'chokidar'
 import debounce from 'lodash.debounce'
 import { copyHTMLFile } from 'builder/html'
 import { bundle } from 'builder/bundle'
-import { source, sourcePath, destinationPath, log, logReplace } from 'utils'
+import { source, sourcePath, destinationPath } from 'utils'
+import { log, logReplace } from 'utils/logger'
 
 const DEBOUNCE = 1000
 const MAIN_KEY = '~MAIN~'
 const RENDER_EKY = 'RENDER'
 const PRELOAD_KEY = '~PREL~'
 
-export const watch = (config, env, spinner) => {
+export const watch = (config, env) => {
   const watcher = chokidar.watch(sourcePath('**/*.*'), {
     ignored: /node_modules/,
     persistent: true
   })
 
   watcher.on('ready', () => {
-    spinner.stopAndPersist({
-      text: chalk.green('Watching for changes..\n'),
-      symbol: '👀'
-    })
+    log(`${chalk.cyan('Watching for changes')} 👀\n`)
   })
 
   watcher.on('change', debounce(

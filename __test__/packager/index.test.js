@@ -1,7 +1,7 @@
 import Packager from 'packager'
 import ora from 'ora'
 import Checker from 'utils/checker'
-import Builder from 'builder'
+import { Builder } from 'builder'
 import electronBuilder from 'electron-builder'
 
 jest.unmock('packager')
@@ -26,8 +26,7 @@ describe('Packager', () => {
   })
 
   it('builds application before packaging', () => {
-    expect(Builder).toHaveBeenCalledWith('mac', 'production')
-    expect(Builder.run).toHaveBeenCalledWith()
+    expect(Builder.run).toHaveBeenCalledWith('mac', 'production')
   })
 
   it('packages app with electron builder', () => {

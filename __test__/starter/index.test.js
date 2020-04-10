@@ -1,18 +1,17 @@
-import Starter from 'starter'
-import Builder from 'builder'
+import { Starter } from 'starter'
+import { Builder } from 'builder'
 import Checker from 'utils/checker'
-import ora from 'ora'
 import { runElectron } from 'utils'
+import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.unmock('starter')
 
 jest.spyOn(console, 'log').mockImplementation()
-
+jest.mock('utils/logger')
 jest.mock('utils/checker')
 
 const setup = async () => {
-  const starter = new Starter([{ inspect: true }])
-  await starter.run()
+  await Starter.run({ flags: { reload: false }, options: [{ inspect: true }] })
 }
 
 describe('Starter', () => {
@@ -23,23 +22,18 @@ describe('Starter', () => {
       expect(Checker.ensure).toHaveBeenCalled()
     })
 
-    it('sets up spinner', () => {
-      expect(ora).toHaveBeenCalledWith({
-        color: 'cyan',
-        text: 'Starting application\n'
-      })
+    it('logs application start', () => {
+      expect(startSpinner).toHaveBeenCalledWith('Starting application')
     })
 
-    it('instantiates builder with platform and env', () => {
-      expect(Builder).toHaveBeenCalledWith('linux', 'development')
-    })
-
-    it('runs builder', () => {
-      expect(Builder.run).toHaveBeenCalled()
-    })
-
-    it('starts spinner', () => {
-      expect(ora.start).toHaveBeenCalled()
+    it('runs builder with platform and env', () => {
+      expect(Builder.run).toHaveBeenCalledWith(
+        'linux',
+        'development',
+        {
+          reload: false
+        }
+      )
     })
 
     it('runs electron app', () => {
@@ -47,7 +41,7 @@ describe('Starter', () => {
     })
 
     it('stops spinner with success', () => {
-      expect(ora.succeed).toHaveBeenCalledWith('Starting application: Done\n')
+      expect(stopSpinner).toHaveBeenCalledWith('Starting application ✓')
     })
   })
 
@@ -57,8 +51,8 @@ describe('Starter', () => {
       setup()
     })
 
-    it('should not start spinner', () => {
-      expect(ora.start).toHaveBeenCalledTimes(0)
+    it('should not log application start', () => {
+      expect(startSpinner).toHaveBeenCalledTimes(0)
     })
 
     it('should not run electron app', () => {

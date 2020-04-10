@@ -15,7 +15,7 @@ export const buildManifest = (source, destination) => {
       if (err) {
         reject(err)
       } else {
-        resolve()
+        resolve(null)
       }
     })
   })

@@ -2,7 +2,7 @@ import path from 'path'
 import ora from 'ora'
 import chalk from 'chalk'
 import Checker from 'utils/checker'
-import Builder from 'builder'
+import { Builder } from 'builder'
 
 const electronBuilder = require('electron-builder')
 
@@ -19,8 +19,7 @@ export default class Packager {
   }
 
   build() {
-    this.builder = new Builder(this.platform, this.environment)
-    return this.builder.run().then(() => {
+    return Builder.run(this.platform, this.environment).then(() => {
       this.spinner.start()
       if (this.environment === 'test') {
         return this.testBuild(this.platform)

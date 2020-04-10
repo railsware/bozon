@@ -44,14 +44,18 @@ describe('bozon cli', () => {
       expect(commander.alias).toHaveBeenNthCalledWith(1, 's')
     })
 
+    it('adds reload option to start command', () => {
+      expect(commander.option).toHaveBeenNthCalledWith(2, '-r, --reload')
+    })
+
     it('adds inspect option to start command', () => {
-      expect(commander.option).toHaveBeenNthCalledWith(2, '--inspect <port>')
+      expect(commander.option).toHaveBeenNthCalledWith(3, '-i, --inspect <port>')
     })
 
     it('adds inspect-brk option to start command', () => {
       expect(commander.option).toHaveBeenNthCalledWith(
-        3,
-        '--inspect-brk <port>'
+        4,
+        '-b, --inspect-brk <port>'
       )
     })
 
@@ -67,8 +71,8 @@ describe('bozon cli', () => {
 
     it('adds timeout option to test command', () => {
       expect(commander.option).toHaveBeenNthCalledWith(
-        4,
-        '--timeout <milliseconds>'
+        5,
+        '-t, --timeout <milliseconds>'
       )
     })
 
@@ -93,7 +97,7 @@ describe('bozon cli', () => {
     })
 
     it('adds publish option to package command', () => {
-      expect(commander.option).toHaveBeenNthCalledWith(5, '--publish')
+      expect(commander.option).toHaveBeenNthCalledWith(6, '-p, --publish')
     })
 
     it('sets pack function as action', () => {

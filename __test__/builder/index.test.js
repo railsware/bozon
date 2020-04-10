@@ -1,30 +1,23 @@
-import Builder from 'builder'
+import { Builder } from 'builder'
 
 import fs from 'fs'
-import ora from 'ora'
 import webpack from 'webpack'
 import { copy } from 'fs-extra'
+import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.mock('fs')
 jest.unmock('builder')
 jest.mock('builder/webpack_config')
+jest.mock('utils/logger')
 
 describe('Builder', () => {
   beforeEach(async () => {
     fs.__setFileList(['index.html'])
-    const builder = new Builder('mac', 'production')
-    await builder.run()
+    await Builder.run('mac', 'production')
   })
 
-  it('creates spinner', () => {
-    expect(ora).toHaveBeenCalledWith({
-      color: 'cyan',
-      text: 'Building Electron application'
-    })
-  })
-
-  it('starts spinner', () => {
-    expect(ora.start).toHaveBeenCalled()
+  it('logs build start', () => {
+    expect(startSpinner).toHaveBeenCalledWith('Building Electron application')
   })
 
   it('copies html files', () => {
@@ -61,9 +54,9 @@ describe('Builder', () => {
     )
   })
 
-  it('stops spinner with success message', () => {
-    expect(ora.succeed).toHaveBeenCalledWith(
-      'Building Electron application: Done'
+  it('logs success message', () => {
+    expect(stopSpinner).toHaveBeenCalledWith(
+      'Building Electron application ✓'
     )
   })
 })

@@ -15,14 +15,15 @@ export const perform = () => {
   commander
     .command('start')
     .alias('s')
-    .option('--inspect <port>')
-    .option('--inspect-brk <port>')
+    .option('-r, --reload')
+    .option('-i, --inspect <port>')
+    .option('-b, --inspect-brk <port>')
     .description('Compile and run application')
     .action(start)
 
   commander
     .command('test [spec]')
-    .option('--timeout <milliseconds>')
+    .option('-t, --timeout <milliseconds>')
     .description('Run tests from spec/ directory')
     .action(test)
 
@@ -33,7 +34,7 @@ export const perform = () => {
 
   commander
     .command('package <platform>')
-    .option('--publish')
+    .option('-p, --publish')
     .description(
       'Build and Package applications for platforms defined in package.json'
     )
