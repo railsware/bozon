@@ -6,34 +6,34 @@ import { buildHTML } from 'builder/html'
 import { bundle } from 'builder/bundle'
 import { watch } from 'builder/watcher'
 import { source, sourcePath, destinationPath } from 'utils'
-import { log, startSpinner, stopSpinner } from 'utils/logger'
+import { log, warn, startSpinner, stopSpinner } from 'utils/logger'
 
-const BUILD_START = chalk.bold('Building Electron application')
-const BUILD_FAILED = `${chalk.yellow('Failed to build application')} ${chalk.red('✖')}`
-const BUILD_SUCCEED = `${chalk.bold('Building Electron application')} ${chalk.green('✓')}`
+const BUILD_START = 'Building Electron application'
+const BUILD_FAILED = 'Failed to build application'
+const BUILD_SUCCEED = 'Building Electron application'
 
 const run = (platform, env, flags) => {
   startSpinner(BUILD_START)
-  const config = new WebpackConfig(env, platform).build()
+  const config = new WebpackConfig(env, platform, flags).build()
   ensureDirSync(destinationPath('', env))
 
-  return Promise.all(buildQueue(config, env))
+  return Promise.all(buildQueue(config, env, flags))
     .then(warnings => {
-      onBuildSuccess(config, env, flags, warnings)
+      onBuildSuccess(config, env, warnings)
     })
     .catch(onBuildError)
 }
 
-const onBuildSuccess = (config, env, flags, warnings) => {
+const onBuildSuccess = (config, env, warnings) => {
   stopSpinner(BUILD_SUCCEED)
   onBuildWarnings(warnings)
-  if (env === 'development' && flags.reload) {
+  if (env === 'development') {
     watch(config, env)
   }
 }
 
 const onBuildError = error => {
-  stopSpinner(BUILD_FAILED)
+  stopSpinner(BUILD_FAILED, false)
   log(chalk.grey(error))
   process.stdin.end()
   process.kill(process.pid)
@@ -41,7 +41,7 @@ const onBuildError = error => {
 
 const onBuildWarnings = warnings => {
   warnings.forEach(item => {
-    if (item) log(chalk.yellow(`⚠ ${item}`))
+    if (item) warn(item)
   })
 }
 

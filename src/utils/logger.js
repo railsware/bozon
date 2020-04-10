@@ -18,12 +18,21 @@ const log = (message, options = {}) => {
   process.stdout.write(formatMessage(message, options))
 }
 
-const startSpinner = message => {
-  spinner = new Spinner()
-  spinner.start(formatMessage(message, { skipLineAfter: true }))
+const warn = message => {
+  log(chalk.yellow(`⚠ ${message}`))
 }
 
-const stopSpinner = message => {
+const startSpinner = message => {
+  spinner = new Spinner()
+  spinner.start(formatMessage(chalk.bold(message), { skipLineAfter: true }))
+}
+
+const stopSpinner = (message, success = true) => {
+  if (success) {
+    message = `${chalk.bold(message)} ${chalk.green('✓')}`
+  } else {
+    message = `${chalk.yellow(message)} ${chalk.red('✖')}`
+  }
   spinner.stop(formatMessage(message))
 }
 
@@ -34,4 +43,4 @@ const logReplace = (message) => {
   process.stdout.cursorTo(0)
 }
 
-export { log, startSpinner, stopSpinner, logReplace }
+export { log, warn, startSpinner, stopSpinner, logReplace }

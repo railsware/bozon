@@ -1,5 +1,4 @@
 import path from 'path'
-import chalk from 'chalk'
 import Checker from 'utils/checker'
 import { Builder } from 'builder'
 import { log, startSpinner, stopSpinner } from 'utils/logger'
@@ -16,7 +15,7 @@ export default class Packager {
 
   build() {
     return Builder.run(this.platform, this.environment).then(() => {
-      startSpinner(chalk.bold('Packaging Electron application'))
+      startSpinner('Packaging Electron application')
       if (this.environment === 'test') {
         return this.testBuild(this.platform)
       } else {
@@ -67,11 +66,11 @@ export default class Packager {
   }
 
   onSuccess() {
-    stopSpinner(`${chalk.bold('Packaging Electron application')} ${chalk.green('✓')}`)
+    stopSpinner('Packaging Electron application')
   }
 
   onError(error) {
-    stopSpinner(`${chalk.yellow('Packaging Electron application')} ${chalk.red('✖')}`)
+    stopSpinner('Packaging Electron application', false)
     log(error)
   }
 }

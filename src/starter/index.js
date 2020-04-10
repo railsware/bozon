@@ -1,11 +1,10 @@
-import chalk from 'chalk'
 import Checker from 'utils/checker'
 import { runElectron, platform } from 'utils'
 import { Builder } from 'builder'
 import { startSpinner, stopSpinner } from 'utils/logger'
 
-const RUN_START = chalk.bold('Starting application')
-const RUN_SUCCESS = `${chalk.bold('Starting application')} ${chalk.green('✓')}`
+const RUN_START = 'Starting application'
+const RUN_SUCCESS = 'Starting application'
 
 const run = params => {
   Checker.ensure()
@@ -16,7 +15,7 @@ const run = params => {
 
 const onBuildSuccess = params => {
   startSpinner(RUN_START)
-  runElectron(params.options)
+  runElectron(params.options, params.flags)
   stopSpinner(RUN_SUCCESS)
 }
 

@@ -9,9 +9,10 @@ import { mainDefaults, rendererDefaults, preloadDefaults } from './defaults'
 const UNIQUENESS_KEYS = ['resolve.modules']
 
 export default class WebpackConfig {
-  constructor(env, platform) {
+  constructor(env, platform, flags) {
     this.env = env
     this.platform = platform
+    this.flags = flags
     this.localConfig()
   }
 
@@ -28,7 +29,9 @@ export default class WebpackConfig {
       )
     }
     this.injectConfig(configs)
-    if (this.env === 'development') { this.injectDevScript(configs) }
+    if (this.env === 'development' && this.flags.reload) {
+      this.injectDevScript(configs)
+    }
     return configs
   }
 

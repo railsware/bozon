@@ -1,13 +1,11 @@
 import path from 'path'
 import chalk from 'chalk'
 import chokidar from 'chokidar'
-import debounce from 'lodash.debounce'
 import { copyHTMLFile } from 'builder/html'
 import { bundle } from 'builder/bundle'
 import { source, sourcePath, destinationPath } from 'utils'
 import { log, logReplace } from 'utils/logger'
 
-const DEBOUNCE = 1000
 const MAIN_KEY = '~MAIN~'
 const RENDER_EKY = 'RENDER'
 const PRELOAD_KEY = '~PREL~'
@@ -22,9 +20,7 @@ export const watch = (config, env) => {
     log(`${chalk.cyan('Watching for changes')} 👀\n`)
   })
 
-  watcher.on('change', debounce(
-    (file) => handleChange(file, config, env), DEBOUNCE)
-  )
+  watcher.on('change', (file) => handleChange(file, config, env))
 }
 
 const handleChange = (file, config, env) => {
@@ -55,7 +51,7 @@ const htmlDestination = (file, env) =>
   destinationPath(path.join('renderer', path.parse(file).base), env)
 
 const fileChangedMessage = file =>
-  `[${chalk.green('CHANGE')}] ${chalk.grey('File')} ${chalk.bold(file)} ${chalk.grey('has been changed')}\n`
+  `[${chalk.green('CHANGE')}] ${chalk.grey('File')} ${chalk.bold(file)} ${chalk.grey('has been changed')}`
 
 const compilingMessage = key =>
   `[${chalk.grey(key)}] ${chalk.grey('Compiling..')}`
@@ -63,5 +59,4 @@ const compilingMessage = key =>
 const compilationDoneMessage = (key, time) =>
   `[${chalk.grey(key)}] ${chalk.cyan('Done')} ${chalk.grey(
     'in'
-  )} ${time} ${chalk.grey('ms')}
-  `
+  )} ${time} ${chalk.grey('ms')}`

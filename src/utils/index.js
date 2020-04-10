@@ -24,25 +24,24 @@ export const destinationPath = (suffix, env) => {
   return path.join(process.cwd(), 'builds', env, suffix)
 }
 
-export const runElectron = (params = []) => {
-  const env = Object.create(process.env)
-  const options = [
-    'nodemon',
-    `-w ${path.join('builds', 'development', 'main')}`,
-    '-e js',
-    '--delay 1',
-    '-q',
-    path.join('node_modules', '.bin', 'electron'),
-    path.join('builds', 'development')
-  ].concat(params)
-  // const options = [
-  //   'npx',
-  //   'electron',
-  //   path.join('builds', 'development')
-  // ].concat(params)
-  env.NODE_ENV = 'development'
-  return spawn('npx', options, {
-    env: env,
+export const runElectron = (params = [], flags) => {
+  let options
+
+  if (flags.reload) {
+    options = [
+      'nodemon',
+      `-w ${path.join('builds', 'development', 'main')}`,
+      '-e js',
+      '-q',
+      path.join('node_modules', '.bin', 'electron'),
+      path.join('builds', 'development')
+    ]
+  } else {
+    options = ['electron', path.join('builds', 'development')]
+  }
+
+  return spawn('npx', options.concat(params), {
+    env: nodeEnv('development'),
     shell: true,
     stdio: 'inherit'
   })
@@ -53,7 +52,7 @@ export const runMocha = (params = []) => {
   env.NODE_ENV = 'test'
   const options = ['mocha'].concat(params)
   return spawnSync('npx', options, {
-    env: env,
+    env: nodeEnv('test'),
     shell: true,
     stdio: 'inherit'
   })
@@ -78,4 +77,9 @@ export const config = (env, platform) => {
   config.file(source('config', 'environments', env + '.json'))
   config.file(source('config', 'platforms', platform + '.json'))
   return config.get()
+}
+const nodeEnv = (value) => {
+  const env = Object.create(process.env)
+  env.NODE_ENV = value
+  return env
 }
