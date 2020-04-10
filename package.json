@@ -34,6 +34,7 @@
     "electron-builder": "^22.4.1",
     "inquirer": "^7.1.0",
     "latest-version": "^5.1.0",
+    "lodash.debounce": "^4.0.8",
     "merge-config": "^2.0.0",
     "nodemon": "^2.0.2",
     "ora": "^4.0.3",

@@ -1,10 +1,11 @@
 import path from 'path'
 import { spawn, spawnSync } from 'child_process'
+import chalk from 'chalk'
 import Config from 'merge-config'
 
 const srcDir = 'src'
 
-export const source = function() {
+export const source = function () {
   const prefix = process.cwd()
   const suffix = path.join.apply(null, arguments)
   return path.join(prefix, suffix)
@@ -30,9 +31,16 @@ export const runElectron = (params = []) => {
     'nodemon',
     `-w ${path.join('builds', 'development', 'main')}`,
     '-e js',
+    '--delay 1',
+    '-q',
     path.join('node_modules', '.bin', 'electron'),
     path.join('builds', 'development')
   ].concat(params)
+  // const options = [
+  //   'npx',
+  //   'electron',
+  //   path.join('builds', 'development')
+  // ].concat(params)
   env.NODE_ENV = 'development'
   return spawn('npx', options, {
     env: env,
@@ -53,7 +61,7 @@ export const runMocha = (params = []) => {
 }
 
 export const platform = () => {
-  const os = process.platform;
+  const os = process.platform
   if (os === 'mac' || os === 'darwin') {
     return 'mac'
   } else if (os === 'windows' || os === 'win32') {
@@ -71,4 +79,16 @@ export const config = (env, platform) => {
   config.file(source('config', 'environments', env + '.json'))
   config.file(source('config', 'platforms', platform + '.json'))
   return config.get()
+}
+
+export const log = (message) => {
+  process.stdout.write(`[${chalk.cyan('bozon')}] ${message}`)
+}
+
+export const logReplace = (message) => {
+  process.stdout.clearLine()
+  process.stdout.clearLine()
+  process.stdout.cursorTo(0)
+  log(message)
+  process.stdout.cursorTo(0)
 }

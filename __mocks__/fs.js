@@ -5,15 +5,17 @@ const __setFileList = (list) => {
 }
 
 const mkdirSync = jest.fn()
-const readFileSync = jest.fn((filename) => {
+export const readFileSync = jest.fn((filename) => {
   if (filename === '/test/home/package.json') {
     return '{}'
   }
   return `${filename.split('/').slice(-1)[0]} contents`
 })
-const readdirSync = jest.fn(() => fileList)
-const writeFileSync = jest.fn()
-const writeFile = jest.fn()
+export const readdirSync = jest.fn(() => fileList)
+export const writeFileSync = jest.fn()
+export const writeFile = jest.fn((_, out, fn) => {
+  fn(null)
+})
 const lstatSync = jest.fn((dir) => {
   return {
     isFile: jest.fn()

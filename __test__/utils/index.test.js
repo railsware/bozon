@@ -70,7 +70,8 @@ describe('utils', () => {
       runElectron()
       expect(childProcess.spawn).toHaveBeenCalledWith(
         'npx',
-        ['nodemon', '-w builds/development/main', '-e js', 'node_modules/.bin/electron', 'builds/development'],
+        ['nodemon', '-w builds/development/main', '-e js', '--delay 1',
+          '-q', 'node_modules/.bin/electron', 'builds/development'],
         { env: {}, shell: true, stdio: 'inherit' }
       )
     })

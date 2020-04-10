@@ -2,12 +2,13 @@
   "name": "<%= name %>",
   "version": "0.1.0",
   "description": "<%= name %> application build with Electron",
-  "repository": "",
-  "dependencies": {},
   "author": {
     "name": "<%= author %>",
     "email": ""
   },
+  "repository": "",
+  "dependencies": {},
+  "license": "",
   "devDependencies": {
     "bozon": "<%= bozonVersion %>",
     "mocha": "<%= mochaVersion %>",
