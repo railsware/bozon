@@ -18,11 +18,11 @@ const log = (message, options = {}) => {
   process.stdout.write(formatMessage(message, options))
 }
 
-const warn = message => {
+const warn = (message) => {
   log(chalk.yellow(`⚠ ${message}`))
 }
 
-const startSpinner = message => {
+const startSpinner = (message) => {
   spinner = new Spinner()
   spinner.start(formatMessage(chalk.bold(message), { skipLineAfter: true }))
 }
@@ -36,11 +36,4 @@ const stopSpinner = (message, success = true) => {
   spinner.stop(formatMessage(message))
 }
 
-const logReplace = (message) => {
-  process.stdout.clearLine()
-  process.stdout.cursorTo(0)
-  log(message)
-  process.stdout.cursorTo(0)
-}
-
-export { log, warn, startSpinner, stopSpinner, logReplace }
+export { log, warn, startSpinner, stopSpinner }

@@ -41,7 +41,7 @@ describe('Starter', () => {
     })
 
     it('stops spinner with success', () => {
-      expect(stopSpinner).toHaveBeenCalledWith('Starting application ✓')
+      expect(stopSpinner).toHaveBeenCalledWith('Starting application')
     })
   })
 

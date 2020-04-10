@@ -41,6 +41,6 @@ describe('Packager', () => {
   })
 
   it('stops spinner with success', () => {
-    expect(stopSpinner).toHaveBeenCalledWith('Packaging Electron application ✓')
+    expect(stopSpinner).toHaveBeenCalledWith('Packaging Electron application')
   })
 })

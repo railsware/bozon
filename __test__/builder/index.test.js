@@ -56,7 +56,7 @@ describe('Builder', () => {
 
   it('logs success message', () => {
     expect(stopSpinner).toHaveBeenCalledWith(
-      'Building Electron application ✓'
+      'Building Electron application'
     )
   })
 })

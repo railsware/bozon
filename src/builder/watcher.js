@@ -4,7 +4,7 @@ import chokidar from 'chokidar'
 import { copyHTMLFile } from 'builder/html'
 import { bundle } from 'builder/bundle'
 import { source, sourcePath, destinationPath } from 'utils'
-import { log, logReplace } from 'utils/logger'
+import { log, startSpinner, stopSpinner } from 'utils/logger'
 
 const MAIN_KEY = '~MAIN~'
 const RENDER_EKY = 'RENDER'
@@ -38,25 +38,27 @@ const handleChange = (file, config, env) => {
 }
 
 const processChange = (key, processing) => {
-  log(compilingMessage(key))
+  startSpinner(compilingMessage(key))
   const start = new Date()
   processing.then(() => {
     const end = new Date()
     const time = end.getTime() - start.getTime()
-    logReplace(compilationDoneMessage(key, time))
+    stopSpinner(compilationDoneMessage(key, time))
   })
 }
 
 const htmlDestination = (file, env) =>
   destinationPath(path.join('renderer', path.parse(file).base), env)
 
-const fileChangedMessage = file =>
-  `[${chalk.green('CHANGE')}] ${chalk.grey('File')} ${chalk.bold(file)} ${chalk.grey('has been changed')}`
+const fileChangedMessage = (file) =>
+  `[${chalk.green('CHANGE')}] ${chalk.grey('File')} ${chalk.bold(
+    file
+  )} ${chalk.grey('has been changed')}`
 
-const compilingMessage = key =>
-  `[${chalk.grey(key)}] ${chalk.grey('Compiling..')}`
+const compilingMessage = (key) =>
+  `[${chalk.grey(key)}] ${chalk.grey('Compiling')}`
 
 const compilationDoneMessage = (key, time) =>
-  `[${chalk.grey(key)}] ${chalk.cyan('Done')} ${chalk.grey(
+  `[${chalk.grey(key)}] ${chalk.cyan('Compiled')} ${chalk.grey(
     'in'
   )} ${time} ${chalk.grey('ms')}`

@@ -66,12 +66,21 @@ describe('utils', () => {
   })
 
   describe('runElectron', () => {
-    it('returns current platform', () => {
-      runElectron()
+    it('runs electron with auto reload', () => {
+      runElectron([], { reload: true })
       expect(childProcess.spawn).toHaveBeenCalledWith(
         'npx',
-        ['nodemon', '-w builds/development/main', '-e js', '--delay 1',
+        ['nodemon', '-w builds/development/main', '-e js',
           '-q', 'node_modules/.bin/electron', 'builds/development'],
+        { env: {}, shell: true, stdio: 'inherit' }
+      )
+    })
+
+    it('runs electron without auto reload', () => {
+      runElectron([], { reload: false })
+      expect(childProcess.spawn).toHaveBeenCalledWith(
+        'npx',
+        ['electron', 'builds/development'],
         { env: {}, shell: true, stdio: 'inherit' }
       )
     })

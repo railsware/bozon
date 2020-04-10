@@ -1,7 +1,6 @@
 import { clear } from 'cleaner'
 
 import { emptyDir } from 'fs-extra'
-import chalk from 'chalk'
 
 import { startSpinner, stopSpinner } from 'utils/logger'
 
@@ -22,7 +21,6 @@ describe('clear', () => {
   })
 
   it('stops spinner with success message', () => {
-    expect(chalk.bold).toHaveBeenCalledWith('Cleaned app directory')
-    expect(stopSpinner).toHaveBeenCalledWith('Cleaned app directory ✓')
+    expect(stopSpinner).toHaveBeenCalledWith('Cleaned app directory')
   })
 })
