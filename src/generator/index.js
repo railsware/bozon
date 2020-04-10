@@ -27,6 +27,7 @@ export default class Generator {
     return this.questionnaire.prompt(async (answers) => {
       this.defaults.id = answers.name.toLowerCase()
       this.defaults.name = classify(answers.name)
+      this.defaults.packageManager = answers.packageManager
       this.defaults.author = answers.author
       this.setup()
     })
@@ -120,14 +121,14 @@ export default class Generator {
 
   installPackages() {
     if (!this.options.skipInstall) {
-      console.log('  Running ' + chalk.cyan('npm install') + '..')
-      childProcess.spawnSync('npm', ['install'], {
+      console.log(`  Running ${chalk.cyan(this.defaults.packageManager + ' install')}..`)
+      childProcess.spawnSync(this.defaults.packageManager, ['install'], {
         cwd: './' + this.name,
         shell: true,
         stdio: 'inherit'
       })
     } else {
-      console.log('  Skipping ' + chalk.cyan('npm install') + '..')
+      console.log(`  Skipping ${chalk.cyan('installing dependencies')} ..`)
     }
   }
 

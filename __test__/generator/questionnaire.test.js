@@ -32,7 +32,13 @@ describe('Questionnaire', () => {
         name: 'author',
         type: 'input',
         validate: expect.any(Function)
-      }
+      },
+      {
+        message: 'Which package manager do you use?',
+        choices: ['yarn', 'npm'],
+        name: 'packageManager',
+        type: 'list'
+      } 
     ])
   })
 

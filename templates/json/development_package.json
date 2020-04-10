@@ -6,9 +6,9 @@
     "name": "<%= author %>",
     "email": ""
   },
-  "repository": "",
+  "repository": {},
   "dependencies": {},
-  "license": "",
+  "license": "ISC",
   "devDependencies": {
     "bozon": "<%= bozonVersion %>",
     "mocha": "<%= mochaVersion %>",

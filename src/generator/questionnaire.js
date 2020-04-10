@@ -24,6 +24,11 @@ export default class Questionnaire {
         validate: value => {
           return isBlank(value) ? 'You have to provide author name' : true
         }
+      }, {
+        type: 'list',
+        name: 'packageManager',
+        message: 'Which package manager do you use?',
+        choices: ['yarn', 'npm']
       }
     ]
   }
