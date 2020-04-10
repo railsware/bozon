@@ -1,8 +1,8 @@
 import path from 'path'
-import ora from 'ora'
 import chalk from 'chalk'
 import Checker from 'utils/checker'
 import { Builder } from 'builder'
+import { log, startSpinner, stopSpinner } from 'utils/logger'
 
 const electronBuilder = require('electron-builder')
 
@@ -12,15 +12,11 @@ export default class Packager {
     this.platform = platform
     this.environment = environment
     this.publish = publish ? 'always' : 'never'
-    this.spinner = ora({
-      text: chalk.cyan('Packaging Electron application'),
-      color: 'cyan'
-    })
   }
 
   build() {
     return Builder.run(this.platform, this.environment).then(() => {
-      this.spinner.start()
+      startSpinner(chalk.bold('Packaging Electron application'))
       if (this.environment === 'test') {
         return this.testBuild(this.platform)
       } else {
@@ -49,12 +45,9 @@ export default class Packager {
           output: '.tmp'
         }
       }
-    }).then(() => {
-      this.spinner.succeed()
-    }).catch((error) => {
-      this.spinner.fail()
-      console.log(error)
     })
+      .then(this.onSuccess)
+      .catch(this.onError)
   }
 
   productionBuild(platform, environment) {
@@ -68,11 +61,17 @@ export default class Packager {
         }
       },
       publish: this.publish
-    }).then(() => {
-      this.spinner.succeed()
-    }).catch((error) => {
-      this.spinner.fail()
-      console.log(error)
     })
+      .then(this.onSuccess)
+      .catch(this.onError)
+  }
+
+  onSuccess() {
+    stopSpinner(`${chalk.bold('Packaging Electron application')} ${chalk.green('✓')}`)
+  }
+
+  onError(error) {
+    stopSpinner(`${chalk.yellow('Packaging Electron application')} ${chalk.red('✖')}`)
+    log(error)
   }
 }

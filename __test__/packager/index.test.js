@@ -1,11 +1,12 @@
 import Packager from 'packager'
-import ora from 'ora'
 import Checker from 'utils/checker'
 import { Builder } from 'builder'
 import electronBuilder from 'electron-builder'
+import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.unmock('packager')
 jest.mock('utils/checker')
+jest.mock('utils/logger')
 
 describe('Packager', () => {
   beforeEach(async () => {
@@ -18,11 +19,7 @@ describe('Packager', () => {
   })
 
   it('shows spinner', () => {
-    expect(ora).toHaveBeenCalledWith({
-      color: 'cyan',
-      text: 'Packaging Electron application'
-    })
-    expect(ora.start).toHaveBeenCalled()
+    expect(startSpinner).toHaveBeenCalledWith('Packaging Electron application')
   })
 
   it('builds application before packaging', () => {
@@ -44,6 +41,6 @@ describe('Packager', () => {
   })
 
   it('stops spinner with success', () => {
-    expect(ora.succeed).toHaveBeenCalled()
+    expect(stopSpinner).toHaveBeenCalledWith('Packaging Electron application ✓')
   })
 })
