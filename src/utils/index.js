@@ -39,8 +39,8 @@ export const runElectron = (params = [], flags) => {
   } else {
     options = ['electron', path.join('builds', 'development')]
   }
-
-  return spawn('npx', options.concat(params), {
+  subscribeOnExit()
+  spawn('npx', options.concat(params), {
     env: nodeEnv('development'),
     shell: true,
     stdio: 'inherit'
@@ -51,7 +51,8 @@ export const runMocha = (params = []) => {
   const env = Object.create(process.env)
   env.NODE_ENV = 'test'
   const options = ['mocha'].concat(params)
-  return spawnSync('npx', options, {
+  subscribeOnExit()
+  spawnSync('npx', options, {
     env: nodeEnv('test'),
     shell: true,
     stdio: 'inherit'
@@ -78,6 +79,13 @@ export const config = (env, platform) => {
   config.file(source('config', 'platforms', platform + '.json'))
   return config.get()
 }
+
+// Put back cursor to console on exit
+const subscribeOnExit = () => {
+  process.on('SIGINT', () => process.exit())
+  process.on('exit', () => console.log('\x1B[?25h'))
+}
+
 const nodeEnv = (value) => {
   const env = Object.create(process.env)
   env.NODE_ENV = value

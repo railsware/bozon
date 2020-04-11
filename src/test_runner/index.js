@@ -15,7 +15,6 @@ export default class TestRunner {
     }
     this.specPath = !options.path ? this.testDir() : options.path
     this.timeout = !options.timeout ? 2000 : options.timeout
-    log(chalk.bold('Running test suite...'))
   }
 
   run() {
@@ -23,9 +22,11 @@ export default class TestRunner {
       if (this.shouldPackageApp()) {
         var packager = new Packager(platform(), 'test')
         packager.build().then(() => {
+          log(chalk.bold('Running test suite...'))
           resolve(runMocha(this.mochaOptions()))
         })
       } else {
+        log(chalk.bold('Running test suite...'))
         resolve(runMocha(this.mochaOptions()))
       }
     })
