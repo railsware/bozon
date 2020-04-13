@@ -1,6 +1,6 @@
-import TestRunner from 'test_runner'
+import { TestRunner } from 'test_runner'
 import Checker from 'utils/checker'
-import { runMocha } from 'utils'
+import { runJest } from 'utils'
 import { log } from 'utils/logger'
 
 jest.mock('fs')
@@ -10,8 +10,7 @@ jest.unmock('test_runner')
 
 describe('TestRunner', () => {
   beforeEach(async () => {
-    const runner = new TestRunner([{ timeout: 5000 }])
-    await runner.run()
+    await TestRunner.run()
   })
 
   it('ensures process is run in app directory', () => {
@@ -23,12 +22,6 @@ describe('TestRunner', () => {
   })
 
   it('calls mocha', () => {
-    expect(runMocha).toHaveBeenCalledWith([
-      '--recursive',
-      './spec',
-      '--timeout',
-      2000,
-      '--exit'
-    ])
+    expect(runJest).toHaveBeenCalledWith(['./test'])
   })
 })

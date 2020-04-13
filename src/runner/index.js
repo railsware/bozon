@@ -1,7 +1,7 @@
 import Generator from 'generator'
 import { Starter } from 'starter'
 import Packager from 'packager'
-import TestRunner from 'test_runner'
+import { TestRunner } from 'test_runner'
 
 export const create = (name, command) => {
   const options = { skipInstall: !!command.skipInstall }
@@ -27,12 +27,8 @@ export const pack = (platform, command) => {
   new Packager(platform, 'production', !!command.publish).build()
 }
 
-export const test = (path, command) => {
-  const options = {
-    path: path,
-    timeout: command.timeout
-  }
-  new TestRunner(options).run().then(() => {
+export const test = (path) => {
+  TestRunner.run(path).then(() => {
     process.exit(0)
   })
 }

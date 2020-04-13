@@ -23,7 +23,6 @@ export const perform = () => {
 
   commander
     .command('test [spec]')
-    .option('-t, --timeout <milliseconds>')
     .description('Run tests from spec/ directory')
     .action(test)
 

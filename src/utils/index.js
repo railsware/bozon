@@ -47,9 +47,16 @@ export const runElectron = (params = [], flags) => {
   })
 }
 
+export const runJest = (params) => {
+  subscribeOnExit()
+  spawnSync('npx', ['jest', '-i'].concat(params), {
+    env: nodeEnv('test'),
+    shell: true,
+    stdio: 'inherit'
+  })
+}
+
 export const runMocha = (params = []) => {
-  const env = Object.create(process.env)
-  env.NODE_ENV = 'test'
   const options = ['mocha'].concat(params)
   subscribeOnExit()
   spawnSync('npx', options, {
