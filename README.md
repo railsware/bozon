@@ -1,16 +1,19 @@
 # bozon
-> Scaffold, Run, Test and Package [Electron](http://electron.atom.io/) application with ease
+> Command line tool for building, testing and publishing modern [Electron](http://electron.atom.io/) applications
 
 [![npm version](https://badge.fury.io/js/bozon.svg)](https://badge.fury.io/js/bozon)
 ![img](https://circleci.com/gh/railsware/bozon.svg?style=shield&circle-token=73a7ce20fc55a51d77657e11c3f5c9d4bf5fdcd9)
 
-## What is Bozon?
-Bozon is a single tool for handling different tasks being performed by multiple packages, which is used for building desktop applications with Electron. Simplify building, compiling, running, testing, and packaging your application.
+Bozon is  a simple, easy to use tool that unifies the existing build tools for Electron development. Simplify building, compiling, running, testing, and packaging your Electron applications.
 
-* **Electron** - build cross platform desktop apps with web technologies
-* **Webpack** - building and packaging source code for renderer process done with webpack
-* **electron-builder** - package and distribute your Electron app
-* **spectron** - Easily test your Electron apps using ChromeDriver and WebdriverIO
+
+## Features
+* **Scaffolding** - Generate ready to use project structure for your new Electron application.
+* **Running** - Run your electron application with **Hot Reload** in develoment environment.
+* **Testing** - Build Application for test env and run feature tests for your Electron application.
+* **Packaging** - Build, package and publish your Electron app for Mac, Windows and Linux platforms.
+
+Bozon uses [Webpack](https://webpack.js.org) to bundle source code for **main** and **renderer** processes as well as **preload** script. It adds **webpack.config.js** file to your project so that you can further configure webpack, add new rules, loaders etc. [Spectron](https://www.electronjs.org/spectron) is used along with [Mocha](https://mochajs.org/) to run your **feature tests** within real Electron application. For **packaging** and **publishing** applications bozon uses [electron-builder](https://www.electron.build/) under the hood.
 
 ![img](https://api.monosnap.com/rpc/file/download?id=KB5BGmknhLmuE38DGEXCFu4rbpBUzr)
 
