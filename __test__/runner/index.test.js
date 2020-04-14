@@ -48,11 +48,6 @@ describe('test', () => {
     test('test/index.test.js')
     expect(TestRunner.run).toHaveBeenCalledWith('test/index.test.js')
   })
-
-  it('calls process exit on successful run', async () => {
-    await test('test/index.test.js', {})
-    expect(process.exit).toHaveBeenCalled()
-  })
 })
 
 describe('package', () => {

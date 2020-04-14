@@ -28,7 +28,5 @@ export const pack = (platform, command) => {
 }
 
 export const test = (path) => {
-  TestRunner.run(path).then(() => {
-    process.exit(0)
-  })
+  TestRunner.run(path)
 }

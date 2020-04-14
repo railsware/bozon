@@ -1,6 +1,5 @@
-import { config, platform, source, sourcePath, destinationPath, runElectron, runMocha } from 'utils'
+import { config, platform, source, sourcePath, destinationPath } from 'utils'
 
-import childProcess from 'child_process'
 import Config from 'merge-config'
 
 jest.spyOn(console, 'log').mockImplementation()
@@ -61,38 +60,6 @@ describe('utils', () => {
     it('returns path to destination file', () => {
       expect(destinationPath('index.js', 'development')).toBe(
         '/test/home/builds/development/index.js'
-      )
-    })
-  })
-
-  describe('runElectron', () => {
-    it('runs electron with auto reload', () => {
-      runElectron([], { reload: true })
-      expect(childProcess.spawn).toHaveBeenCalledWith(
-        'npx',
-        ['nodemon', '-w builds/development/main', '-e js',
-          '-q', 'node_modules/.bin/electron', 'builds/development'],
-        { env: {}, shell: true, stdio: 'inherit' }
-      )
-    })
-
-    it('runs electron without auto reload', () => {
-      runElectron([], { reload: false })
-      expect(childProcess.spawn).toHaveBeenCalledWith(
-        'npx',
-        ['electron', 'builds/development'],
-        { env: {}, shell: true, stdio: 'inherit' }
-      )
-    })
-  })
-
-  describe('runMocha', () => {
-    it('returns current platform', () => {
-      runMocha(['--recursive', './test/features'])
-      expect(childProcess.spawnSync).toHaveBeenCalledWith(
-        'npx',
-        ['mocha', '--recursive', './test/features'],
-        { env: {}, shell: true, stdio: 'inherit' }
       )
     })
   })

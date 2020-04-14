@@ -1,34 +1,51 @@
-import fs from 'fs'
 import chalk from 'chalk'
+import { spawnSync } from 'child_process'
 import Packager from 'packager'
 import Checker from 'utils/checker'
-import { platform, runJest, source } from 'utils'
+import { platform, nodeEnv, subscribeOnExit } from 'utils'
 import { log } from 'utils/logger'
-
-const shouldPackageApp = (specPath) => {
-  return specPath.match(/(spec|test)\/?$/) || specPath.match(/feature/)
-}
-
-const testDir = () => {
-  return fs.existsSync(source('test')) ? './test' : './spec'
-}
 
 const run = path => {
   Checker.ensure()
-  const specPath = !path ? testDir() : path
+  subscribeOnExit()
+  if (!path || path.match(/features/)) {
+    buildAndRun(path)
+  } else {
+    log(chalk.bold('Running test suite...'))
+    runUnitTests(path)
+  }
+}
 
-  return new Promise((resolve) => {
-    if (shouldPackageApp(specPath)) {
-      const packager = new Packager(platform(), 'test')
-      packager.build().then(() => {
-        log(chalk.bold('Running test suite...'))
-        resolve(runJest([specPath]))
-      })
-    } else {
-      log(chalk.bold('Running test suite...'))
-      resolve(runJest([specPath]))
+const buildAndRun = path => {
+  return new Packager(platform(), 'test').build().then(() => {
+    log(chalk.bold('Running test suite...'))
+    if (!path) {
+      return runAllTests()
     }
+    return runFeatureTests(path)
   })
+}
+
+const runFeatureTests = path => {
+  spawnSync('npx', ['jest', '-i', path], {
+    env: nodeEnv('test'),
+    shell: true,
+    stdio: 'inherit'
+  })
+}
+
+const runUnitTests = path => {
+  spawnSync('npx', ['jest', path], {
+    env: nodeEnv('test'),
+    shell: true,
+    stdio: 'inherit'
+  })
+}
+
+const runAllTests = () => {
+  runUnitTests('./test/units')
+  runFeatureTests('./test/features')
+  return Promise.resolve()
 }
 
 export const TestRunner = { run }
