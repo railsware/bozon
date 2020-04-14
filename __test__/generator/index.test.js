@@ -48,6 +48,7 @@ describe('Generator', () => {
     [
       ['/test/home/myapp/.gitignore', 'gitignore contents'],
       ['/test/home/myapp/package.json', 'development_package.json contents'],
+      ['/test/home/myapp/jest.config.js', 'jest.config.js contents'],
       ['/test/home/myapp/webpack.config.js', 'webpack.config.js contents'],
       ['/test/home/myapp/LICENSE', 'license contents'],
       ['/test/home/myapp/README.md', 'readme.md contents'],
@@ -65,8 +66,8 @@ describe('Generator', () => {
       ['/test/home/myapp/config/platforms/windows.json', 'windows.json contents'],
       ['/test/home/myapp/config/platforms/linux.json', 'linux.json contents'],
       ['/test/home/myapp/config/platforms/mac.json', 'mac.json contents'],
-      ['/test/home/myapp/test/features/main_spec.js', 'main_spec.js contents'],
-      ['/test/home/myapp/test/helper.js', 'helper.js contents']
+      ['/test/home/myapp/test/features/main.test.js', 'main_test.js contents'],
+      ['/test/home/myapp/test/setup.js', 'setup.js contents']
     ].forEach(sections => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(sections[0], sections[1])
     })
@@ -76,6 +77,7 @@ describe('Generator', () => {
     [
       '  create .gitignore',
       '  create package.json',
+      '  create jest.config.js',
       '  create webpack.config.js',
       '  create LICENSE',
       '  create README.md',
@@ -93,8 +95,8 @@ describe('Generator', () => {
       '  create config/platforms/windows.json',
       '  create config/platforms/linux.json',
       '  create config/platforms/mac.json',
-      '  create test/features/main_spec.js',
-      '  create test/helper.js'
+      '  create test/features/main.test.js',
+      '  create test/setup.js'
     ].forEach(message => {
       expect(console.log).toHaveBeenCalledWith(message)
     })

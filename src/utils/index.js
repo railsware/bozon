@@ -1,5 +1,4 @@
 import path from 'path'
-import { spawn, spawnSync } from 'child_process'
 import Config from 'merge-config'
 
 const srcDir = 'src'
@@ -24,41 +23,6 @@ export const destinationPath = (suffix, env) => {
   return path.join(process.cwd(), 'builds', env, suffix)
 }
 
-export const runElectron = (params = [], flags) => {
-  let options
-
-  if (flags.reload) {
-    options = [
-      'nodemon',
-      `-w ${path.join('builds', 'development', 'main')}`,
-      '-e js',
-      '-q',
-      path.join('node_modules', '.bin', 'electron'),
-      path.join('builds', 'development')
-    ]
-  } else {
-    options = ['electron', path.join('builds', 'development')]
-  }
-  subscribeOnExit()
-  spawn('npx', options.concat(params), {
-    env: nodeEnv('development'),
-    shell: true,
-    stdio: 'inherit'
-  })
-}
-
-export const runMocha = (params = []) => {
-  const env = Object.create(process.env)
-  env.NODE_ENV = 'test'
-  const options = ['mocha'].concat(params)
-  subscribeOnExit()
-  spawnSync('npx', options, {
-    env: nodeEnv('test'),
-    shell: true,
-    stdio: 'inherit'
-  })
-}
-
 export const platform = () => {
   const os = process.platform
   if (os === 'mac' || os === 'darwin') {
@@ -81,12 +45,12 @@ export const config = (env, platform) => {
 }
 
 // Put back cursor to console on exit
-const subscribeOnExit = () => {
+export const subscribeOnExit = () => {
   process.on('SIGINT', () => process.exit())
   process.on('exit', () => console.log('\x1B[?25h'))
 }
 
-const nodeEnv = (value) => {
+export const nodeEnv = (value) => {
   const env = Object.create(process.env)
   env.NODE_ENV = value
   return env

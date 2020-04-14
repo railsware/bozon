@@ -21,7 +21,7 @@ const lstatSync = jest.fn((dir) => {
     isFile: jest.fn()
   }
 })
-const existsSync = jest.fn()
+const existsSync = jest.fn().mockReturnValue(true)
 
 export default {
   mkdirSync,

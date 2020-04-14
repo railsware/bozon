@@ -60,7 +60,7 @@ export default class Generator {
 
   async getVersions() {
     this.defaults.bozonVersion = await latestVersion('bozon')
-    this.defaults.mochaVersion = await latestVersion('mocha')
+    this.defaults.jestVersion = await latestVersion('jest')
     this.defaults.spectronVersion = await latestVersion('spectron')
   }
 
@@ -71,6 +71,7 @@ export default class Generator {
       'package.json',
       this.defaults
     )
+    this.copyTpl('jest.config.js', 'jest.config.js')
     this.copyTpl('webpack.config.js', 'webpack.config.js')
     this.copyTpl('license', 'LICENSE', this.defaults)
     this.copyTpl('readme.md', 'README.md', this.defaults)
@@ -113,10 +114,10 @@ export default class Generator {
     )
     this.copyTpl($('json', 'mac.json'), $('config', 'platforms', 'mac.json'))
     this.copyTpl(
-      $('test', 'main_spec.js'),
-      $('test', 'features', 'main_spec.js')
+      $('test', 'main_test.js'),
+      $('test', 'features', 'main.test.js')
     )
-    this.copyTpl($('test', 'helper.js'), $('test', 'helper.js'), this.defaults)
+    this.copyTpl($('test', 'setup.js'), $('test', 'setup.js'), this.defaults)
   }
 
   installPackages() {

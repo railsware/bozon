@@ -1,47 +1,82 @@
+import { spawn } from 'child_process'
 import { Starter } from 'starter'
 import { Builder } from 'builder'
 import Checker from 'utils/checker'
-import { runElectron } from 'utils'
+import { subscribeOnExit } from 'utils'
 import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.unmock('starter')
 
 jest.spyOn(console, 'log').mockImplementation()
+jest.mock('child_process')
 jest.mock('utils/logger')
 jest.mock('utils/checker')
 
-const setup = async () => {
-  await Starter.run({ flags: { reload: false }, options: [{ inspect: true }] })
+const setup = async (flags) => {
+  await Starter.run({ flags: flags, options: [{ inspect: true }] })
 }
 
 describe('Starter', () => {
   describe('Build successful', () => {
-    beforeEach(() => setup())
+    describe('with reload flag', () => {
+      beforeEach(() => setup({ reload: true }))
 
-    it('ensures process is run in app directory', () => {
-      expect(Checker.ensure).toHaveBeenCalled()
+      it('ensures process is run in app directory', () => {
+        expect(Checker.ensure).toHaveBeenCalled()
+      })
+
+      it('logs application start', () => {
+        expect(startSpinner).toHaveBeenCalledWith('Starting application')
+      })
+
+      it('runs builder with platform and env', () => {
+        expect(Builder.run).toHaveBeenCalledWith(
+          'linux',
+          'development',
+          {
+            reload: true
+          }
+        )
+      })
+
+      it('runs electron app', () => {
+        expect(spawn).toHaveBeenCalledWith(
+          'npx',
+          ['nodemon', '-w builds/development/main', '-e js',
+            '-q', 'node_modules/.bin/electron', 'builds/development', { inspect: true }],
+          { env: {}, shell: true, stdio: 'inherit' }
+        )
+      })
+
+      it('stops spinner with success', () => {
+        expect(stopSpinner).toHaveBeenCalledWith('Starting application')
+      })
+
+      it('returns cursor back', () => {
+        expect(subscribeOnExit).toHaveBeenCalled()
+      })
     })
 
-    it('logs application start', () => {
-      expect(startSpinner).toHaveBeenCalledWith('Starting application')
-    })
+    describe('without reload flag', () => {
+      beforeEach(() => setup({ reload: false }))
 
-    it('runs builder with platform and env', () => {
-      expect(Builder.run).toHaveBeenCalledWith(
-        'linux',
-        'development',
-        {
-          reload: false
-        }
-      )
-    })
+      it('runs builder with platform and env', () => {
+        expect(Builder.run).toHaveBeenCalledWith(
+          'linux',
+          'development',
+          {
+            reload: false
+          }
+        )
+      })
 
-    it('runs electron app', () => {
-      expect(runElectron).toHaveBeenCalled()
-    })
-
-    it('stops spinner with success', () => {
-      expect(stopSpinner).toHaveBeenCalledWith('Starting application')
+      it('runs electron app', () => {
+        expect(spawn).toHaveBeenCalledWith(
+          'npx',
+          ['electron', 'builds/development', { inspect: true }],
+          { env: {}, shell: true, stdio: 'inherit' }
+        )
+      })
     })
   })
 
@@ -56,7 +91,7 @@ describe('Starter', () => {
     })
 
     it('should not run electron app', () => {
-      expect(runElectron).toHaveBeenCalledTimes(0)
+      expect(spawn).toHaveBeenCalledTimes(0)
     })
   })
 })

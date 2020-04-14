@@ -69,13 +69,6 @@ describe('bozon cli', () => {
       expect(commander.command).toHaveBeenNthCalledWith(3, 'test [spec]')
     })
 
-    it('adds timeout option to test command', () => {
-      expect(commander.option).toHaveBeenNthCalledWith(
-        5,
-        '-t, --timeout <milliseconds>'
-      )
-    })
-
     it('sets test function as action', () => {
       expect(commander.action).toHaveBeenCalledWith(test)
     })
@@ -97,7 +90,7 @@ describe('bozon cli', () => {
     })
 
     it('adds publish option to package command', () => {
-      expect(commander.option).toHaveBeenNthCalledWith(6, '-p, --publish')
+      expect(commander.option).toHaveBeenNthCalledWith(5, '-p, --publish')
     })
 
     it('sets pack function as action', () => {

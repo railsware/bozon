@@ -3,7 +3,7 @@ import { create, start, pack, test } from 'runner'
 import Generator from 'generator'
 import { Starter } from 'starter'
 import Packager from 'packager'
-import TestRunner from 'test_runner'
+import { TestRunner } from 'test_runner'
 
 jest.spyOn(process, 'exit').mockImplementation()
 
@@ -40,26 +40,13 @@ describe('start', () => {
 
 describe('test', () => {
   it('calls test runner without options', () => {
-    test('test/index.test.js', {})
-    expect(TestRunner).toHaveBeenCalledWith({
-      path: 'test/index.test.js',
-      timeout: undefined
-    })
+    test()
     expect(TestRunner.run).toHaveBeenCalled()
   })
 
-  it('calls test runner with options', () => {
-    test('test/index.test.js', { timeout: 5000 })
-    expect(TestRunner).toHaveBeenCalledWith({
-      path: 'test/index.test.js',
-      timeout: 5000
-    })
-    expect(TestRunner.run).toHaveBeenCalled()
-  })
-
-  it('calls process exit on successful run', async () => {
-    await test('test/index.test.js', {})
-    expect(process.exit).toHaveBeenCalled()
+  it('calls test runner with path', () => {
+    test('test/index.test.js')
+    expect(TestRunner.run).toHaveBeenCalledWith('test/index.test.js')
   })
 })
 
