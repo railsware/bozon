@@ -9,11 +9,11 @@ Bozon is  a simple, easy to use tool that unifies the existing build tools for E
 
 ## Features
 * **Scaffolding** - Generate ready to use project structure for your new Electron application.
-* **Running** - Run your electron application with **Hot Reload** in develoment environment.
+* **Running** - Run your electron application with **Hot Reload** in development environment.
 * **Testing** - Build Application for test env and run feature tests for your Electron application.
 * **Packaging** - Build, package and publish your Electron app for Mac, Windows and Linux platforms.
 
-Bozon uses [Webpack](https://webpack.js.org) to bundle source code for **main** and **renderer** processes as well as **preload** script. It adds **webpack.config.js** file to your project so that you can further configure webpack, add new rules, loaders etc. [Spectron](https://www.electronjs.org/spectron) is used along with [Mocha](https://mochajs.org/) to run your **feature tests** within real Electron application. For **packaging** and **publishing** applications bozon uses [electron-builder](https://www.electron.build/) under the hood.
+Bozon uses [Webpack](https://webpack.js.org) to bundle source code for **main** and **renderer** processes as well as **preload** script. It adds **webpack.config.js** file to your project so that you can further configure webpack, add new rules, loaders etc. [Jest](https://jestjs.io/) along with [Spectron](https://www.electronjs.org/spectron) are used to run your **unit** and **feature tests** within real Electron application. For **packaging** and **publishing** applications bozon uses [electron-builder](https://www.electron.build/) under the hood.
 
 ![img](https://api.monosnap.com/rpc/file/download?id=KB5BGmknhLmuE38DGEXCFu4rbpBUzr)
 
@@ -76,7 +76,7 @@ Bozon provides a way to define environment specific and platform specific config
 ```
 
 ## Testing
-Bozon is using [spectron](https://github.com/electron/spectron) and [mocha](https://mochajs.org/) spec runner for testing Electron applications. Both unit and integration tests should go to `./test` directory. Simply execute for running tests:
+Bozon is using [Jest](https://jestjs.io/) and [Spectron](https://www.electronjs.org/spectron) for testing Electron applications. Both unit and integration tests should go to `./test` directory. Simply execute for running tests:
 
 ```bash
 bozon test
