@@ -1,9 +1,11 @@
-import { create, start, pack, test } from 'runner'
+import { create, start, pack, test, clear } from 'runner'
 
 import Generator from 'generator'
 import { Starter } from 'starter'
 import Packager from 'packager'
 import { TestRunner } from 'test_runner'
+import { Cleaner } from 'cleaner'
+import { restoreCursorOnExit } from 'utils'
 
 jest.spyOn(process, 'exit').mockImplementation()
 
@@ -36,6 +38,11 @@ describe('start', () => {
       options: ['--inspect=true']
     })
   })
+
+  it('restores cursor', () => {
+    start({})
+    expect(restoreCursorOnExit).toHaveBeenCalled()
+  })
 })
 
 describe('test', () => {
@@ -47,6 +54,11 @@ describe('test', () => {
   it('calls test runner with path', () => {
     test('test/index.test.js')
     expect(TestRunner.run).toHaveBeenCalledWith('test/index.test.js')
+  })
+
+  it('restores cursor', () => {
+    test()
+    expect(restoreCursorOnExit).toHaveBeenCalled()
   })
 })
 
@@ -61,5 +73,22 @@ describe('package', () => {
     pack('windows', {})
     expect(Packager).toHaveBeenCalledWith('windows', 'production', false)
     expect(Packager.build).toHaveBeenCalled()
+  })
+
+  it('restores cursor', () => {
+    pack('mac', {})
+    expect(restoreCursorOnExit).toHaveBeenCalled()
+  })
+})
+
+describe('clear', () => {
+  it('calls test runner without options', () => {
+    clear()
+    expect(Cleaner.run).toHaveBeenCalled()
+  })
+
+  it('restores cursor', () => {
+    clear()
+    expect(restoreCursorOnExit).toHaveBeenCalled()
   })
 })

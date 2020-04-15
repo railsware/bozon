@@ -2,7 +2,6 @@ import { spawn } from 'child_process'
 import { Starter } from 'starter'
 import { Builder } from 'builder'
 import Checker from 'utils/checker'
-import { subscribeOnExit } from 'utils'
 import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.unmock('starter')
@@ -50,10 +49,6 @@ describe('Starter', () => {
 
       it('stops spinner with success', () => {
         expect(stopSpinner).toHaveBeenCalledWith('Starting application')
-      })
-
-      it('returns cursor back', () => {
-        expect(subscribeOnExit).toHaveBeenCalled()
       })
     })
 

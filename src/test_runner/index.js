@@ -2,12 +2,11 @@ import chalk from 'chalk'
 import { spawnSync } from 'child_process'
 import Packager from 'packager'
 import Checker from 'utils/checker'
-import { platform, nodeEnv, subscribeOnExit } from 'utils'
+import { platform, nodeEnv } from 'utils'
 import { log } from 'utils/logger'
 
 const run = path => {
   Checker.ensure()
-  subscribeOnExit()
   if (!path || path.match(/features/)) {
     buildAndRun(path)
   } else {

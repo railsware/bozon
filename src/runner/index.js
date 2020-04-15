@@ -2,6 +2,8 @@ import Generator from 'generator'
 import { Starter } from 'starter'
 import Packager from 'packager'
 import { TestRunner } from 'test_runner'
+import { Cleaner } from 'cleaner'
+import { restoreCursorOnExit } from 'utils'
 
 export const create = (name, command) => {
   const options = { skipInstall: !!command.skipInstall }
@@ -9,6 +11,7 @@ export const create = (name, command) => {
 }
 
 export const start = command => {
+  restoreCursorOnExit()
   const params = {
     options: [],
     flags: {
@@ -24,9 +27,16 @@ export const start = command => {
 }
 
 export const pack = (platform, command) => {
+  restoreCursorOnExit()
   new Packager(platform, 'production', !!command.publish).build()
 }
 
 export const test = (path) => {
+  restoreCursorOnExit()
   TestRunner.run(path)
+}
+
+export const clear = () => {
+  restoreCursorOnExit()
+  Cleaner.run()
 }

@@ -1,14 +1,12 @@
-import { clear } from 'cleaner'
-
+import { Cleaner } from 'cleaner'
 import { emptyDir } from 'fs-extra'
-
 import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.unmock('cleaner')
 jest.mock('utils/logger')
 
 describe('clear', () => {
-  beforeEach(async () => await clear())
+  beforeEach(async () => await Cleaner.run())
 
   it('shows spinner', () => {
     expect(startSpinner).toHaveBeenCalledWith('Cleaning app directory')

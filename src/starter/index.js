@@ -1,7 +1,7 @@
 import path from 'path'
 import { spawn } from 'child_process'
 import Checker from 'utils/checker'
-import { platform, nodeEnv, subscribeOnExit } from 'utils'
+import { platform, nodeEnv } from 'utils'
 import { Builder } from 'builder'
 import { startSpinner, stopSpinner } from 'utils/logger'
 
@@ -36,7 +36,6 @@ const runApplication = (params = [], flags) => {
   } else {
     options = ['electron', path.join('builds', 'development')]
   }
-  subscribeOnExit()
   spawn('npx', options.concat(params), {
     env: nodeEnv('development'),
     shell: true,

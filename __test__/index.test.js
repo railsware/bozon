@@ -1,8 +1,7 @@
 import commander from 'commander'
 
 import { perform } from 'index'
-import { create, start, test, pack } from 'runner'
-import { clear } from 'cleaner'
+import { create, start, test, pack, clear } from 'runner'
 
 jest.unmock('index')
 

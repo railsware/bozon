@@ -1,6 +1,5 @@
 import { spawnSync } from 'child_process'
 import { TestRunner } from 'test_runner'
-import { subscribeOnExit } from 'utils'
 import Checker from 'utils/checker'
 import { log } from 'utils/logger'
 
@@ -42,10 +41,6 @@ describe('TestRunner', () => {
         shell: true,
         stdio: 'inherit'
       })
-    })
-
-    it('returns cursor back', () => {
-      expect(subscribeOnExit).toHaveBeenCalled()
     })
   })
 

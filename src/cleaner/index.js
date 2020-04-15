@@ -4,7 +4,7 @@ import { startSpinner, stopSpinner } from 'utils/logger'
 
 const DIRECTORIES = ['builds', 'packages', '.tmp']
 
-export const clear = async () => {
+const run = async () => {
   startSpinner('Cleaning app directory')
   await Promise.all(DIRECTORIES.map((dir) => clearDir(dir)))
   stopSpinner('Cleaned app directory')
@@ -13,3 +13,5 @@ export const clear = async () => {
 const clearDir = (dir) => {
   return emptyDir(path.join(process.cwd(), dir))
 }
+
+export const Cleaner = { run }

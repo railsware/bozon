@@ -1,6 +1,5 @@
 import commander from 'commander'
-import { create, start, pack, test } from './runner'
-import { clear } from 'cleaner'
+import { create, start, pack, test, clear } from './runner'
 import json from '../package.json'
 
 export const perform = () => {

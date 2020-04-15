@@ -45,7 +45,7 @@ export const config = (env, platform) => {
 }
 
 // Put back cursor to console on exit
-export const subscribeOnExit = () => {
+export const restoreCursorOnExit = () => {
   process.on('SIGINT', () => process.exit())
   process.on('exit', () => console.log('\x1B[?25h'))
 }
