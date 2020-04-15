@@ -2,7 +2,6 @@
 .editorconfig
 .eslintrc.js
 .prettierrc.js
-jest.config.js
 babel.config.js
 .vscode/
 .circleci/
@@ -12,4 +11,5 @@ src/
 node_modules/
 CONTRIBUTING.md
 yarn-error.log
+./jest.config.js
 ./webpack.config.js
