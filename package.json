@@ -1,7 +1,7 @@
 {
 	"name": "bozon",
 	"version": "1.0.0-beta.1",
-	"description": "Framework for building Electron applications",
+	"description": "Command line tool for building, testing and publishing modern Electron applications",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/railsware/bozon.git"
@@ -15,7 +15,7 @@
 		"publish": "npm publish",
 		"release": "yarn build && yarn publish"
 	},
-	"keywords": [ "electron", "desktop", "application", "framework", "bozon" ],
+	"keywords": [ "electron", "desktop", "application", "cli", "bozon" ],
 	"author": "Railsware, Alex Chaplinsky",
 	"license": "MIT",
 	"dependencies": {
@@ -24,7 +24,7 @@
 		"commander": "^5.0.0",
 		"css-loader": "^3.5.2",
 		"ejs": "^3.0.2",
-		"electron": "^8.2.1",
+		"electron": "^8.2.2",
 		"electron-builder": "^22.4.1",
 		"inquirer": "^7.1.0",
 		"latest-version": "^5.1.0",
