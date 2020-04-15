@@ -8,10 +8,10 @@ import { log } from 'utils/logger'
 const run = path => {
   Checker.ensure()
   if (!path || path.match(/features/)) {
-    buildAndRun(path)
+    return buildAndRun(path)
   } else {
     log(chalk.bold('Running test suite...'))
-    runUnitTests(path)
+    return runUnitTests(path)
   }
 }
 
@@ -26,25 +26,34 @@ const buildAndRun = path => {
 }
 
 const runFeatureTests = path => {
-  spawnSync('npx', ['jest', '-i', path], {
+  const result = spawnSync('npx', ['jest', '-i', path], {
     env: nodeEnv('test'),
     shell: true,
     stdio: 'inherit'
   })
+  return buildPromise(result.status)
 }
 
 const runUnitTests = path => {
-  spawnSync('npx', ['jest', path], {
+  const result = spawnSync('npx', ['jest', path], {
     env: nodeEnv('test'),
     shell: true,
     stdio: 'inherit'
   })
+  return buildPromise(result.status)
 }
 
 const runAllTests = () => {
-  runUnitTests('./test/units')
-  runFeatureTests('./test/features')
-  return Promise.resolve()
+  return Promise.all([
+    runUnitTests('./test/units'),
+    runFeatureTests('./test/features')
+  ])
+}
+
+const buildPromise = status => {
+  return (status === 0)
+    ? Promise.resolve()
+    : Promise.reject(Error('Some tests failed'))
 }
 
 export const TestRunner = { run }

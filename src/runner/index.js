@@ -23,20 +23,22 @@ export const start = command => {
   } else if (command.inspectBrk) {
     params.options = ['--inspect-brk=' + command.inspectBrk]
   }
-  Starter.run(params)
+  return Starter.run(params)
 }
 
 export const pack = (platform, command) => {
   restoreCursorOnExit()
-  new Packager(platform, 'production', !!command.publish).build()
+  return new Packager(platform, 'production', !!command.publish).build()
 }
 
 export const test = (path) => {
   restoreCursorOnExit()
-  TestRunner.run(path)
+  return TestRunner.run(path)
+    .then(() => process.exit(0))
+    .catch(() => process.exit(1))
 }
 
 export const clear = () => {
   restoreCursorOnExit()
-  Cleaner.run()
+  return Cleaner.run()
 }

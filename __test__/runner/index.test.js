@@ -46,19 +46,35 @@ describe('start', () => {
 })
 
 describe('test', () => {
-  it('calls test runner without options', () => {
-    test()
+  it('calls test runner without options', async () => {
+    await test()
     expect(TestRunner.run).toHaveBeenCalled()
   })
 
-  it('calls test runner with path', () => {
-    test('test/index.test.js')
+  it('calls test runner with path', async () => {
+    await test('test/index.test.js')
     expect(TestRunner.run).toHaveBeenCalledWith('test/index.test.js')
   })
 
-  it('restores cursor', () => {
-    test()
+  it('restores cursor', async () => {
+    await test()
     expect(restoreCursorOnExit).toHaveBeenCalled()
+  })
+
+  it('exits with success status', async () => {
+    await test()
+    expect(process.exit).toHaveBeenCalledWith(0)
+  })
+
+  describe('running test fails', () => {
+    beforeEach(() => {
+      TestRunner.__setError(Error)
+    })
+
+    it('exits with error status', async () => {
+      await test()
+      expect(process.exit).toHaveBeenCalledWith(1)
+    })
   })
 })
 
