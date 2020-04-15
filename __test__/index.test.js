@@ -12,7 +12,7 @@ describe('bozon cli', () => {
 
   describe('version', () => {
     it('sets current version', () => {
-      expect(commander.version).toHaveBeenCalledWith('1.0.0-alpha.10')
+      expect(commander.version).toHaveBeenCalledWith('1.0.0-beta.1')
     })
 
     it('sets usage instruction', () => {
@@ -48,7 +48,10 @@ describe('bozon cli', () => {
     })
 
     it('adds inspect option to start command', () => {
-      expect(commander.option).toHaveBeenNthCalledWith(3, '-i, --inspect <port>')
+      expect(commander.option).toHaveBeenNthCalledWith(
+        3,
+        '-i, --inspect <port>'
+      )
     })
 
     it('adds inspect-brk option to start command', () => {
