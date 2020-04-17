@@ -33,6 +33,7 @@ Then generate your new project:
 ```bash
 bozon new [name]
 ```
+
 This will create a new directory `[name]` produce the following file structure:
 
   * Use `--skip-install` option if you want to skip running `npm install`
@@ -43,11 +44,14 @@ This will create a new directory `[name]` produce the following file structure:
   |--src/
   |  |--main/
   |  |  |--index.js
-  |  |--renderer/
+  |  |--preload/
+  |  |  |--index.js
+  |  |--renderer/git 
+  |  |  |--index.html
   |  |  |--images/
   |  |  |--stylesheets/
-  |  |  |--index.js
-  |  |  |--index.html
+  |  |  |--javascripts/
+  |  |  |  |--index.js
   |--test/
   |--package.json
 ```
