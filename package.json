@@ -1,6 +1,6 @@
 {
 	"name": "bozon",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Command line tool for building, testing and publishing modern Electron applications",
 	"repository": {
 		"type": "git",
@@ -15,13 +15,7 @@
 		"publish": "npm publish",
 		"release": "yarn build && yarn publish"
 	},
-	"keywords": [
-		"electron",
-		"desktop",
-		"application",
-		"cli",
-		"bozon"
-	],
+	"keywords": [ "electron", "desktop", "application", "cli", "bozon" ],
 	"author": "Railsware, Alex Chaplinsky",
 	"license": "MIT",
 	"dependencies": {
