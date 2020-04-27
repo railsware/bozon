@@ -52,11 +52,11 @@ export default class WebpackConfig {
   }
 
   injectConfig(configs) {
-    configs.main.plugins.push(
-      new webpack.DefinePlugin({
-        CONFIG: JSON.stringify(this.settings())
-      })
-    )
+    const CONFIG = {
+      CONFIG: JSON.stringify(this.settings())
+    }
+    configs.main.plugins.push(new webpack.DefinePlugin(CONFIG))
+    configs.preload.plugins.push(new webpack.DefinePlugin(CONFIG))
   }
 
   injectDevScript(configs) {
