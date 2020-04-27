@@ -15,7 +15,13 @@
 		"publish": "npm publish",
 		"release": "yarn build && yarn publish"
 	},
-	"keywords": [ "electron", "desktop", "application", "cli", "bozon" ],
+	"keywords": [
+		"electron",
+		"desktop",
+		"application",
+		"cli",
+		"bozon"
+	],
 	"author": "Railsware, Alex Chaplinsky",
 	"license": "MIT",
 	"dependencies": {
@@ -32,7 +38,7 @@
 		"nodemon": "^2.0.3",
 		"style-loader": "^1.1.4",
 		"underscore.string": "^3.3.5",
-		"webpack": "^4.42.1",
+		"webpack": "^4.43.0",
 		"webpack-inject-plugin": "^1.5.4",
 		"webpack-merge": "^4.2.2"
 	},
@@ -47,7 +53,7 @@
 		"@babel/core": "^7.9.0",
 		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
 		"@babel/preset-env": "^7.9.5",
-		"babel-jest": "^25.3.0",
+		"babel-jest": "^25.4.0",
 		"babel-loader": "^8.1.0",
 		"eslint": "^6.8.0",
 		"eslint-config-standard": "^14.1.1",
@@ -56,8 +62,8 @@
 		"eslint-plugin-promise": "^4.2.1",
 		"eslint-plugin-standard": "^4.0.1",
 		"fs-extra": "^9.0.0",
-		"jest": "^25.3.0",
-		"prettier": "^2.0.4",
+		"jest": "^25.4.0",
+		"prettier": "^2.0.5",
 		"webpack-cli": "^3.3.11",
 		"webpack-node-externals": "^1.7.2"
 	},
