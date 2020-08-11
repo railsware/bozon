@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
-import merge from 'webpack-merge'
+import { mergeWithCustomize } from 'webpack-merge'
 import InjectPlugin from 'webpack-inject-plugin'
 import { source, config } from 'utils'
 import { mainDefaults, rendererDefaults, preloadDefaults } from './defaults'
@@ -36,7 +36,7 @@ export default class WebpackConfig {
   }
 
   merge(defaults, config) {
-    return merge({
+    return mergeWithCustomize({
       customizeArray(a, b, key) {
         if (UNIQUENESS_KEYS.indexOf(key) !== -1) {
           return Array.from(new Set([...a, ...b]))

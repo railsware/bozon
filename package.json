@@ -40,7 +40,7 @@
     "underscore.string": "^3.3.5",
     "webpack": "^4.44.1",
     "webpack-inject-plugin": "^1.5.4",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^5.1.1"
   },
   "preferGlobal": true,
   "bin": {
