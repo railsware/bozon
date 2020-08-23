@@ -1,7 +1,7 @@
 import path from 'path'
 import { spawn } from 'child_process'
 import Checker from 'utils/checker'
-import { platform, nodeEnv } from 'utils'
+import { platform, isWindows, nodeEnv } from 'utils'
 import { Builder } from 'builder'
 import { startSpinner, stopSpinner } from 'utils/logger'
 
@@ -30,7 +30,7 @@ const runApplication = (params = [], flags) => {
       `-w ${path.join('builds', 'development', 'main')}`,
       '-e js',
       '-q',
-      path.join('node_modules', '.bin', 'electron'),
+      electronPath(),
       path.join('builds', 'development')
     ]
   } else {
@@ -41,6 +41,13 @@ const runApplication = (params = [], flags) => {
     shell: true,
     stdio: 'inherit'
   })
+}
+
+const electronPath = () => {
+  if (isWindows()) {
+    return path.join('node_modules', 'electron', 'cli.js')
+  }
+  return path.join('node_modules', '.bin', 'electron')
 }
 
 export const Starter = { run }

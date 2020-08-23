@@ -6,12 +6,11 @@ import { startSpinner, stopSpinner } from 'utils/logger'
 
 jest.unmock('starter')
 
-jest.spyOn(console, 'log').mockImplementation()
 jest.mock('child_process')
 jest.mock('utils/logger')
 jest.mock('utils/checker')
 
-const setup = async (flags) => {
+const setup = async flags => {
   await Starter.run({ flags: flags, options: [{ inspect: true }] })
 }
 

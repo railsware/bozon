@@ -23,16 +23,30 @@ export const destinationPath = (suffix, env) => {
   return path.join(process.cwd(), 'builds', env, suffix)
 }
 
+export const isWindows = () => {
+  const { platform } = process
+  return platform === 'windows' || platform === 'win32'
+}
+
+export const isMacOS = () => {
+  const { platform } = process
+  return platform === 'mac' || platform === 'darwin'
+}
+
+export const isLinux = () => {
+  const { platform } = process
+  return platform === 'linux'
+}
+
 export const platform = () => {
-  const os = process.platform
-  if (os === 'mac' || os === 'darwin') {
+  if (isMacOS()) {
     return 'mac'
-  } else if (os === 'windows' || os === 'win32') {
+  } else if (isWindows()) {
     return 'windows'
-  } else if (os === 'linux') {
+  } else if (isLinux()) {
     return 'linux'
   } else {
-    throw new Error('Unsupported platform ' + os)
+    throw new Error('Unsupported platform ' + process.platform)
   }
 }
 
