@@ -70,7 +70,7 @@
   },
   "resolutions": {
     "js-yaml": "^3.14.0",
-    "yargs-parser": "^20.1.0",
+    "yargs-parser": "^20.2.0",
     "elliptic": ">=6.5.3",
     "lodash": ">=4.17.20",
     "serialize-javascript": "^5.0.1"
