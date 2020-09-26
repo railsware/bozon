@@ -1,5 +1,6 @@
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+import path from 'path'
 import { app, BrowserWindow } from 'electron'
 
 const createWindow = () => {
@@ -9,7 +10,8 @@ const createWindow = () => {
     width: CONFIG.width,
     height: CONFIG.height,
     webPreferences: {
-      nodeIntegration: true
+      worldSafeExecuteJavaScript: true,
+      preload: path.join(app.getAppPath(), 'preload', 'index.js')
     }
   })
 

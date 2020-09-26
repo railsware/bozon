@@ -30,7 +30,7 @@
     "commander": "^6.1.0",
     "css-loader": "^4.3.0",
     "ejs": "^3.1.5",
-    "electron": "^9.2.0",
+    "electron": "^10.1.2",
     "electron-builder": "^22.8.1",
     "inquirer": "^7.3.3",
     "latest-version": "^5.1.0",
