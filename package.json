@@ -29,13 +29,14 @@
     "chokidar": "^3.5.1",
     "commander": "^7.0.0",
     "css-loader": "^5.0.1",
-    "ejs": "^3.1.5",
+    "ejs": "^3.1.6",
     "electron": "^11.2.1",
     "electron-builder": "^22.9.1",
     "electron-notarize": "^1.0.0",
+    "elliptic": "^6.5.4",
     "inquirer": "^7.3.3",
     "latest-version": "^5.1.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "merge-config": "^2.0.0",
     "nodemon": "^2.0.7",
     "style-loader": "^2.0.0",
@@ -71,9 +72,7 @@
   },
   "resolutions": {
     "js-yaml": "^3.14.1",
-    "yargs-parser": "^20.2.4",
-    "elliptic": ">=6.5.3",
-    "lodash": ">=4.17.20",
+    "yargs-parser": "^20.2.6",
     "serialize-javascript": "^5.0.1"
   }
 }
