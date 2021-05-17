@@ -7,6 +7,7 @@ import { bundle } from 'builder/bundle'
 import { watch } from 'builder/watcher'
 import { source, sourcePath, destinationPath } from 'utils'
 import { log, warn, startSpinner, stopSpinner } from 'utils/logger'
+import * as Util from "node/util";
 
 const BUILD_START = 'Building Electron application'
 const BUILD_FAILED = 'Failed to build application'
@@ -34,7 +35,7 @@ const onBuildSuccess = (config, env, warnings) => {
 
 const onBuildError = error => {
   stopSpinner(BUILD_FAILED, false)
-  log(chalk.grey(error))
+  log(chalk.grey(Util.inspect(error)))
   process.stdin.end()
   process.kill(process.pid)
 }
