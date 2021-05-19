@@ -7,7 +7,7 @@ import { bundle } from 'builder/bundle'
 import { watch } from 'builder/watcher'
 import { source, sourcePath, destinationPath } from 'utils'
 import { log, warn, startSpinner, stopSpinner } from 'utils/logger'
-import * as Util from "node/util";
+import { inspect }  from 'util'
 
 const BUILD_START = 'Building Electron application'
 const BUILD_FAILED = 'Failed to build application'
