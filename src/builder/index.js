@@ -35,7 +35,7 @@ const onBuildSuccess = (config, env, warnings) => {
 
 const onBuildError = error => {
   stopSpinner(BUILD_FAILED, false)
-  log(chalk.grey(Util.inspect(error)))
+  log(chalk.grey(inspect(error)))
   process.stdin.end()
   process.kill(process.pid)
 }
