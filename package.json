@@ -65,15 +65,17 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
     "fs-extra": "^10.0.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "prettier": "^2.3.1",
     "webpack-cli": "^4.7.2",
     "webpack-node-externals": "^3.0.0"
   },
   "resolutions": {
+    "browserslist": "4.16.6",
     "js-yaml": "^3.14.1",
     "yargs-parser": "^20.2.7",
     "serialize-javascript": "^5.0.1",
+    "lodash": "^4.17.21",
     "xmldom": ">=0.5.0"
   }
 }
