@@ -71,7 +71,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "resolutions": {
-    "js-yaml": "^3.14.1",
+    "js-yaml": "^4.1.0",
     "yargs-parser": "^20.2.9",
     "lodash": "^4.17.21",
     "xmldom": ">=0.5.0"
