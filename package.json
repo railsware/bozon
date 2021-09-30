@@ -1,6 +1,6 @@
 {
   "name": "bozon",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Command line tool for building, testing and publishing modern Electron applications",
   "repository": {
     "type": "git",
