@@ -73,7 +73,6 @@
   "resolutions": {
     "js-yaml": "^3.14.1",
     "yargs-parser": "^20.2.9",
-    "serialize-javascript": "^5.0.1",
     "lodash": "^4.17.21",
     "xmldom": ">=0.5.0"
   }
