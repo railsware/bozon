@@ -2,7 +2,7 @@
 > Command line tool for building, testing and publishing modern [Electron](http://electron.atom.io/) applications
 
 [![npm version](https://badge.fury.io/js/bozon.svg)](https://badge.fury.io/js/bozon)
-![img](https://circleci.com/gh/railsware/bozon.svg?style=shield&circle-token=73a7ce20fc55a51d77657e11c3f5c9d4bf5fdcd9)
+[![Actions Status](https://github.com/railsware/bozon/workflows/Node.js%20CI/badge.svg)](https://github.com/swiftyapp/swifty/actions)
 
 Bozon is  a simple, easy to use tool that unifies the existing build tools for Electron development. Simplify building, compiling, running, testing, and packaging your Electron applications.
 
