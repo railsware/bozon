@@ -143,8 +143,8 @@ export default class Generator {
   }
 
   copy(src, dest) {
-    var template = $(__dirname, '..', 'templates', src)
-    var destination = $(process.cwd(), this.name, dest)
+    const template = $(__dirname, '..', 'templates', src)
+    const destination = $(process.cwd(), this.name, dest)
     fs.writeFileSync(destination, fs.readFileSync(template))
     console.log('  ' + chalk.green('create') + ' ' + dest)
   }
@@ -153,9 +153,9 @@ export default class Generator {
     if (typeof data === 'undefined') {
       data = {}
     }
-    var template = $(__dirname, '..', 'templates', src)
-    var destination = $(process.cwd(), this.name, dest)
-    var str = fs.readFileSync(template, 'utf8')
+    const template = $(__dirname, '..', 'templates', src)
+    const destination = $(process.cwd(), this.name, dest)
+    const str = fs.readFileSync(template, 'utf8')
 
     fs.writeFileSync(destination, ejs.render(str, data))
     console.log('  ' + chalk.green('create') + ' ' + dest)

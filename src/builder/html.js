@@ -4,10 +4,11 @@ import { copy } from 'fs-extra'
 
 export const buildHTML = (inputDir, outputDir) => {
   Promise.all(
-    readdirSync(inputDir).map((file) => {
+    readdirSync(inputDir).filter((file) => {
       if (file.match(/\.html$/)) {
         return copyHTMLFile(path.join(inputDir, file), path.join(outputDir, file))
       }
+      return false
     })
   )
 }
