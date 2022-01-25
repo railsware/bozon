@@ -15,8 +15,6 @@ Bozon is  a simple, easy to use tool that unifies the existing build tools for E
 
 Bozon uses [Webpack](https://webpack.js.org) to bundle source code for **main** and **renderer** processes as well as **preload** script. It adds **webpack.config.js** file to your project so that you can further configure webpack, add new rules, loaders etc. [Jest](https://jestjs.io/) along with [Spectron](https://www.electronjs.org/spectron) are used to run your **unit** and **feature tests** within real Electron application. For **packaging** and **publishing** applications bozon uses [electron-builder](https://www.electron.build/) under the hood.
 
-![img](https://api.monosnap.com/rpc/file/download?id=KB5BGmknhLmuE38DGEXCFu4rbpBUzr)
-
 ## Installation
 
 
