@@ -53,21 +53,21 @@
     "node": ">= 10.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.7",
+    "@babel/core": "^7.17.2",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.16.7",
-    "babel-jest": "^27.4.5",
+    "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.3",
-    "eslint": "^8.6.0",
+    "eslint": "^8.8.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-standard": "^5.0.0",
     "fs-extra": "^10.0.0",
-    "jest": "^27.4.5",
+    "jest": "^27.5.1",
     "prettier": "^2.5.1",
-    "webpack-cli": "^4.9.1",
+    "webpack-cli": "^4.9.2",
     "webpack-node-externals": "^3.0.0"
   },
   "resolutions": {
