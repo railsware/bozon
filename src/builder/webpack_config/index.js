@@ -68,7 +68,7 @@ export default class WebpackConfig {
   }
 
   mode() {
-    return this.env === 'test' ? 'development' : this.env
+    return (this.env === 'development' || this.env === 'test') ? 'development' : 'production'
   }
 
   settings() {
