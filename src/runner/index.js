@@ -3,7 +3,7 @@ import { Starter } from 'starter'
 import Packager from 'packager'
 import { TestRunner } from 'test_runner'
 import { Cleaner } from 'cleaner'
-import { restoreCursorOnExit } from 'utils'
+import { restoreCursorOnExit, platform } from 'utils'
 
 export const create = (name, command) => {
   const options = { skipInstall: !!command.skipInstall }
@@ -24,6 +24,14 @@ export const start = command => {
     params.options = ['--inspect-brk=' + command.inspectBrk]
   }
   return Starter.run(params)
+}
+
+export const build = (env) => {
+  restoreCursorOnExit()
+  return new Packager(platform(), env)
+    .build()
+    .then(() => process.exit(0))
+    .catch(() => process.exit(1))
 }
 
 export const pack = (platform, command) => {

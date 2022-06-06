@@ -1,7 +1,7 @@
 import commander from 'commander'
 
 import { perform } from 'index'
-import { create, start, test, pack, clear } from 'runner'
+import { create, start, build, test, pack, clear } from 'runner'
 
 jest.unmock('index')
 
@@ -12,7 +12,7 @@ describe('bozon cli', () => {
 
   describe('version', () => {
     it('sets current version', () => {
-      expect(commander.version).toHaveBeenCalledWith('1.2.9')
+      expect(commander.version).toHaveBeenCalledWith('1.3.0')
     })
 
     it('sets usage instruction', () => {
@@ -66,9 +66,19 @@ describe('bozon cli', () => {
     })
   })
 
+  describe('build', () => {
+    it('sets build command', () => {
+      expect(commander.command).toHaveBeenNthCalledWith(3, 'build [env]')
+    })
+
+    it('sets build function as action', () => {
+      expect(commander.action).toHaveBeenCalledWith(build)
+    })
+  })
+
   describe('test', () => {
     it('sets test command', () => {
-      expect(commander.command).toHaveBeenNthCalledWith(3, 'test [spec]')
+      expect(commander.command).toHaveBeenNthCalledWith(4, 'test [spec]')
     })
 
     it('sets test function as action', () => {
@@ -78,7 +88,7 @@ describe('bozon cli', () => {
 
   describe('clear', () => {
     it('sets clear command', () => {
-      expect(commander.command).toHaveBeenNthCalledWith(4, 'clear')
+      expect(commander.command).toHaveBeenNthCalledWith(5, 'clear')
     })
 
     it('sets clear function as action', () => {
@@ -88,7 +98,7 @@ describe('bozon cli', () => {
 
   describe('package', () => {
     it('sets package command', () => {
-      expect(commander.command).toHaveBeenNthCalledWith(5, 'package <platform>')
+      expect(commander.command).toHaveBeenNthCalledWith(6, 'package <platform>')
     })
 
     it('adds publish option to package command', () => {
@@ -101,11 +111,11 @@ describe('bozon cli', () => {
   })
 
   it('sets descriptions for commands', () => {
-    expect(commander.description).toHaveBeenCalledTimes(5)
+    expect(commander.description).toHaveBeenCalledTimes(6)
   })
 
   it('sets actions for commands', () => {
-    expect(commander.action).toHaveBeenCalledTimes(5)
+    expect(commander.action).toHaveBeenCalledTimes(6)
   })
 
   it('it parses process argv', () => {

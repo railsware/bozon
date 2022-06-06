@@ -1,5 +1,5 @@
 import commander from 'commander'
-import { create, start, pack, test, clear } from './runner'
+import { create, start, build, pack, test, clear } from './runner'
 import json from '../package.json'
 
 export const perform = () => {
@@ -19,6 +19,11 @@ export const perform = () => {
     .option('-b, --inspect-brk <port>')
     .description('Compile and run application')
     .action(start)
+
+  commander
+    .command('build [env]')
+    .description('Build application to builds/ directory')
+    .action(build)
 
   commander
     .command('test [spec]')
