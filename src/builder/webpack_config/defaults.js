@@ -2,7 +2,7 @@ import { destinationPath } from 'utils'
 
 export const mainDefaults = (mode, env) => {
   return {
-    mode: mode,
+    mode,
     target: 'electron-main',
     entry: './src/main/index.js',
     output: {
@@ -26,7 +26,7 @@ export const mainDefaults = (mode, env) => {
 
 export const rendererDefaults = (mode, env) => {
   return {
-    mode: mode,
+    mode,
     target: 'electron-renderer',
     entry: './src/renderer/javascripts/index.js',
     output: {
@@ -62,7 +62,7 @@ export const rendererDefaults = (mode, env) => {
 
 export const preloadDefaults = (mode, env) => {
   return {
-    mode: mode,
+    mode,
     target: 'electron-preload',
     entry: './src/preload/index.js',
     output: {
