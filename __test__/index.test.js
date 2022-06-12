@@ -12,7 +12,7 @@ describe('bozon cli', () => {
 
   describe('version', () => {
     it('sets current version', () => {
-      expect(commander.version).toHaveBeenCalledWith('1.3.1')
+      expect(commander.version).toHaveBeenCalledWith('1.3.2')
     })
 
     it('sets usage instruction', () => {
